@@ -1,0 +1,98 @@
+﻿@model JobPortalLibrary.Employer.EmployerUser
+
+@{
+    ViewBag.Title = "KTCompanyDeatilsGV";
+    Layout = "~/Views/Shared/Employer_Layout.cshtml";
+}
+
+<h2 >CompanyDeatils</h2>
+<button >
+    <a href="@Url.Action("CompanyRegistration","Employer")" > Company Registration</a>
+</button>
+<br />
+<br />
+
+<table class="table table-hover" style="border:thick; width:200px">
+    <tr style="background-color: #435ebe; color: white;">
+
+
+        <th>
+            @Html.HiddenFor(model => model.Employercode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyWebsite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HRName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HRNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HREmail)
+        </th>
+
+
+        @*<th></th>*@
+    </tr>
+
+@foreach (var item in Model.LTUser) 
+{
+    <tr>
+
+        <td>
+            @Html.HiddenFor(modelItem => item.Employercode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyEmail)
+        </td>
+
+
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyWebsite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactNo)
+        </td>
+       
+
+
+        <td>
+            @Html.DisplayFor(modelItem => item.HRName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HRNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HREmail)
+        </td>
+
+
+
+
+
+
+
+
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+    </tr>
+}
+
+</table>

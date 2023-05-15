@@ -1,0 +1,196 @@
+﻿@model JobPortalLibrary.Employer.EmployerUser
+
+
+@using (Html.BeginForm())
+{
+    @*<style>
+    /* Modal Content */
+    .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        border: 1px solid #888;
+        width: 80%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s
+    }
+    /* Add Animation */
+    -webkit-keyframes animatetop {
+        from
+
+    {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+
+    }
+
+    keyframes animatetop {
+        from
+
+    {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+
+    }
+
+
+    .modal-header {
+        padding: 2px 16px;
+        background-color: lightblue;
+        color: white;
+    }
+
+    .modal-body {
+        padding: 2px 16px;
+    }
+
+    .modal-footer {
+        padding: 2px 16px;
+        background-color: lightblue;
+        color: white;
+    }
+</style>*@
+
+    <div style="margin-left:40px">
+<h1 style="margin-left:100px;margin-bottom:20px;">Job Details</h1>
+        <dl class="dl-horizontal">
+            <div class="row">
+
+                <dt class="form-group">
+                    @Html.DisplayNameFor(model => model.CompanyName)
+                </dt>
+                <dt class="form-group">
+                    @Html.DisplayNameFor(model => model.ContactPerson)
+                </dt>
+                <dt class="form-group">
+                    @Html.DisplayNameFor(model => model.JobTitle)
+                </dt>
+                <dt class="form-group">
+                    @Html.DisplayNameFor(model => model.JobDescription)
+                </dt>
+                <dt class="form-group">
+                    @Html.DisplayNameFor(model => model.JobCategory)
+                </dt>
+                <dt class="form-group">
+                    @Html.DisplayNameFor(model => model.OpportunityType)
+                </dt>
+                <dt class="form-group">
+                    @Html.DisplayNameFor(model => model.WorkingShifts)
+                </dt>
+                <dt class="form-group">
+                    @Html.DisplayNameFor(model => model.NoOfOpenings)
+                </dt>
+                <dt class="form-group">
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+                <dt class="form-group">
+                    @Html.DisplayNameFor(model => model.Salary)
+                </dt>
+                <dt class="form-group">
+                    @Html.DisplayNameFor(model => model.TotalExperience)
+                </dt>
+                <dt class="form-group">
+                    @Html.DisplayNameFor(model => model.ExpectedJoiningDate1 )
+                </dt>
+                <dt class="form-group">
+                    @Html.DisplayNameFor(model => model.ApplicationEndDate1)
+                </dt>
+            </div>
+            <div class="row" style="margin-left:180px;margin-top:-460px">
+
+                <dd class="form-group">
+                    @Html.DisplayFor(model => model.CompanyName)
+                </dd>
+                <dd class="form-group">
+                    @Html.DisplayFor(model => model.ContactPerson)
+                </dd>
+                <dd class="form-group">
+                    @Html.DisplayFor(model => model.JobTitle)
+                </dd>
+
+
+                <dd class="form-group">
+                    @Html.DisplayFor(model => model.JobDescription)
+                </dd>
+
+
+                <dd class="form-group">
+                    @Html.DisplayFor(model => model.JobCategory)
+                </dd>
+
+                <dd class="form-group">
+                    @Html.DisplayFor(model => model.OpportunityType)
+                </dd>
+
+                <dd class="form-group">
+                    @Html.DisplayFor(model => model.WorkingShifts)
+                </dd>
+
+                <dd class="form-group">
+                    @Html.DisplayFor(model => model.NoOfOpenings)
+                </dd>
+
+
+                <dd class="form-group">
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+
+                <dd class="form-group">
+                    @Html.DisplayFor(model => model.Salary)
+                </dd>
+
+                <dd class="form-group">
+                    @Html.DisplayFor(model => model.TotalExperience)
+                </dd>
+
+                <dd class="form-group">
+                    @Html.DisplayFor(model => model.ExpectedJoiningDate1)
+                </dd>
+                <dd class="form-group">
+                    @Html.DisplayFor(model => model.ApplicationEndDate1)
+                </dd>
+            </div>
+
+           
+
+           
+
+        </dl>
+        <a style="color:blue;" href="https://facebook.com/sharer.php?url=@Session["url"]"> <i  class="bi bi-facebook"></i></a>
+
+        &nbsp;&nbsp;&nbsp;
+        <a style="color:blue" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=@Session["url"]"> <i class="bi bi-linkedin"></i></a>
+        &nbsp;&nbsp;&nbsp;
+        <a style="color:deepskyblue" href="https://twitter.com/intent/tweet?url=@Session["url"]"> <i class="bi bi-twitter"></i></a>
+
+    </div>
+
+    <button type="button" style="margin-left:400px;background-color:aquamarine;" height="30px;" width="40px;">
+        @Html.ActionLink("Close", "jobgrid")
+    </button>
+
+
+    @*<div class="modal-footer">
+            <button type="button" class="btn" href="@Url.Action("jobgrid"  "Employer")">Close</button>
+        </div>*@
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
