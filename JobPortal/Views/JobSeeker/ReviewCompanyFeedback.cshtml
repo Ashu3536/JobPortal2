@@ -1,0 +1,55 @@
+﻿@model JobPortalLibrary.JobSeeker.SeekerUser
+
+@{
+    ViewBag.Title = "ReviewCompanyFeedback";
+
+}
+<style>
+    .col-md-10 {
+        font-size: 30px;
+        color: black;
+    }
+</style>
+
+@using (Html.BeginForm("ReviewCompany", "JobSeeker", FormMethod.Get, new { @enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.CompanyName, "Company Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.CompanyId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DisplayFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(model => model.DoyouCurrentlyworkhere, "Do you Currently work here?", htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-9">
+            @Html.Label("Yes")
+            @Html.RadioButtonFor(Model => Model.DoyouCurrentlyworkhere, "True", new { @id = "Yes" })&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.Label("No")
+            @Html.RadioButtonFor(model => model.DoyouCurrentlyworkhere, "False", new { @id = "No" })
+            @Html.ValidationMessageFor(model => model.DoyouCurrentlyworkhere, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Review, "Review", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Review, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Review, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+
+    <div class="form-group" style="margin-left:500px">
+        <div class="col-md-offset-3 col-md-10">
+            <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+            <input type="submit" value="Review" class="btn btn-primary" />
+        </div>
+    </div>
+
+}
+

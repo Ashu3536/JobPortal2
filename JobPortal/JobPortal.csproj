@@ -2430,14 +2430,11 @@
     <Content Include="Views\Admin\RPCompanyGridviewDetails.cshtml" />
     <Content Include="Views\Admin\view.cshtml" />
     <Content Include="Views\JobSeeker\ADDEducationDetails.cshtml" />
-    <Content Include="Views\JobSeeker\AllCompany.cshtml" />
     <Content Include="Views\JobSeeker\CareerProfile.cshtml" />
     <Content Include="Views\JobSeeker\CareerProfilePopup.cshtml" />
-    <Content Include="Views\JobSeeker\CompanysDetails.cshtml" />
     <Content Include="Views\JobSeeker\EducationDetails.cshtml" />
     <Content Include="Views\JobSeeker\EmploymentDetails.cshtml" />
     <Content Include="Views\JobSeeker\EmploymentDetailsPopup.cshtml" />
-    <Content Include="Views\JobSeeker\PreferredJob.cshtml" />
     <Content Include="Views\JobSeeker\ProjectDetails.cshtml" />
     <Content Include="Views\JobSeeker\ProjectDetailsPop.cshtml" />
     <Content Include="Views\JobSeeker\SeekerDetails.cshtml" />
@@ -2445,6 +2442,11 @@
     <Content Include="Views\JobSeeker\SeekerDetailsPopup.cshtml" />
     <Content Include="Views\JobSeeker\SeekerResume.cshtml" />
     <Content Include="Views\JobSeeker\SeekerResumeUpload.cshtml" />
+    <Content Include="Views\JobSeeker\AllCompany.cshtml" />
+    <Content Include="Views\JobSeeker\CompanysDetails.cshtml" />
+    <Content Include="Views\JobSeeker\PreferredJob.cshtml" />
+    <Content Include="Views\JobSeeker\jobdetails.cshtml" />
+    <Content Include="Views\JobSeeker\ReviewCompanyFeedback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

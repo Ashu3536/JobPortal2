@@ -259,7 +259,9 @@ namespace JobPortalLibrary.JobSeeker
         public string NoOfEmployees { get; set; }
         public string CompanyWebsite { get; set; }
         public bool Follow1 { get; set; }
+        public bool DoyouCurrentlyworkhere { get; set; }
         public string Follow2 { get; set; }
+        public string RequiredQualificationId { get; set; }
         //--------Sanket Side---------//
 
         public string JobLocation { get; set; }

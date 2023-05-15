@@ -17,9 +17,7 @@ namespace JobPortal.Controllers
 {
     public class JobSeekerController : Controller
     {
-
         //--------------------------------Saurabh Start------------------//
-        
         string seekercode;
         string month;
         string year;
@@ -378,6 +376,8 @@ namespace JobPortal.Controllers
                     obj.ProfileIMG = dr["ProfileIMG"].ToString();
                 }
                 dr.Close();
+                //ViewBag.CityId = obj.CityId1;
+                //ViewBag.City = obj.City;
                 return await Task.Run(() => View(obj));
             }
             else
@@ -1087,7 +1087,7 @@ namespace JobPortal.Controllers
                 return await Task.Run(() => View("Login", "Account"));
             }
         }
-        public async Task<ActionResult> PreferredJob(string seekercode)
+        public async Task<ActionResult> PreferredJob()
         {
             if (Session["SeekerCode"] != null)
             {
@@ -1109,6 +1109,7 @@ namespace JobPortal.Controllers
                     obju.Location = ds.Tables[0].Rows[i]["JobLocation"].ToString();
                     obju.PostJobCode = ds.Tables[0].Rows[i]["PostJobCode"].ToString();
                     obju.CompanyName = ds.Tables[0].Rows[i]["CompanyName"].ToString();
+                    obju.CompanyLogo = ds.Tables[0].Rows[i]["CompanyLogo"].ToString();
                     obju.TotalExperience = ds.Tables[0].Rows[i]["TotalExperience"].ToString();
                     obju.CurrentSalary = ds.Tables[0].Rows[i]["Salary"].ToString();
                     obju.JobType = ds.Tables[0].Rows[i]["JobType"].ToString();
@@ -1158,6 +1159,99 @@ namespace JobPortal.Controllers
             }
 
         }
+        [HttpGet]
+        public async Task<ActionResult> jobdetails(string id)
+        {
+            SeekerUser obj = new SeekerUser();
+            obj.PostJobCode = id;
+            BALSeeker obj1 = new BALSeeker();
+            SqlDataReader dr;
+            dr = obj1.jobdetails(obj);
+            while (dr.Read())
+            {
+                obj.JobTitle = dr["JobTitle"].ToString();
+                obj.Location = dr["JobLocation"].ToString();
+                obj.PostJobCode = dr["PostJobCode"].ToString();
+                obj.CompanyName = dr["CompanyName"].ToString();
+                obj.CompanyLogo = dr["CompanyLogo"].ToString();
+                obj.TotalExperience = dr["TotalExperience"].ToString();
+                obj.CurrentSalary = dr["Salary"].ToString();
+                obj.JobType = dr["JobType"].ToString();
+                obj.NoOfEmployees = dr["NoofOpenings"].ToString();
+                obj.StartDate = Convert.ToDateTime(dr["ApplicationStartDate"].ToString());
+
+                obj.JobDescription = dr["JobDescription"].ToString();
+                obj.Industry = dr["IndustryName"].ToString();
+                obj.JobCategory = dr["JobCategory"].ToString();
+                obj.CompanyWebsite = dr["OpportunityType"].ToString();
+                obj.AboutCompany = dr["AboutCompany"].ToString();
+                obj.CorrespondenceAddress = dr["Address"].ToString();
+                obj.RequiredQualificationId = dr["RequiredQualificationId"].ToString();
+
+                if (obj.RequiredQualificationId != null && obj.RequiredQualificationId != "")
+                {
+                    var languageid = obj.RequiredQualificationId;
+                    char[] seperator = { ',' };
+                    string[] language = null;
+                    language = languageid.Split(seperator);
+                    string languages1 = null;
+                    string languages2 = null;
+
+                    for (int k = 0; k < language.Length; k++)
+                    {
+                        BALSeeker objbal = new BALSeeker();
+                        DataTable dt = new DataTable();
+                        dt = objbal.requiredQualification(Convert.ToInt32(language[k]));
+                        languages1 = dt.Rows[0][1].ToString();
+
+
+                        if (k == language.Length - 1)
+                        {
+                            languages2 = string.Concat(languages2, languages1);
+                        }
+                        else
+                        {
+                            languages2 = string.Concat(languages2, languages1, ",");
+                        }
+                        obj.RequiredQualificationId = languages2;
+                    }
+                }
+                else { obj.RequiredQualificationId = null; }
+
+                if (obj.Location != null && obj.Location != "")
+                {
+                    var languageid = obj.Location;
+                    char[] seperator = { ',' };
+                    string[] language = null;
+                    language = languageid.Split(seperator);
+                    string languages1 = null;
+                    string languages2 = null;
+
+                    for (int k = 0; k < language.Length; k++)
+                    {
+                        BALSeeker objbal = new BALSeeker();
+                        DataTable dt = new DataTable();
+                        dt = objbal.PreferredLocation(Convert.ToInt32(language[k]));
+                        languages1 = dt.Rows[0][2].ToString();
+
+
+                        if (k == language.Length - 1)
+                        {
+                            languages2 = string.Concat(languages2, languages1);
+                        }
+                        else
+                        {
+                            languages2 = string.Concat(languages2, languages1, ",");
+                        }
+                        obj.Location = languages2;
+                    }
+                }
+                else { obj.Location = null; }
+
+            }
+            dr.Close();
+            return await Task.Run(() => View(obj));
+        }
         public async Task<ActionResult> AllCompany()
         {
             BALSeeker ObjBal = new BALSeeker();
@@ -1180,26 +1274,11 @@ namespace JobPortal.Controllers
                 lstUserDt1.Add(obju);
             }
             objDetails.lstuser = lstUserDt1;
-            //List<SeekerUser> lstUserDt2 = new List<SeekerUser>();
-            //for (int i = 1; i < ds.Tables[0].Rows.Count; i += 2)
-            //{
-            //    SeekerUser obju = new SeekerUser();
-
-            //    obju.CompanyId = Convert.ToInt32(ds.Tables[0].Rows[i]["CompanyId"].ToString());
-            //    obju.CompanyName = ds.Tables[0].Rows[i]["CompanyName"].ToString();
-            //    obju.Slogan = ds.Tables[0].Rows[i]["Slogan"].ToString();
-            //    obju.CompanyLogo = ds.Tables[0].Rows[i]["CompanyLogo"].ToString();
-            //    obju.Rating = ds.Tables[0].Rows[i]["Rating"].ToString();
-            //    obju.Follow = Convert.ToInt32(ds.Tables[0].Rows[i]["Follow"]);
-            //    //obju.Review = ds.Tables[0].Rows[i]["Review"].ToString();
-
-            //    lstUserDt1.Add(obju);
-            //}
-            //objDetails.lstuser1 = lstUserDt2;
-
             return await Task.Run(() => View(objDetails));
 
         }
+
+
         [HttpGet]
         public async Task<ActionResult> CompanysDetails(int id)
         {
@@ -1225,6 +1304,77 @@ namespace JobPortal.Controllers
             }
             dr.Close();
             return await Task.Run(() => View(obj));
+        }
+        [HttpPost]
+        public async Task<ActionResult> ReviewCompanyFeedback(int CompanyId)
+        {
+            if (Session["SeekerCode"] != null)
+            {
+
+                SeekerUser obj = new SeekerUser();
+                obj.CompanyId = CompanyId;
+                BALSeeker obj1 = new BALSeeker();
+                SqlDataReader dr;
+                dr = obj1.CompanysDetails(obj);
+                while (dr.Read())
+                {
+                    obj.CompanyName = dr["CompanyName"].ToString();
+                    obj.CompanyId = Convert.ToInt32(dr["CompanyId"].ToString());
+                }
+                dr.Close();
+                return await Task.Run(() => View(obj));
+            }
+            else
+            {
+                return await Task.Run(() => View("Login", "Account"));
+            }
+        }
+        [HttpGet]
+        public async Task<ActionResult> ReviewCompany(int CompanyId, bool DoyouCurrentlyworkhere, string Review)
+        {
+            if (Session["SeekerCode"] != null)
+            {
+
+                seekercode = Session["SeekerCode"].ToString();
+                SeekerUser obj = new SeekerUser();
+                obj.CompanyId = CompanyId;
+                obj.DoyouCurrentlyworkhere = DoyouCurrentlyworkhere;
+                obj.Review = Review;
+
+                obj.Seekercode = seekercode;
+
+                BALSeeker obj1 = new BALSeeker();
+                SqlDataReader dr;
+                dr = obj1.CompanyFeedback(obj);
+                if (dr.HasRows == true)
+                {
+                    while (dr.Read())
+                    {
+                        obj.CompanyId = Convert.ToInt32(dr["CompanyId"].ToString());
+                        obj.EmployerCode = dr["Employercode"].ToString();
+                    }
+                    dr.Close();
+                    obj1.ReviewCompanyFeedback(obj);
+                    return await Task.Run(() => RedirectToAction("CompanysDetails"));
+                }
+                else
+                {
+                    dr.Close();
+                    dr = obj1.CompanysDetails(obj);
+                    while (dr.Read())
+                    {
+                        obj.EmployerCode = dr["Employercode"].ToString();
+                    }
+                    dr.Close();
+                    obj1.SaveCompanyFeedback(obj);
+                    return await Task.Run(() => RedirectToAction("CompanysDetails"));
+                }
+                dr.Close();
+            }
+            else
+            {
+                return await Task.Run(() => View("Login", "Account"));
+            }
         }
         [HttpPost]
         public async Task<ActionResult> FollowCompany(int Companyid)
@@ -1411,6 +1561,7 @@ namespace JobPortal.Controllers
             //    obju.JobTitle = ds.Tables[0].Rows[i]["JobTitle"].ToString();
             //    obju.JobLocation = ds.Tables[0].Rows[i]["JobLocation"].ToString();
             //    obju.SalaryRange = ds.Tables[0].Rows[i]["SalaryRange"].ToString();
+            //    obju.TotalExperience = ds.Tables[0].Rows[i]["TotalExperience"].ToString();
 
             //    lstUserDt1.Add(obju);
             //}
@@ -1420,7 +1571,7 @@ namespace JobPortal.Controllers
             return await Task.Run(() => View());
         }
         [HttpPost]
-        public async Task<ActionResult> Search(SeekerUser obj, string jobTitle, string jobLocation, string salary)
+        public async Task<ActionResult> Search(SeekerUser obj, string jobTitle, string jobLocation, string salary,string totalexperience)
         {
             KTJobLocation();
             if (Session["SeekerCode"] != null)
@@ -1431,6 +1582,7 @@ namespace JobPortal.Controllers
             obj.JobTitle = jobTitle;
             obj.Salary = salary;
             obj.JobLocation = jobLocation;
+            obj.TotalExperience = totalexperience;
             BALSeeker ObjBal = new BALSeeker();
             DataSet ds = new DataSet();
             ds = ObjBal.FindJobs1(obj);
@@ -1449,6 +1601,7 @@ namespace JobPortal.Controllers
                     obju.JobTitle = ds.Tables[0].Rows[i]["JobTitle"].ToString();
                     //obju.Location = ds.Tables[0].Rows[i]["JobLocation"].ToString();
                     obju.PostJobCode = ds.Tables[0].Rows[i]["PostJobCode"].ToString();
+                    obju.CompanyLogo = ds.Tables[0].Rows[i]["CompanyLogo"].ToString();
                     obju.CompanyName = ds.Tables[0].Rows[i]["CompanyName"].ToString();
                     obju.TotalExperience = ds.Tables[0].Rows[i]["TotalExperience"].ToString();
                     obju.CurrentSalary = ds.Tables[0].Rows[i]["Salary"].ToString();
