@@ -42,11 +42,11 @@
 
                     })
                         .then(function () {
-                            window.location.href = "/Employer/RejectionEmail?AppliedJobId=" + AppliedJobId;
+                            window.location.href = "/Employer/RejectionEmail?AppliedJobId="+AppliedJobId;
                         })
-                        .then(function () {
-                            window.location.href = "/Employer/RoundsGridR2";
-                        })
+                        //.then(function () {
+                        //    window.location.href = "/Employer/RoundsGridR2";
+                        //})
 
                 }
             });
@@ -65,11 +65,11 @@
                 Applylist: Applylist
             })
                 .then(function () {
-                    window.location.href = "/Employer/HireEmail?AppliedJobId=" + AppliedJobId;
+                    window.location.href = "/Employer/HireEmail?AppliedJobId="+AppliedJobId;
                 })
-                .then(function () {
-                    window.location.href = "/Employer/RoundsGridR2";
-                })
+                //.then(function () {
+                //    window.location.href = "/Employer/RoundsGridR2";
+                //})
         });
 
         $('#btnReject').click(function () {
@@ -84,11 +84,11 @@
                 Applylist: Applylist
             })
                 .then(function () {
-                    window.location.href = "/Employer/RejectionEmail?AppliedJobId=" + AppliedJobId;
+                    window.location.href = "/Employer/RejectionEmail?AppliedJobId="+AppliedJobId;
                 })
-                .then(function () {
-                    window.location.href = "/Employer/RoundsGridR2";
-                })
+                //.then(function () {
+                //    window.location.href = "/Employer/RoundsGridR2";
+                //})
         });
 
         $('#btnOpen').click(function () {
@@ -667,14 +667,14 @@
 </body>
 </html>
 
-<div class="col-md-offset-2 col-md-10" style="margin-left:745px">
+<div class="col-md-offset-2 col-md-10" style="margin-left:730px;">
     <input type="submit" value="Schedule Interview " style="vertical-align:middle;" class="button2" id="btnOpen" />
 </div>
 <br />
 <div>
-    <table class="table table-hover" style="width:90%;" id="search">
+    <table class="table table-hover" style="width:90%;" id="ashish">
         <thead>
-            <tr style="background-color: #435ebe; border-radius: 0.5rem;color:white;">
+            <tr style="background-color: #435ebe; color: white;">
                 <th>
                     Selectall<br />
                     <input type="checkbox" id="selectall" class="css-checkbox " name="selectall" />
@@ -715,11 +715,10 @@
         else
         {
             <tbody>
-
                 @foreach (var item in Model.LstUser)
                 {
                     <tr>
-                        <td>
+                        <td class="checkbox">
                             @Html.CheckBox("multiSelect", new { id = "multiselect", @class = "checkbox", Value = item.AppliedJobId })
                         </td>
 
@@ -739,24 +738,24 @@
                                 @Html.DisplayFor(modelItem => item.SeekerEmail)
                             </span>
                         </td>
+
                         <td>
                             @Html.DisplayFor(modelItem => item.Status)
                             <br />
                             <button type="button" class="btn btn-success response border-success" style="background:white;">
-                                <p style="font-size:20px;height:9px;">
+                                <p style="font-size:20px;height:9px">
                                     @*@Html.ActionLink("Approve", "UpdateRound4", new { AppliedJobId = item.AppliedJobId })*@
-                                    <a class="sweetApprove" title="Approve" href="#" data-id="@item.AppliedJobId" @*href="@Url.Action("UpdateRound2", "Employer", new { AppliedJobId = item.AppliedJobId })"*@ style="color:green">&#10004;</a>
+                                    <a class="sweetApprove" title="Aprrove" href="#" data-id="@item.AppliedJobId" @*href="@Url.Action("UpdateRound1", "Employer", new { AppliedJobId = item.AppliedJobId })"*@ style="color:green;">&#10004;</a>
                                 </p>
                             </button>&nbsp;&nbsp;
                             <button type="button" class="btn btn-success response border-danger" style="background:white;">
-                                <p style="font-size:20px;height:9px;width:20px;">
+                                <p style="font-size:18px;height:9px;width:20px;">
                                     @*@Html.ActionLink("Approve", "UpdateRound4", new { AppliedJobId = item.AppliedJobId })*@
-                                    <a class="sweetReject" title="Reject" href="#" data-id="@item.AppliedJobId" @*href="@Url.Action("RejectatRound2", "Employer", new { AppliedJobId = item.AppliedJobId })"*@ style="color:green">&#10060;</a>
+                                    <a class="sweetReject" title="Reject" href="#" data-id="@item.AppliedJobId" @*href="@Url.Action("RejectatRound1", "Employer", new { AppliedJobId = item.AppliedJobId })"*@>&#10060;</a>
                                 </p>
                             </button>
-
                             @*<button type="button" class="btn-danger">
-                                    @Html.ActionLink("Reject", "RejectatRound2", new { AppliedJobId = item.AppliedJobId }, new { @style = "color: white;" })
+                                    @Html.ActionLink("Reject", "RejectatRound1", new { AppliedJobId = item.AppliedJobId }, new { @style = "color: white;" })
 
                                 </button>*@
                             @*<button type="button" style="margin-left:15px">&#x2717;</button>*@
@@ -764,26 +763,29 @@
                             @*<button class="btn" style="margin-left:10px"><i class="bi bi-download"></i></button>*@
                         </td>
                     </tr>
+
+
                 }
             </tbody>
         }
     </table>
+
     <br />
 
-    <div class="form-group" style="margin-left:665px">
+    <div class="form-group" style="margin-left:662px">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Hire" style="vertical-align: middle; display: none;" class="button" id="btnApprove" />
+            <input type="submit" value="Hire" style="vertical-align:middle;display:none;" class="button" id="btnApprove" />
         </div>
         <div class="col-md-offset-2 col-md-10">
+
             <input type="submit" value="Reject" style="vertical-align: middle; margin-left: 103px; margin-top: -72px; display: none;" class="button1" id="btnReject" />
+
         </div>
         @*<div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Schedule Interview " style="vertical-align:middle;" class="button2" id="btnOpen" />
             </div>*@
     </div>
 </div>
-
-
 
 
 <!--<div style="margin-left:778px">-->

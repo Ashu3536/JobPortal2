@@ -77,6 +77,17 @@ namespace JobPortalLibrary.Admin
             dr = cmd.ExecuteReader();
             return dr;
         }
+        public SqlDataReader RejectStatusGet(AdminUser objAdmin)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("SPAdmin", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Flag", "RejectStatusGet");
+            cmd.Parameters.AddWithValue("@PostJobCode", objAdmin.PostJobCode);
+            SqlDataReader dr;
+            dr = cmd.ExecuteReader();
+            return dr;
+        }
         //------------------------Admin Company Reviews----------------------------------------------------/
 
         public DataSet RPCompanyGridview()
@@ -209,6 +220,19 @@ namespace JobPortalLibrary.Admin
             adpt.Fill(ds);
             return ds;
 
+        }
+        //----------------Admin Jobs------------///
+        public DataSet RPAdminJobsGrid()
+        {
+            ManageConnection();
+            SqlCommand cmb = new SqlCommand("SPAdmin", con);
+            cmb.CommandType = CommandType.StoredProcedure;
+            cmb.Parameters.AddWithValue("@Flag", "RPAdminJobsGrid");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmb;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
         }
 
         //----------Rita End------------------------------------------//

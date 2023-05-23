@@ -80,41 +80,41 @@
             padding: 10px;
             resize: block;
         }
-    </style>
-    <table class="table table-bordered table-striped mt-4 dt-responsive nowrap table-responsive" id="example" style="margin-left: 250px; width:1180px;">
+    </style>    
+    <table class="table table-bordered table-striped mt-4 dt-responsive nowrap table-responsive" id="Rita" style="margin-left: 250px; width:1110px;">
         <thead>
-            <tr @*style="background-color: brown; color:lime"*@>
-                <th style=" text-align: center;">
+            <tr style="background-color:royalblue;">
+                <th style=" text-align: center; color: white;">
                     View
                 </th>
 
-                <th style="text-align: center;font-size:15px;">
+                <th style="text-align: center; font-size: 15px; color: white;">
                     @Html.HiddenFor(model => model.ReviewId)
                 </th>
-                <th style=" text-align: center;font-size:15px">
+                <th style=" text-align: center; font-size: 15px; color: white;">
                     @Html.DisplayNameFor(model => model.CompanyName)
                 </th>
-                <th style=" text-align: center;font-size:15px;">
+                <th style=" text-align: center; font-size: 15px; color: white;">
                     @Html.DisplayNameFor(model => model.RegistrationDate)
                 </th>
-                <th style=" text-align: center;font-size:15px">
+                <th style=" text-align: center; font-size: 15px; color: white;">
                     @Html.DisplayNameFor(model => model.AboutCompany)
                 </th>
-                <th style=" text-align: center;font-size:15px">
+                <th style=" text-align: center; font-size: 15px; color: white;">
                     @Html.DisplayNameFor(model => model.Rating)
                 </th>
-                <th style=" text-align: center;font-size:15px">
+                <th style=" text-align: center; font-size: 15px; color: white;">
                     @Html.DisplayNameFor(model => model.Review)
                 </th>
-                <th style=" text-align: center;font-size:15px">
+                <th style=" text-align: center; font-size: 15px; color: white;">
                     @Html.DisplayNameFor(model => model.Status)
                 </th>
-                <th style="width:200px; text-align: center;font-size:15px">
+                <th style="width: 200px; text-align: center; font-size: 15px; color: white;">
                     Status
                 </th>
 
 
-                <th></th>
+               
             </tr>
         </thead>
         <tbody>
@@ -125,11 +125,12 @@
                     <td>
 
 
-                        <a class="btnfetch fa fa-eye" title="View" style="font-size:25px;color:black;padding:10px 10px 10px 45px;" href="javascript:;" data-id="@item.ReviewId"></a>
+                        <a class="btnfetch fa fa-eye" title="View" style="font-size:25px;color:blue;padding:10px 10px 10px 10px;" href="javascript:;" data-id="@item.ReviewId"></a>
                     </td>
 
                     <td>
                         @Html.HiddenFor(modelItem => item.ReviewId)
+                        <a class="fa fa-trash" title="Delete" style="font-size:25px;color:red;" href="@Url.Action("RPCompanyIsDelete","Admin",new { ReviewId = @item.ReviewId })"> </a>
                     </td>
 
                     <td>
@@ -176,12 +177,7 @@
 
                     </td>
 
-                    <td>
-                        <br />
-
-                        <a class="fa fa-trash" title="Delete" style="font-size:25px;color:black;padding:10px 10px 10px 10px;" href="@Url.Action("RPCompanyIsDelete","Admin",new { ReviewId = @item.ReviewId })"> </a>
-
-                    </td>
+                    
 
                 </tr>
             }

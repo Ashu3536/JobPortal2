@@ -6,7 +6,11 @@
 }
 <html>
 <head>
-
+    <style>
+        td{
+            text-align:center;
+        }
+    </style>
 </head>
 <body style="background-color: aliceblue ">
 
@@ -120,8 +124,8 @@
             foreach (var item in @Model.ListUser)
             {
 
-                <div class="card" style="width:50rem;height:10rem;background-color:lightsteelblue;margin-left:10%;">
-                    <table id="tblGrid">
+                <div class="card d-flex dynamic-card mb-5" style="width:50rem;height:164px; margin-left:5%;border-radius:10px;box-shadow: 20px 10px 10px lightgrey">
+                    <table id="tblGrid" style="text-align:center">
                         <thead>
                             <tr>
                             </tr>
@@ -131,7 +135,7 @@
                                 <td>
                                     @Html.HiddenFor(modelItem => item.Seekercode)
                                 </td>
-                                <td style="font-size:25px;font-style:oblique">
+                                <td style="font-size:25px;font-style:oblique;">
                                     <strong style="font-size:30px">@item.JobTitle</strong>
                                     <br />
                                     @item.SeekerName
@@ -146,12 +150,12 @@
                                     @Html.HiddenFor(modelItem => item.ResumePDF)
                                 </td>
                                 <td style="font-size:25px; font-style:oblique">
-                                    <button type="button" style="background-color:royalblue;border-radius:10px;height:40px; ">
+                                    <button type="button" style="background-color:royalblue;border-radius:2px;height:40px; ">
                                         <a class="SeekerDetails" href="javascript:;" data-id="@item.Seekercode" style="color:white;">Details</a>
                                     </button>
                                 </td>
                                 <td style="font-size:25px; font-style:oblique">
-                                    <a style="border:3px solid black" href="@item.ResumePDF" target="_blank">View</a>
+                                    <a style="border:3px solid black" href="~/Content/Resume Pdf/@item.ResumePDF" target="_blank">View</a>
                                 </td>
                             </tr>
 

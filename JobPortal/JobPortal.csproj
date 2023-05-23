@@ -285,6 +285,7 @@
     <Content Include="Content\css\data-table\bootstrap-table.css" />
     <Content Include="Content\css\datapicker\colorpicker.css" />
     <Content Include="Content\css\datapicker\datepicker3.css" />
+    <Content Include="Content\css\dataTables.bootstrap.min.css" />
     <Content Include="Content\css\dropzone\dropzone.css" />
     <Content Include="Content\css\duallistbox\bootstrap-duallistbox.min.css" />
     <Content Include="Content\css\editor\bootstrap-editable.css" />
@@ -299,6 +300,7 @@
     <Content Include="Content\css\ionRangeSlider\ion.rangeSlider.css" />
     <Content Include="Content\css\ionRangeSlider\ion.rangeSlider.skinFlat.css" />
     <Content Include="Content\css\ionRangeSlider\sprite-skin-flat.png" />
+    <Content Include="Content\css\jquery.dataTables.min.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\meanmenu.min.css" />
     <Content Include="Content\css\metisMenu\metisMenu-vertical.css" />
@@ -368,6 +370,11 @@
     <Content Include="Content\images\samples\origami.jpg" />
     <Content Include="Content\images\samples\water.jpg" />
     <Content Include="Content\images\Twitter.jpg" />
+    <Content Include="Content\Img2\sort_asc.png" />
+    <Content Include="Content\Img2\sort_asc_disabled.png" />
+    <Content Include="Content\Img2\sort_both.png" />
+    <Content Include="Content\Img2\sort_desc.png" />
+    <Content Include="Content\Img2\sort_desc_disabled.png" />
     <Content Include="Content\img\about-1 - Copy.jpg" />
     <Content Include="Content\img\about-1.jpg" />
     <Content Include="Content\img\about-2 - Copy.jpg" />
@@ -2353,11 +2360,14 @@
     <Content Include="Scripts\datatable js\jszip.min.js" />
     <Content Include="Scripts\datatable js\pdfmake.min.js" />
     <Content Include="Scripts\datatable js\vfs_fonts.js" />
+    <Content Include="Scripts\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\dataTables.bootstrap4.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -2432,7 +2442,6 @@
     <Content Include="Views\JobSeeker\ADDEducationDetails.cshtml" />
     <Content Include="Views\JobSeeker\CareerProfile.cshtml" />
     <Content Include="Views\JobSeeker\CareerProfilePopup.cshtml" />
-    <Content Include="Views\JobSeeker\EducationDetails.cshtml" />
     <Content Include="Views\JobSeeker\EmploymentDetails.cshtml" />
     <Content Include="Views\JobSeeker\EmploymentDetailsPopup.cshtml" />
     <Content Include="Views\JobSeeker\ProjectDetails.cshtml" />
@@ -2447,6 +2456,12 @@
     <Content Include="Views\JobSeeker\PreferredJob.cshtml" />
     <Content Include="Views\JobSeeker\jobdetails.cshtml" />
     <Content Include="Views\JobSeeker\ReviewCompanyFeedback.cshtml" />
+    <Content Include="Views\JobSeeker\AllJobs.cshtml" />
+    <Content Include="Views\JobSeeker\EditEducationDetails.cshtml" />
+    <Content Include="Views\JobSeeker\EducationDetails.cshtml" />
+    <Content Include="Views\Admin\RPAdminJobsGrid.cshtml" />
+    <Content Include="Views\Employer\RPBilling.cshtml" />
+    <Content Include="Views\Employer\PlanDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

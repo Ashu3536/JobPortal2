@@ -18,26 +18,26 @@
 
     }*@
 
-<table class="table table-bordered table-striped mt-4 dt-responsive nowrap table-responsive" id="example" style="margin-left:300px;width:1000px">
+<table class="table table-bordered table-striped mt-4 dt-responsive nowrap table-responsive" id="example" style="margin-left: 300px; width: 1000px; border: solid">
     <thead>
-        <tr>
-            <th style="width: 150px; text-align: center">
+        <tr style="background-color:royalblue">
+            <th style="width: 150px; text-align: center; color: white;">
                 @Html.DisplayNameFor(model => model.Employercode)
             </th>
-            <th style="width: 500px; text-align: center">
+            <th style="width: 5s00px; text-align: center; color: white;">
                 @Html.DisplayNameFor(model => model.EmployerName)
             </th>
-            <th style="width: 100px; text-align: center">
+            <th style="width: 100px; text-align: center; color: white;">
                 @Html.DisplayNameFor(model => model.Plans)
             </th>
-            <th style="width: 150px; text-align: center">
+            <th style="width: 150px; text-align: center; color: white;">
                 @Html.DisplayNameFor(model => model.SubscriptionDate)
             </th>
 
-            <th style="width: 150px; text-align: center">
+            <th style="width: 150px; text-align: center; color: white;">
                 @Html.DisplayNameFor(model => model.Status)
             </th>
-            <th style="width: 100px; text-align: center">
+            <th style="width: 100px; text-align: center; color: white;">
                 @Html.DisplayNameFor(model => model.PlanDuration)
             </th>
 
@@ -52,7 +52,7 @@
                 </th>*@
 
 
-            <th style="width: 100px; text-align: left">Status Update</th>
+            <th style="width: 70px; text-align:left; color: white;">Status Update</th>
         </tr>
     </thead>
     @using (Html.BeginForm("EmployerStatus", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using JobPortalLibrary.Admin;
 
 namespace JobPortalLibrary.Employer
 {
@@ -208,7 +209,7 @@ namespace JobPortalLibrary.Employer
             SqlCommand cmd = new SqlCommand("Employeer", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "Deletecandidate");
-            cmd.Parameters.AddWithValue("@Seekercode", obj.Seekercode);
+            cmd.Parameters.AddWithValue("@AppliedJobId", obj.AppliedJobId);
             cmd.ExecuteNonQuery();
             
 
@@ -698,16 +699,37 @@ namespace JobPortalLibrary.Employer
             return ds;
 
         }
-        public void Update(EmployerUser obj)
+        public DataSet GetEmailid(EmployerUser obj)
         {
             ManageConnection();
             SqlCommand cmd = new SqlCommand("Employeer", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@flag", "Update");
-            cmd.Parameters.AddWithValue("@StatusId", obj.StatusId);
+            cmd.Parameters.AddWithValue("@flag", "GetEmailid");
+            //cmd.Parameters.AddWithValue("@StatusId", obj.StatusId);
             cmd.Parameters.AddWithValue("@Seekercode", obj.Seekercode);
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
             cmd.ExecuteNonQuery();
             
+        }
+        public DataSet GetCompanyDetails(EmployerUser obj)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "GetCompanyDetails");
+            //cmd.Parameters.AddWithValue("@StatusId", obj.StatusId);
+            cmd.Parameters.AddWithValue("@EmployeerCode", obj.Employercode);
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+            cmd.ExecuteNonQuery();
+
         }
         public DataSet ResumeAlert(EmployerUser objseeker)
         {
@@ -925,6 +947,33 @@ namespace JobPortalLibrary.Employer
         //    return dr;
 
         //}
+        public DataSet PlanDetails()
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "PlanDetails");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+
+        }
+        public DataSet getbenifits(int benifitsid)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "getbenifits");
+            cmd.Parameters.AddWithValue("@BenefitId", benifitsid);
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+
+        }
         //---------------------------------Ashish End----------------------------//
         //---------------------------------Muskan Start----------------------------//
         public DataSet Fetchemp(string employercode)
@@ -978,8 +1027,102 @@ namespace JobPortalLibrary.Employer
             cmd.ExecuteNonQuery();
             con.Close();
         }
+
+        //-------------------company view---------------------------//
+        public void viewEmployerSave(EmployerUser obj)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.Parameters.AddWithValue("@flag", "viewEmployerSave");
+            cmd.Parameters.AddWithValue("@Seekercode", obj.Seekercode);
+            cmd.Parameters.AddWithValue("@EmployeerCode", obj.Employercode);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        public SqlDataReader viewEmployer(EmployerUser obj)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("SPSeeker", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "viewEmployer");
+            cmd.Parameters.AddWithValue("@Seekercode", obj.Seekercode);
+            cmd.Parameters.AddWithValue("@EmployeerCode", obj.Employercode);
+            SqlDataReader dr;
+            dr = cmd.ExecuteReader();
+            return dr;
+
+        }
+        //--------------------Dashboard-------------------------------------------------
+        public DataSet ACJobCount()
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Flag", "ACJobCount");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+        }
+        public DataSet ACApplyJobCount()
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Flag", "ACApplyJobCount");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+        }
+        public DataSet ACInterviewConducted()
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Flag", "ACInterviewConducted");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+
+        }
+        public DataSet ACTotalHire()
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Flag", "ACTotalHire");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+
+        }
+        //-------------Rita----------------------------------------------//
+        public DataSet RPBilling(EmployerUser obj)
+        {
+            ManageConnection();
+            SqlCommand cmb = new SqlCommand("Employeer", con);
+            cmb.CommandType = CommandType.StoredProcedure;
+            cmb.Parameters.AddWithValue("@flag", "RPBilling");
+            cmb.Parameters.AddWithValue("@EmployeerCode", obj.Employercode);
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmb;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+
+        }
+        //////////----------------Rita End-----------//
+
     }
 }
+
 
 
 

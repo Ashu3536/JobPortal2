@@ -566,7 +566,81 @@ namespace JobPortalLibrary.JobSeeker
             return ds;
 
         }
+        public DataSet AllJobs()
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("SPSeeker", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "AllJobs");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
 
+        }
+        public DataSet SearchJobs(SeekerUser objseeker)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("SPSeeker", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "SearchJobs");
+            cmd.Parameters.AddWithValue("@JobTitle", objseeker.JobTitle);
+            cmd.Parameters.AddWithValue("@TotalExperience", objseeker.TotalExperience);
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+
+        }
+        //-----------------------------dashboard count---------------------------//
+        public SqlDataReader totalcompany()
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("SPSeeker", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "totalcompany");
+            SqlDataReader dr;
+            dr = cmd.ExecuteReader();
+            return dr;
+
+        }
+        public SqlDataReader totaljobs()
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("SPSeeker", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "totaljobs");
+            SqlDataReader dr;
+            dr = cmd.ExecuteReader();
+            return dr;
+
+        }
+        public SqlDataReader totalapplyjobs(SeekerUser obj)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("SPSeeker", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "totalapplyjobs");
+            cmd.Parameters.AddWithValue("@Seekercode", obj.Seekercode);
+            SqlDataReader dr;
+            dr = cmd.ExecuteReader();
+            return dr;
+
+        }
+        public SqlDataReader ViewProfile(SeekerUser obj)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("SPSeeker", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "ViewProfile");
+            cmd.Parameters.AddWithValue("@Seekercode", obj.Seekercode);
+            SqlDataReader dr;
+            dr = cmd.ExecuteReader();
+            return dr;
+
+        }
 
 
         //--------------------------------------Saurabh End--------------------------------//

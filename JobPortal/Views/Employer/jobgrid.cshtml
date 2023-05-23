@@ -12,7 +12,7 @@
     <link rel="stylesheet" src="https://cdn.datatables.net/buttons/2.3.2/css/buttons.bootstrap5.min.css" />*@
 <!--<link href="~/Content/datatable/buttons.dataTables.min.css" rel="stylesheet" />
 <link href="~/Content/datatable/jquery.dataTables.min.css" rel="stylesheet" />-->
-<button>
+<button class="btn-bg-cl-digg-tw">
     @*<a href="@Url.Action("JobRegistration","Employer")" PostJobCode="@Model.PostJobCode">Post a Job</a>*@
     @Html.ActionLink("Post a Job", "JobRegister")
 </button>
@@ -156,25 +156,26 @@
                 </td>
                 <td>
                     @*@Html.ActionLink("Sponcer This Job", "Actions", new { postjobcode = item.PostJobCode }, htmlAttributes: new { @class = "btn btn-info" }) |
-                        @Html.ActionLink("View Job Details", "JobDetails", new { postjobcode = item.PostJobCode }, htmlAttributes: new { @class = "btn btn-info popup" }) |*@
+        @Html.ActionLink("View Job Details", "JobDetails", new { postjobcode = item.PostJobCode }, htmlAttributes: new { @class = "btn btn-info popup" }) |*@
                     @*<button type="button">
-                            <a class="sponcerjob" href="" data-id="@item.PostJobCode">Sponcer This Job</a>
-                        </button>*@
+            <a class="sponcerjob" href="" data-id="@item.PostJobCode">Sponcer This Job</a>
+        </button>*@
+                    <a class=" bi bi-eye-fill" title="View" style="font-size:20px;color:blue;" href="@Url.Action("JobDetails", "Employer", new {PostJobCode=item.PostJobCode})"></a>
 
 
-                    <a class="Viewdetails bi bi-eye-fill" title="View" style="font-size:20px;color:blue;padding:10px 10px 10px 10px;" href="javascripts:;" data-id="@item.PostJobCode"></a>
+                    @*<a class="Viewdetails bi bi-eye-fill" title="View" style="font-size:20px;color:blue;padding:10px 10px 10px 10px;" href="javascripts:;" data-id="@item.PostJobCode"></a>*@
 
                     @*<br /> <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button type="button">
-                            <a class="sharejob" href="" data-id="@item.PostJobCode">Share Job</a>
-                        </button>8
-                        &nbsp;&nbsp;*@
+        <button type="button">
+            <a class="sharejob" href="" data-id="@item.PostJobCode">Share Job</a>
+        </button>8
+        &nbsp;&nbsp;*@
                     @*<button type="button">
-                            <a  href="@Url.Action("RepostJob","Employer")"data-id="@item.PostJobCode"></a>
-                        </button>*@
+            <a  href="@Url.Action("RepostJob","Employer")"data-id="@item.PostJobCode"></a>
+        </button>*@
                     @*<button type="button">
-                            @Html.ActionLink("RepostJob", "RepostJob", new { PostJobCode = item.PostJobCode })
-                        </button>*@
+            @Html.ActionLink("RepostJob", "RepostJob", new { PostJobCode = item.PostJobCode })
+        </button>*@
                     &nbsp;&nbsp; &nbsp;&nbsp;
 
                     <a class="bi bi-pencil-fill" title="Edit" style="font-size:20px;color:blue;padding:10px 10px 10px 10px;" href="@Url.Action("RepostJob", "Employer", new {PostJobCode = item.PostJobCode})"> </a>

@@ -60,6 +60,30 @@
                     });
                 });
             });
+            $(function () {
+                $(".EditEducationDetails").click(function () {
+                    var $buttonClicked = $(this);
+                    var id = $buttonClicked.attr('data-id')
+                    /* var id = $(this).closest("tr").find("td").eq(0).html();*/
+                    $.ajax({
+                        type: "POST",
+                        url: "/JobSeeker/EditEducationDetails",
+                        data: '{SSCID: "' + id + '" }',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        success: function (response) {
+                            $("#partialModal").find(".modal-body").html(response);
+                            $("#partialModal").modal('show');
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                });
+            });
         </script>
     }
 
@@ -75,7 +99,7 @@
 
         .tabprofile {
             margin-top: -18%;
-            margin-bottom: 0%;
+            margin-bottom: 2%;
         }
 
         .tbprofiless {
@@ -177,7 +201,7 @@
     <!-- Dashboard End -->
     @*<form style="margin-left:50px">*@
     <div class="tabprofile">
-        <div class="card" style="width:50rem; margin-left:380px;border-radius:20px;box-shadow: 5px 10px 10px lightgrey">
+        <div class="card" style="width: 50rem; margin-left: 400px; margin-bottom:-50px;border-radius:20px; box-shadow: 5px 10px 10px lightgrey">
 
             <div class="tbprofiless">
                 <div style="display: flex">
@@ -203,12 +227,14 @@
                                         @Html.HiddenFor(Model => Model.SSC)
                                         <lable for="html" value="@ViewBag.SSCBoard">@ViewBag.SSCDegree </lable><br />
                                         @Html.DisplayFor(model => model.SSCPassingYear)
-                                        <button style="margin-left:571px; background-color:white;border:0;" type="submit"><i class="fa fa-trash"></i></button>
-
+                                    <div style="display: flex; margin-top: -60px;">
+                                        <a style="align-items: center; justify-content: center;margin-left:70%" href="javascript:void(0);" class="EditEducationDetails" data-id="@Model.SSC"><i class='fas fa-pen' style='font-size:15px'></i></a>&nbsp;&nbsp;&nbsp;
+                                        <button style="border:0;background-color:white;" type="submit"><i class="fa fa-trash"></i></button>
+                                    </div>
                                     </dd>
                                 </div>
                             }
-                        </div>
+                        </div><br />
                     }
                     @using (Html.BeginForm("DeleteHSC", "JobSeeker", FormMethod.Post))
                     {
@@ -221,8 +247,10 @@
                                         @Html.HiddenFor(Model => Model.HSC)
                                         <lable for="html" value="@ViewBag.HSCBoard">@ViewBag.HSCDegree </lable><br />
                                         @Html.DisplayFor(model => model.HSCPassingYear)
-
-                                        <button style="margin-left:571px" type="submit"><i class="fa fa-trash"></i></button>
+                                    <div style="display: flex; margin-top: -60px;">
+                                        <a style="align-items: center; justify-content: center;margin-left:70%" href="javascript:void(0);" class="EditEducationDetails" data-id="@Model.HSC"><i class='fas fa-pen' style='font-size:15px'></i></a>&nbsp;&nbsp;&nbsp;
+                                        <button style="border:0;background-color:white;" type="submit"><i class="fa fa-trash"></i></button>
+                                    </div>
                                     </dd>
                                 </div>
                             }
@@ -245,7 +273,10 @@
                                     <dd>
                                         @Html.DisplayFor(model => model.UGPassingYear)
                                         @Html.DisplayFor(model => model.UGCourseType)
-                                        <button style="margin-left:500px" type="submit"><i class="fa fa-trash"></i></button>
+                                        <div style="display: flex; margin-top: -60px;">
+                                            <a style="align-items: center; justify-content: center;margin-left:70%" href="javascript:void(0);" class="EditEducationDetails" data-id="@Model.UGDegree"><i class='fas fa-pen' style='font-size:15px'></i></a>&nbsp;&nbsp;&nbsp;
+                                            <button style="border:0;background-color:white;" type="submit"><i class="fa fa-trash"></i></button>
+                                        </div>
                                     </dd>
 
                                 </div>
@@ -269,7 +300,10 @@
                                     <dd>
                                         @Html.DisplayFor(model => model.GraduationPassingYear)
                                         @Html.DisplayFor(model => model.GCourseType)
-                                        <button style="margin-left:500px" type="submit"><i class="fa fa-trash"></i></button>
+                                        <div style="display: flex; margin-top: -60px;">
+                                            <a style="align-items: center; justify-content: center;margin-left:70%" href="javascript:void(0);" class="EditEducationDetails" data-id="@Model.Graduation"><i class='fas fa-pen' style='font-size:15px'></i></a>&nbsp;&nbsp;&nbsp;
+                                            <button style="border:0;background-color:white;" type="submit"><i class="fa fa-trash"></i></button>
+                                        </div>
                                     </dd>
 
                                 </div>
@@ -292,8 +326,10 @@
                                     <dd>
                                         @Html.DisplayFor(model => model.PGmarks)
                                         @Html.DisplayFor(model => model.PGCourseType)
-
-                                        <button style="margin-left:500px" type="submit"><i class="fa fa-trash"></i></button>
+                                        <div style="display: flex; margin-top: -60px;">
+                                            <a style="align-items: center; justify-content: center;margin-left:70%" href="javascript:void(0);" class="EditEducationDetails" data-id="@Model.PG"><i class='fas fa-pen' style='font-size:15px'></i></a>&nbsp;&nbsp;&nbsp;
+                                            <button style="border:0;background-color:white;" type="submit"><i class="fa fa-trash"></i></button>
+                                        </div>
                                     </dd>
 
                                 </div>

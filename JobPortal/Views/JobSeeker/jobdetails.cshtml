@@ -15,6 +15,7 @@
         padding: 20px;
         margin-top: 10px;
     }
+
     .tabprofile2 {
         height: 190px;
         padding: 20px;
@@ -27,7 +28,6 @@
         width: 32px;
     }
 </style>
-
 <div class="tabprofile">
     <div class="card" onclick="location.href = '/JobSeeker/jobdetails'" style="width:67rem;height:170px; margin-left:100px;border-radius:10px;box-shadow: 20px 10px 10px lightgrey">
         @using (Html.BeginForm("PreferredJob", "JobSeeker", FormMethod.Post))
@@ -64,12 +64,12 @@
                         @Html.DisplayFor(modelItem => Model.NoOfEmployees)
                     </i>
                 </dd>
-                    <div class="form-group" style="margin-left:900px;margin-top:-25px;">
-                        <div class="col-md-offset-2 col-md-9">
-                            <a class="btn btn-primary ApplyJobs" href="javascript:;" data-id="@Model.PostJobCode">Apply</a>
-                        </div>
+                <div class="form-group" style="margin-left:900px;margin-top:-25px;">
+                    <div class="col-md-offset-2 col-md-9">
+                        <a class="btn btn-primary ApplyJobs" href="javascript:;" data-id="@Model.PostJobCode">Apply</a>
                     </div>
-             </dl>
+                </div>
+            </dl>
         }
     </div>
 </div>
@@ -117,7 +117,7 @@
             <hr />
             <div class="company">
                 <dd style="margin-top: -10px;">
-                    <a href="https://facebook.com/sharer.php?url=@Session["url"]" target="_blank" >
+                    <a href="https://facebook.com/sharer.php?url=@Session["url"]" target="_blank">
                         <img class="shear" src="~/Content/images/facebook.jpg" />
                     </a>
                     <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=@Session["url"]" target="_blank">
@@ -152,5 +152,50 @@
         </dl>
 
     </div>
-
 </div>
+<div id="partialModal" class="modal" tabindex="-1" role="dialog" style="position:center">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" style="color:lightgreen; font-size:xx-large"></h3>
+
+                <span aria-hidden="true">&times;</span>
+
+            </div>
+            <div class="modal-body">
+            </div>
+
+        </div>
+    </div>
+</div>c
+
+
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".ApplyJobs").click(function () {
+            var $buttonClicked = $(this);
+            var id = $buttonClicked.attr('data-id')
+            /* var id = $(this).closest("tr").find("td").eq(0).html();*/
+            $.ajax({
+                type: "GET",
+                url: "/JobSeeker/ApplyJobs/",
+                data: { PostJobCode: id },
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (response) {
+                    $("#partialModal").find(".modal-body").html(response);
+                    $("#partialModal").modal('show');
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+    });
+</script>

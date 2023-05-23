@@ -170,7 +170,7 @@ namespace JobPortalLibrary.JobSeeker
         public string ExMonth { get; set; }
 
         public string SSC { get; set; }
-
+        public string SSC1 { get; set; }
         public string SSCBoard { get; set; }
         public string SSCBoard1 { get; set; }
 
@@ -178,6 +178,7 @@ namespace JobPortalLibrary.JobSeeker
 
         public string SSCmarks { get; set; }
         public string HSC { get; set; }
+        public string HSC1 { get; set; }
 
         public string HSCBoard { get; set; }
         public string HSCBoard1 { get; set; }

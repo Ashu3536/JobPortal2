@@ -79,11 +79,11 @@
 
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.ReviewId)
+                        @Html.HiddenFor(model => model.ReviewId)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.ReviewId)
+                        @Html.HiddenFor(model => model.ReviewId)
                     </dd>
 
                     <dt>
@@ -95,11 +95,11 @@
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.Rdate)
+                        @Html.DisplayNameFor(model => model.RegistrationDate)
                     </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.RegistrationDate)
+                    <dd class="fa fa-star">
+                        @Html.DisplayFor(model => model.Rdate)
                     </dd>
 
                     <dt>

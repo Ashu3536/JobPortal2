@@ -288,6 +288,7 @@ namespace JobPortalLibrary.Employer
         public List<EmployerUser> ListUser { get; set; }
         public string ResumePDF { get; set; }
         public int CityId1 { get; set; }
+        public string Profilesummary { get; set; }
         //------------------------------------------sachin End---------------------------------------//
         //------------------------------------------Ashish Start---------------------------------------//
         public string JobSeekerName { get; set; }
@@ -310,8 +311,25 @@ namespace JobPortalLibrary.Employer
 
         public string Applycodelist { get; set; }
         public string InterviewType { get; set; }
+        public string SubscriptionName { get; set; }
+        public string Benefits { get; set; }
+        public string SubscriptionDuration { get; set; }
+        public string SubscriptionDetails { get; set; }
+        public Int64 PlanPricing { get; set; }
+        public int Offer { get; set; }
+        public Int64 OfferedPrice { get; set; }
+        public int SubscriptionId { get; set; }
         //------------------------------------------sachin End---------------------------------------//
 
+        public string applicationend { get; set; }
+        public string applicationjoin { get; set; }
+        public string message { get; set; }
+        //////////----------------Rita-----------//
+        public DateTime SubscriptionDate { get; set; }
+        public string Plans { get; set; }
+        public string PlanPrice { get; set; }
+        public List<EmployerUser> Users { get; set; }
+        //////////----------------Rita End-----------//
 
     }
 }

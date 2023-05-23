@@ -1,4 +1,4 @@
-﻿@model JobPortalLibrary.Employer.EmployerUser
+﻿ @model JobPortalLibrary.Employer.EmployerUser
 
 @{
     ViewBag.Title = "RoundsGridR3";
@@ -43,11 +43,11 @@
 
                     })
                         .then(function () {
-                            window.location.href = "/Employer/RejectionEmail?AppliedJobId=" + AppliedJobId;
+                            window.location.href = "/Employer/RejectionEmail?AppliedJobId="+AppliedJobId;
                         })
-                        .then(function () {
-                            window.location.href = "/Employer/RoundsGridR3";
-                        })
+                        //.then(function () {
+                        //    window.location.href = "/Employer/RoundsGridR3";
+                        //})
 
                 }
             });
@@ -65,11 +65,11 @@
                 Applylist: Applylist
             })
                 .then(function () {
-                    window.location.href = "/Employer/HireEmail?AppliedJobId=" + AppliedJobId;
+                    window.location.href = "/Employer/HireEmail?AppliedJobId="+AppliedJobId;
                 })
-                .then(function () {
-                    window.location.href = "/Employer/RoundsGridR3";
-                })
+                //.then(function () {
+                //    window.location.href = "/Employer/RoundsGridR3";
+                //})
         });
 
         $('#btnReject').click(function () {
@@ -84,11 +84,11 @@
                 Applylist: Applylist
             })
                 .then(function () {
-                    window.location.href = "/Employer/RejectionEmail?AppliedJobId=" + AppliedJobId;
+                    window.location.href = "/Employer/RejectionEmail?AppliedJobId="+AppliedJobId;
                 })
-                .then(function () {
-                    window.location.href = "/Employer/RoundsGridR3";
-                })
+                //.then(function () {
+                //    window.location.href = "/Employer/RoundsGridR3";
+                //})
         });
 
         $('#btnOpen').click(function () {
@@ -671,7 +671,7 @@
 </div>
 <br />
 <div>
-    <table class="table table-hover" style="width:90%;" id="search">
+    <table class="table table-hover" style="width:90%;" id="ashish">
         <thead>
             <tr style="background-color: #435ebe; border-radius: 0.5rem;color:white;">
                 <th>

@@ -137,18 +137,28 @@ namespace JobPortal.Controllers
             dr = obj1.RPJobDetails(obj);
             while (dr.Read())
             {
-                obj.PostJobCode = dr["PostJobCode"].ToString();
+                obj.CompanyLogo = dr["CompanyLogo"].ToString();
+                obj.CompanyName = dr["CompanyName"].ToString();
+                obj.ContactPerson = dr["ContactPerson"].ToString();
                 obj.JobTitle = dr["JobTitle"].ToString();
                 obj.JobDescription = dr["JobDescription"].ToString();
-                obj.ApplicationStartDate = Convert.ToDateTime(dr["ApplicationStartDate"].ToString());
-                //obju.StatusId = Convert.ToInt32(ds.Tables[0].Rows[i]["StatusId"].ToString());
-                obj.Status = dr["Status"].ToString();
+                obj.JobCategory = dr["JobCategory"].ToString();
+                obj.OpportunityType = dr["OpportunityType"].ToString();
+                obj.WorkingShifts = dr["WorkingShifts"].ToString();
+                obj.NoOfOpenings = dr["NoOfOpenings"].ToString();
+                obj.Address = dr["Address"].ToString();
+                obj.Salary = dr["Salary"].ToString();
+                obj.TotalExperience = dr["TotalExperience"].ToString();
+                obj.JobType = dr["JobType"].ToString();
+                obj.ExpectedJoiningDate = dr["ExpectedJoiningDate"].ToString();
+                obj.ApplicationEndDate = dr["ApplicationEndDate"].ToString();
 
             }
             dr.Close();
             return await Task.Run(() => PartialView(obj));
 
         }
+
         [HttpGet]
         public async Task<ActionResult> RejectionReason(string PostJobCode)
         {
@@ -156,7 +166,7 @@ namespace JobPortal.Controllers
             obj.PostJobCode = PostJobCode;
             BALAdmin obj1 = new BALAdmin();
             SqlDataReader dr;
-            dr = obj1.RPJobDetails(obj);
+            dr = obj1.RejectStatusGet(obj);
             while (dr.Read())
             {
                 obj.PostJobCode = dr["PostJobCode"].ToString();
@@ -368,6 +378,29 @@ namespace JobPortal.Controllers
             //BALAdmin obj1 = new BALAdmin();
             //obj1.RPPaymentStatusUpdate(obj.Employercode,obj.)
             //return View();
+        }
+        ///------------Admin jobs-------------------///
+        [HttpGet]
+        public async Task<ActionResult> RPAdminJobsGrid()
+        {
+            BALAdmin obj = new BALAdmin();
+            DataSet ds = new DataSet();
+            ds = obj.RPAdminJobsGrid();
+            AdminUser objuser = new AdminUser();
+            List<AdminUser> users1 = new List<AdminUser>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                AdminUser obju = new AdminUser();
+                obju.CompanyName = ds.Tables[0].Rows[i]["CompanyName"].ToString();
+                obju.JobTitle = ds.Tables[0].Rows[i]["JobTitle"].ToString();
+                obju.Status = ds.Tables[0].Rows[i]["Status"].ToString();
+                obju.applicationcount = ds.Tables[0].Rows[i]["applicationcount"].ToString();               
+                obju.Hire = ds.Tables[0].Rows[i]["hire"].ToString();
+
+                users1.Add(obju);
+            }
+            objuser.Users = users1;
+            return await Task.Run(() => View(objuser));
         }
     }
 }

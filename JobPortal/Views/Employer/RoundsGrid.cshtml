@@ -46,11 +46,11 @@
 
                     })
                         .then(function () {
-                            window.location.href = "/Employer/RejectionEmail?AppliedJobId=" + AppliedJobId;
+                            window.location.href = "/Employer/RejectionEmail?AppliedJobId="+AppliedJobId;
                         })
-                        .then(function () {
-                            window.location.href = "/Employer/RoundsGrid";
-                        })
+                        //.then(function () {
+                        //    window.location.href = "/Employer/RoundsGrid";
+                        //})
 
                 }
             });
@@ -68,9 +68,9 @@
             $.get("/Employer/UpdateRound1list", {
                 Applylist: Applylist
             })
-                .then(function () {
-                    window.location.href = "/Employer/HireEmail?AppliedJobId=" + AppliedJobId;
-                })
+                //.then(function () {
+                //    window.location.href = "/Employer/HireEmail?AppliedJobId="+AppliedJobId;
+                //})
                 .then(function () {
                     window.location.href = "/Employer/RoundsGrid";
                 })
@@ -88,11 +88,11 @@
                 Applylist: Applylist
             })
                 .then(function () {
-                    window.location.href = "/Employer/RejectionEmail?AppliedJobId=" + AppliedJobId;
+                    window.location.href = "/Employer/RejectionEmail?AppliedJobId="+AppliedJobId;
                 })
-                .then(function () {
-                    window.location.href = "/Employer/RoundsGrid";
-                })
+                //.then(function () {
+                //    window.location.href = "/Employer/RoundsGrid";
+                //})
         });
 
         $('#btnOpen').click(function () {
@@ -764,7 +764,7 @@
 </div>
 <br />
 <div>
-    <table class="table table-hover" style="width:90%;" id="example">
+    <table class="table table-hover" style="width:90%;" id="ashish">
         <thead>
             <tr style="background-color: #435ebe; color: white;">
                 <th>

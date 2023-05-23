@@ -72,7 +72,21 @@ namespace JobPortalLibrary.Admin
         public string EmployerName { get; set; }
 
         public string StatusType { get; set; }
-
+        public string ContactPerson { get; set; }
+        public string JobCategory { get; set; }
+        public string OpportunityType { get; set; }
+        public string WorkingShifts { get; set; }
+        public string NoOfOpenings { get; set; }
+        public string Address { get; set; }
+        public string Salary { get; set; }
+        public string TotalExperience { get; set; }
+        public string ExpectedJoiningDate { get; set; }
+        public string ApplicationEndDate { get; set; }
+        public string JobType { get; set; }
+        public string CompanyLogo { get; set; }
+        public string Location { get; set; }
+        public string applicationcount { get; set; }
+        public string Hire { get; set; }
 
     }
 }
