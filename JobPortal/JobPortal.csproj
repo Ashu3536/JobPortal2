@@ -258,9 +258,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Code2Night.jpeg" />
+    <Content Include="Content\Admin\LoginImage.jpg" />
     <Content Include="Content\bootstrap-chosen.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.bundle.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\chosen-sprite%402x.png" />
@@ -333,6 +335,7 @@
     <Content Include="Content\css\widgets\chat.css" />
     <Content Include="Content\css\widgets\todo.css" />
     <Content Include="Content\files\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\images\avatar7.png" />
     <Content Include="Content\images\bg\4853433.jpg" />
     <Content Include="Content\images\Camera.png" />
@@ -469,6 +472,7 @@
     <Content Include="Content\img\together.png" />
     <Content Include="Content\img\ViewPDF.png" />
     <Content Include="Content\img\wild_flowers.png" />
+    <Content Include="Content\jquery.min.js" />
     <Content Include="Content\js\bootstrap.bundle.min.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\c3-charts\c3-active.js" />
@@ -2349,6 +2353,8 @@
     <Content Include="Content\bootstrap-chosen.less" />
     <Content Include="Content\Resume Pdf\Rita Sanjay Patil resume.pdf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\chart.js" />
+    <Content Include="Scripts\chart.min.js" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\chosen.min.css" />
@@ -2462,10 +2468,21 @@
     <Content Include="Views\Admin\RPAdminJobsGrid.cshtml" />
     <Content Include="Views\Employer\RPBilling.cshtml" />
     <Content Include="Views\Employer\PlanDetails.cshtml" />
+    <Content Include="Views\Employer\GetCompanyDetails.cshtml" />
+    <Content Include="Views\JobSeeker\CompanyFeedback.cshtml" />
+    <Content Include="Views\Admin\siteEarningE.cshtml" />
+    <Content Include="Views\Admin\siteEarningS.cshtml" />
+    <Content Include="Views\Employer\GetPlanDetails.cshtml" />
+    <Content Include="Views\Employer\AddPaymentDetails.cshtml" />
+    <Content Include="Views\Admin\Subscription.cshtml" />
+    <Content Include="Views\Admin\Plangrid.cshtml" />
+    <Content Include="Views\Admin\EditPlan.cshtml" />
+    <Content Include="Views\Admin\PlanDetails.cshtml" />
+    <Content Include="Views\Admin\AddBenefits.cshtml" />
+    <Content Include="Views\Admin\Jobseekargrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Admin\" />
     <Folder Include="Content\PDF Files\" />
     <Folder Include="Models\" />
   </ItemGroup>

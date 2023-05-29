@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -87,6 +88,48 @@ namespace JobPortalLibrary.Admin
         public string Location { get; set; }
         public string applicationcount { get; set; }
         public string Hire { get; set; }
+        public List<AdminUser> User { get; set; }
 
+     
+       
+        public string HRName { get; set; }
+        //---------Mitali Start--------//
+        public int SubscriptionId { get; set; }
+
+        public string SubscriptionName { get; set; }
+
+        public string Benefits { get; set; }
+        public string SubscriptionDetails { get; set; }
+        [Required]
+        public string SubscriptionDuration { get; set; }
+        [Required]
+        public Int64 PlanPricing { get; set; }
+
+        public int Offer { get; set; }
+
+        public Int64 OfferedPrice { get; set; }
+
+
+        [DataType(DataType.Date)]
+        public DateTime From { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime To { get; set; }
+        public string[] BenifitList { get; set; }
+
+        public string[] SeekerBenifitList { get; set; }
+
+        public List<AdminUser> joblist { get; set; }
+
+        public string UserCategory { get; set; }
+
+        public List<AdminUser> planlist { get; set; }
+
+        public string IsOffer { get; set; }
+        //-------------Mitali End--------------//
+        public string subDate { get; set; }
+        public string SeekerCode { get; set; }
+        public string SeekerName { get; set; }
+        public string Designation { get; set; }
     }
 }

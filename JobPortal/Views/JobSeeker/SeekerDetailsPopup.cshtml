@@ -151,7 +151,7 @@
         </div>
 
         <div class="item form-group">
-            @Html.LabelFor(model => model.Pincode1, htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
+            @Html.LabelFor(model => model.Pincode1, "Pincode", htmlAttributes: new { @class = "col-form-label col-md-3 col-sm-3 label-align required" })
             <div class="col-md-6 col-sm-6 ">
                 @Html.EditorFor(model => model.Pincode1, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Pincode1, "", new { @class = "text-danger" })

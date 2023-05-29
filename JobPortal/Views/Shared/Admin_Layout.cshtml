@@ -25,9 +25,10 @@
 
     <link href="~/Content/Admin/css/style.css" rel="stylesheet" />
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"></script>
+    <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"   />
     @*<link href="~/Content/Admin/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <link href="~/Content/Admin/css/style.css" rel="stylesheet" />*@
+        <link href="~/Content/Admin/css/style.css" rel="stylesheet" />*@
 
 </head>
 <body>
@@ -240,7 +241,7 @@
                                         <li>
                                             <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                         </li>
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="@Url.Action("Logout","Employer")"><i class="icon-key"></i> <span>Logout</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -266,6 +267,16 @@
                         <ul aria-expanded="false">
                             <li><a href="@Url.Action("view","Admin")">Home 1</a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-user menu-icon"></i><span class="nav-text">Site Earning</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="@Url.Action("SiteEarningE","Admin")">Employer</a></li>
+                            <li><a href="@Url.Action("siteEarningS","Admin")">Seeker</a></li>
+
                         </ul>
                     </li>
                     @*<li class="mega-menu mega-menu-sm">
@@ -361,13 +372,16 @@
                         </a>
                     </li>
                     <li>
-                        <a  href="@Url.Action("RPAdminJobsGrid","Admin")" aria-expanded="false">
+                        <a href="@Url.Action("RPAdminJobsGrid","Admin")" aria-expanded="false">
                             <i class="fa fa-briefcase"></i><span class="nav-text">Jobs</span>
                         </a>
                     </li>
                     <li>
-                        <a href="widgets.html" aria-expanded="false">
-                            <i class="fa fa-users"></i><span class="nav-text">JobSeeker</span>
+                        <a href="@Url.Action("Jobseekargrid","Admin")" aria-expanded="false">
+                            @* <a href="@Url.Action("RPAdminEmployeGrid","Admin")">*@
+                            <i class="fa fa-user"> </i>
+                            <span class="nav-text">JobSeeker</span>
+                            @*</a>*@
                         </a>
                     </li>
                     <li>
@@ -387,11 +401,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="widgets.html" aria-expanded="false">
-                            @*<a href="@Url.Action("RPCompanyGridview","Admin")">*@
+                        <a href="@Url.Action("Plangrid","Admin")" aria-expanded="false">
+
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Add/Manage Subscriptions</span>
                         </a>
-                        </a>
+
                     </li>
                     <li class="nav-label">Forms</li>
                     <li>
@@ -602,33 +616,42 @@
     <!-- ChartistJS -->
     <script src="~/Content/Admin/plugins/chartist/js/chartist.min.js"></script>
     <script src="~/Content/Admin/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
-
-
-
     <script src="~/Content/Admin/js/dashboard/dashboard-1.js"></script>
 
 
     @*<script src="~/Content/js/bootstrap.bundle.min.js"></script>
+        <script src="~/Content/js/main.js"></script>
+        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/jquery.dataTables.min.js"></script>
+        <script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#Rita").dataTable(
+                    {
+                        "lengthMenu": [10, 20, 40, 60, 80],
+                        "dom": '<"dt-buttons"Bfli>rtp',
+                        "paging": true,
+                        "autoWidth": false,
+                        "fixedHeader": true,
+
+                    });
+
+
+            });
+        </script>*@
     <script src="~/Content/js/main.js"></script>
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Scripts/jquery.dataTables.min.js"></script>
-    <script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <script>
+
         $(document).ready(function () {
-            $("#Rita").dataTable(
-                {
-                    "lengthMenu": [10, 20, 40, 60, 80],
-                    "dom": '<"dt-buttons"Bfli>rtp',
-                    "paging": true,
-                    "autoWidth": false,
-                    "fixedHeader": true,
-
-                });
-
-
+            $('#example').DataTable();
         });
-    </script>*@
-
+    </script>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

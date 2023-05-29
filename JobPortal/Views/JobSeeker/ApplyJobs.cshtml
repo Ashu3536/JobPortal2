@@ -1,4 +1,5 @@
 ﻿@model JobPortalLibrary.JobSeeker.SeekerUser
+
 @using (Html.BeginForm("SubmitPDF", "JobSeeker", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     <div>
@@ -13,7 +14,7 @@
         </dl>
         <input type="file" id="myFile" name="myFile">
 
-        <button type="submit" class="btn btn-primary" postjobcode="@Model.PostJobCode" id="Save">Upload</button>
+        <button type="submit" class="btn btn-primary" postjobcode="@Model.PostJobCode" id="Save">Submit Application</button>
         <br />
 
         @*<a style="color:blue" href="https://facebook.com/sharer.php?url=@Session["url"]"> <i class="bi bi-facebook"></i></a>
@@ -26,59 +27,6 @@
     </div>
 }
 
-
-@*<p>
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        @Html.ActionLink("Back to List", "Index")
-
-    </p>*@
-
-@*<div id="partialModal" class="modal" tabindex="-1" role="dialog" style="position:center">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" style="color:lightgreen; font-size:xx-large"></h3>
-               
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            </div>
-            
-        </div>
-    </div>
-</div>*@
-
-@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
-
-<script type="text/javascript">
-    $(function () {
-        $(".SubmitApplication").click(function () {
-            var $buttonClicked = $(this);
-            var id = $buttonClicked.attr('data-id')
-            /* var id = $(this).closest("tr").find("td").eq(0).html();*/
-            $.ajax({
-                type: "POST",
-                url: "/JobSeeker/Search/ApplyJobs/SubmitApplication",
-                data: { PostJobCode: id },
-                contentType: "application/json; charset=utf-8",
-                dataType: "html",
-                success: function (response) {
-                    $("#partialModal").find(".modal-body").html(response);
-                    $("#partialModal").modal('show');
-                },
-                failure: function (response) {
-                    alert(response.responseText);
-                },
-                error: function (response) {
-                    alert(response.responseText);
-                }
-            });
-        });
-    });
-</script>*@
 
 <style type="text/css">
     body {
@@ -94,9 +42,5 @@
         font-family: 'Times New Roman', Times, serif;
         font-size: 20px;
         transform: translate(-50%, 50%);
-    }
-
-
-    .modal-content {
     }
 </style>

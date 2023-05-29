@@ -8,11 +8,13 @@ using System.Data.SqlClient;
 using JobPortalLibrary.Admin;
 using JobPortalLibrary.JobSeeker;
 using System.Threading.Tasks;
+using JobPortalLibrary.Employer;
 
 namespace JobPortal.Controllers
 {
     public class AdminController : Controller
     {
+        int SubscriptionId;
         // GET: Admin
         public ActionResult Index()
         {
@@ -293,14 +295,22 @@ namespace JobPortal.Controllers
                 obju.Employercode = ds.Tables[0].Rows[i]["EmployerCode"].ToString();
                 obju.EmployerName = ds.Tables[0].Rows[i]["EmployerName"].ToString();
                 obju.PaymentMode = ds.Tables[0].Rows[i]["PaymentMode"].ToString();
-                obju.Plans = ds.Tables[0].Rows[i]["Plans"].ToString();
-                string date = (ds.Tables[0].Rows[i]["SubscriptionDate"].ToString());
-                DateTime SubscriptionD = Convert.ToDateTime(date);
-                obju.SubscriptionDate = Convert.ToDateTime(SubscriptionD.ToShortDateString());
+                obju.SubscriptionName = ds.Tables[0].Rows[i]["SubscriptionName"].ToString();
+               
+
+                //string date = (ds.Tables[0].Rows[i]["SubscriptionDate"].ToString());
+                //DateTime SubscriptionDuration = Convert.ToDateTime(date);
+
+                DateTime date = Convert.ToDateTime(ds.Tables[0].Rows[i]["SubscriptionDate"].ToString());
+                obju.subDate = date.ToShortDateString();
+
+             //   obju.SubscriptionDate = Convert.ToDateTime(SubscriptionDuration.ToShortDateString());
                 //DateTime date = Convert.ToDateTime(ds.Tables[0].Rows[i]["SubscriptionDate"].ToString());
                 //obju.Rdate = date.ToShortDateString();
-                obju.PlanDuration = ds.Tables[0].Rows[i]["PlanDuration"].ToString();
+                obju.SubscriptionDuration = ds.Tables[0].Rows[i]["SubscriptionDuration"].ToString();
                 obju.Status = ds.Tables[0].Rows[i]["Status"].ToString();
+
+               
 
                 users1.Add(obju);
             }
@@ -396,6 +406,317 @@ namespace JobPortal.Controllers
                 obju.Status = ds.Tables[0].Rows[i]["Status"].ToString();
                 obju.applicationcount = ds.Tables[0].Rows[i]["applicationcount"].ToString();               
                 obju.Hire = ds.Tables[0].Rows[i]["hire"].ToString();
+
+                users1.Add(obju);
+            }
+            objuser.Users = users1;
+            return await Task.Run(() => View(objuser));
+        }
+        [HttpGet]
+        public async Task<ActionResult> siteEarningE()
+        {
+
+            BALAdmin obj = new BALAdmin();
+            DataSet ds = new DataSet();
+            ds = obj.SiteEarningEmp();
+            AdminUser objuser = new AdminUser();
+            List<AdminUser> User = new List<AdminUser>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                AdminUser obju = new AdminUser();
+
+                //obju.SubscriptionId = Convert.ToInt32(ds.Tables[0].Rows[i]["SubscriptionId"].ToString());
+                obju.Employercode = ds.Tables[0].Rows[i]["EmployerCode"].ToString();
+                //obju.HRName = ds.Tables[0].Rows[i]["HRName"].ToString();
+                //obju.CompanyName = ds.Tables[0].Rows[i]["CompanyName"].ToString();
+                obju.SubscriptionName = ds.Tables[0].Rows[i]["SubscriptionName"].ToString();
+
+                obju.SubscriptionDuration = ds.Tables[0].Rows[i]["SubscriptionDuration"].ToString();
+                obju.Offer = Convert.ToInt32(ds.Tables[0].Rows[i]["Offer"].ToString());
+                obju.PlanPricing = Convert.ToInt64(ds.Tables[0].Rows[i]["PlanPricing"].ToString());
+                obju.OfferedPrice = Convert.ToInt64(ds.Tables[0].Rows[i]["OfferedPrice"].ToString());
+                User.Add(obju);
+            }
+            objuser.User = User;
+            BALAdmin objE = new BALAdmin();
+            DataSet ds1 = new DataSet();
+
+            ds1 = objE.TotalAmountE();
+            @ViewBag.TotalAmount = ds1.Tables[0].Rows[0]["TotalEmpAmount"].ToString();
+
+
+            BALAdmin objee = new BALAdmin();
+            DataSet ds2 = new DataSet();
+
+            ds2 = objE.MonthlyEarningE();
+            @ViewBag.Currentmonth = ds2.Tables[0].Rows[0]["CurrentMonth"].ToString();
+            return await Task.Run(() => View(objuser));
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> siteEarningS()
+        {
+            BALAdmin obj = new BALAdmin();
+            DataSet ds = new DataSet();
+            ds = obj.SiteEarningSeeker();
+            AdminUser objuser = new AdminUser();
+            List<AdminUser> User = new List<AdminUser>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                AdminUser obju = new AdminUser();
+
+                obju.Seekercode = ds.Tables[0].Rows[i]["SeekerCode"].ToString();
+                obju.SubscriptionName = ds.Tables[0].Rows[i]["SubscriptionName"].ToString();
+                obju.SubscriptionDuration = ds.Tables[0].Rows[i]["SubscriptionDuration"].ToString();
+                obju.Offer = Convert.ToInt32(ds.Tables[0].Rows[i]["Offer"].ToString());
+                obju.PlanPricing = Convert.ToInt64(ds.Tables[0].Rows[i]["PlanPricing"].ToString());
+                obju.OfferedPrice = Convert.ToInt64(ds.Tables[0].Rows[i]["OfferedPrice"].ToString());
+
+
+
+                User.Add(obju);
+            }
+            objuser.Users = User;
+            objuser.User = User;
+            BALAdmin objE = new BALAdmin();
+            DataSet ds1 = new DataSet();
+
+            ds1 = objE.TotalAmountS();
+            @ViewBag.TotalAmount = ds1.Tables[0].Rows[0]["TotalSeekAmount"].ToString();
+
+            BALAdmin objee = new BALAdmin();
+            DataSet ds2 = new DataSet();
+
+            ds2 = objE.MonthlyEarningS();
+            @ViewBag.Currentmonth = ds2.Tables[0].Rows[0]["CurrentMonth"].ToString();
+            return await Task.Run(() => View(objuser));
+
+            return await Task.Run(() => View(objuser));
+
+        }
+        //------------------------Mitali Start---------------------------//
+        [HttpGet]
+        public ActionResult Subscription()
+        {
+            AllList();
+            DurationList();
+            GetBenefits();
+            return view();
+        }
+        [HttpPost]
+        public ActionResult Subscription(AdminUser subscription)
+        {
+
+            AdminUser subp = new AdminUser();
+            BALAdmin objB = new BALAdmin();
+            // subscription.SubscriptionDuration = subscription.From + " - " + subscription.To;
+            subscription.OfferedPrice = subscription.PlanPricing - (subscription.PlanPricing * subscription.Offer / 100);
+            subscription.Benefits = string.Join(",", subscription.BenifitList);
+            objB.Subscription(subscription);
+            return RedirectToAction("Subscription");
+
+
+        }
+        public async Task<ActionResult> AllList()                                                                // hardcoded dropdown
+        {
+            var list = new List<string>() { "Employer", "JobSeeker" };
+            ViewBag.Category = list;
+            return await Task.Run(() => View());
+        }
+
+
+        [HttpGet]
+        public ActionResult AddBenefits()
+        {
+
+            return view();
+        }
+        [HttpPost]
+        public ActionResult AddBenefits(AdminUser benefit)
+        {
+            AdminUser subp = new AdminUser();
+            BALAdmin objB = new BALAdmin();
+            objB.AddBenefits(benefit);
+            return RedirectToAction("Subscription");
+
+
+        }
+        public async Task<ActionResult> GetBenefits()                        //multiselect dropdown
+        {
+            BALAdmin objB = new BALAdmin();
+            EmployerUser obj = new EmployerUser();
+            DataSet ds = objB.GetBenefits();
+            List<SelectListItem>
+            BenifitList = new List<SelectListItem>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                BenifitList.Add(new SelectListItem
+                {
+                    Text = dr["Benefits"].ToString(),
+                    Value = dr["BenefitId"].ToString()
+                });
+            }
+            ViewBag.BenifitList = new SelectList(BenifitList, "Value", "Text");
+            return await Task.Run(() => View());
+        }
+        public async Task<ActionResult> Plangrid()
+        {
+            BALAdmin plan = new BALAdmin();
+            DataSet ds = new DataSet();
+            ds = plan.PlanGrid();
+            AdminUser users = new AdminUser();
+            List<AdminUser> planlst = new List<AdminUser>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                AdminUser user = new AdminUser();
+                user.SubscriptionId = Convert.ToInt32(ds.Tables[0].Rows[i]["SubscriptionId"].ToString());
+                user.SubscriptionName = ds.Tables[0].Rows[i]["SubscriptionName"].ToString();
+                //   user.Benefits = ds.Tables[0].Rows[i]["Benefits"].ToString();
+                user.PlanPricing = Convert.ToInt64(ds.Tables[0].Rows[i]["PlanPricing"].ToString());
+                user.Offer = Convert.ToInt32(ds.Tables[0].Rows[i]["Offer"].ToString());
+                user.OfferedPrice = Convert.ToInt64(ds.Tables[0].Rows[i]["OfferedPrice"].ToString());
+                planlst.Add(user);
+            }
+            users.planlist = planlst;
+            // result = jobgridlst.Where(a => a.Address.ToLower().Contains(searchtext));
+            return await Task.Run(() => View(users));
+
+        }
+        [HttpGet]
+        public async Task<ActionResult> PlanDetails(int SubscriptionId)
+        {
+            AdminUser objA = new AdminUser();
+            objA.SubscriptionId = SubscriptionId;
+            BALAdmin obj2 = new BALAdmin();
+            SqlDataReader dr;
+            dr = obj2.PlanDetails(objA);
+            while (dr.Read())
+            {
+                objA.SubscriptionId = Convert.ToInt32(dr["SubscriptionId"].ToString());
+                objA.SubscriptionName = dr["SubscriptionName"].ToString();
+                objA.Benefits = dr["Benefits"].ToString();
+                objA.SubscriptionDuration = dr["SubscriptionDuration"].ToString();
+                objA.SubscriptionDetails = dr["SubscriptionDetails"].ToString();
+                objA.PlanPricing = Convert.ToInt64(dr["PlanPricing"].ToString());
+                objA.Offer = Convert.ToInt32(dr["Offer"].ToString());
+                objA.OfferedPrice = Convert.ToInt64(dr["OfferedPrice"].ToString());
+                objA.Benefits = dr["Benefits"].ToString();
+
+            }
+            dr.Close();
+            var bbbbb = objA.Benefits;
+            char[] seprator = { ',' };
+            string[] ben = null;
+            ben = bbbbb.Split(seprator);
+            string benifit1 = null;
+            string benifit2 = null;
+            AdminUser obbj = new AdminUser();
+            BALAdmin fun = new BALAdmin();
+            for (int i = 0; i < ben.Length; i++)
+            {
+                DataSet ds2 = new DataSet();
+                int BenifitsId = Convert.ToInt32(ben[i]);
+                ds2 = fun.getbenifits(BenifitsId);
+                benifit1 = ds2.Tables[0].Rows[0][0].ToString();
+
+                if (i == ben.Length - 1)
+                {
+                    benifit2 = string.Concat(benifit2, benifit1);
+                }
+                else
+                {
+                    benifit2 = string.Concat(benifit2, benifit1, " ✔");
+                }
+                objA.Benefits = benifit2;
+            }
+            return await Task.Run(() => View(objA));
+        }
+        [HttpGet]
+        public async Task<ActionResult> EditPlan(int SubscriptionId)
+        {
+
+            DurationList();
+            GetBenefits();
+            TempData["SubscriptionId"] = SubscriptionId;
+            AdminUser objA = new AdminUser();
+            objA.SubscriptionId = SubscriptionId;
+            BALAdmin obj1 = new BALAdmin();
+            SqlDataReader dr;
+            dr = obj1.PlanDetails(objA);
+            while (dr.Read())
+            {
+                AdminUser user = new AdminUser();
+                objA.SubscriptionId = Convert.ToInt32(dr["SubscriptionId"].ToString());
+                objA.SubscriptionName = dr["SubscriptionName"].ToString();
+                objA.Benefits = dr["Benefits"].ToString();
+                objA.SubscriptionDuration = dr["SubscriptionDuration"].ToString();
+                objA.SubscriptionDetails = dr["SubscriptionDetails"].ToString();
+                objA.PlanPricing = Convert.ToInt64(dr["PlanPricing"].ToString());
+                objA.Offer = Convert.ToInt32(dr["Offer"].ToString());
+                objA.OfferedPrice = Convert.ToInt64(dr["OfferedPrice"].ToString());
+
+            }
+            dr.Close();
+            ViewBag.SubscriptionDetails = objA.SubscriptionDetails;
+
+
+            return await Task.Run(() => View(objA));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditPlan(AdminUser objA)
+        {
+            if (TempData.ContainsKey("SubscriptionId"))
+                SubscriptionId = Convert.ToInt32(TempData["SubscriptionId"].ToString());
+            objA.SubscriptionId = SubscriptionId;
+            //AdminUser obj = new AdminUser();
+            //objA.SubscriptionId=SubscriptionId;
+            BALAdmin obj1 = new BALAdmin();
+            objA.OfferedPrice = objA.PlanPricing - (objA.PlanPricing * objA.Offer / 100);
+            objA.Benefits = string.Join(",", objA.BenifitList);
+            obj1.UpdatePlan(objA);
+
+
+            return await Task.Run(() => RedirectToAction("Plangrid"));
+
+        }
+
+        public async Task<ActionResult> DurationList()                                                                // hardcoded dropdown
+        {
+            var list = new List<string>() { "1 Month", "3 Month", "6 Month", " 1 Year" };
+            ViewBag.DurationList = list;
+            return await Task.Run(() => View());
+        }
+
+        public ActionResult DeletePlan(AdminUser obj, int SubscriptionId)
+        {
+
+            obj.SubscriptionId = SubscriptionId;
+            BALAdmin obj1 = new BALAdmin();
+            obj1.DeletePlan(obj);
+            return RedirectToAction("Plangrid");
+        }
+        public async Task<ActionResult> Jobseekargrid()
+        {
+            BALAdmin obj = new BALAdmin();
+            DataSet ds = new DataSet();
+            ds = obj.Jobseekargrid();
+            AdminUser objuser = new AdminUser();
+            List<AdminUser> users1 = new List<AdminUser>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                AdminUser obju = new AdminUser();
+                obju.SeekerCode = ds.Tables[0].Rows[i]["SeekerCode"].ToString();
+                obju.EmailId = ds.Tables[0].Rows[i]["EmailId"].ToString();
+                obju.SeekerName = ds.Tables[0].Rows[i]["SeekerName"].ToString();
+                obju.ContactNo = Convert.ToInt64(ds.Tables[0].Rows[i]["ContactNo"].ToString());
+                obju.Designation = ds.Tables[0].Rows[i]["Designation"].ToString();
+                string Rdate = (ds.Tables[0].Rows[i]["SubscriptionDate"].ToString());
+                obju.Rdate = Rdate;
+                //   DateTime date = Convert.ToDateTime(ds.Tables[0].Rows[i]["SubscriptionDate"].ToString());
+                //   obju.Rdate = date.ToShortDateString();
+                obju.Status = ds.Tables[0].Rows[i]["Status"].ToString();
 
                 users1.Add(obju);
             }

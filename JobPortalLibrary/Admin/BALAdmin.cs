@@ -236,6 +236,224 @@ namespace JobPortalLibrary.Admin
         }
 
         //----------Rita End------------------------------------------//
+        public DataSet SiteEarningEmp()
+        {
+            ManageConnection();
+            SqlCommand cmb = new SqlCommand("SPAdmin", con);
+            cmb.CommandType = CommandType.StoredProcedure;
+            cmb.Parameters.AddWithValue("@flag", "SiteearningEmp");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmb;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
 
+        }
+        public DataSet SiteEarningSeeker()
+        {
+            ManageConnection();
+            SqlCommand cmb = new SqlCommand("SPAdmin", con);
+            cmb.CommandType = CommandType.StoredProcedure;
+            cmb.Parameters.AddWithValue("@flag", "SiteearningSeek");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmb;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+
+        }
+        public DataSet TotalAmountE()
+        {
+            ManageConnection();
+            SqlCommand cmb = new SqlCommand("SPAdmin", con);
+            cmb.CommandType = CommandType.StoredProcedure;
+            cmb.Parameters.AddWithValue("@flag", "TotalAmountEmp");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmb;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+        }
+        public DataSet TotalAmountS()
+        {
+            ManageConnection();
+            SqlCommand cmb = new SqlCommand("SPAdmin", con);
+            cmb.CommandType = CommandType.StoredProcedure;
+            cmb.Parameters.AddWithValue("@flag", "TotalAmountSeek");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmb;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+        }
+
+        public DataSet MonthlyEarningE()
+        {
+            ManageConnection();
+            SqlCommand cmb = new SqlCommand("SPAdmin", con);
+            cmb.CommandType = CommandType.StoredProcedure;
+            cmb.Parameters.AddWithValue("@Flag", "MonthlyEarningEmp");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmb;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+        }
+
+        public DataSet MonthlyEarningS()
+        {
+            ManageConnection();
+            SqlCommand cmb = new SqlCommand("SPAdmin", con);
+            cmb.CommandType = CommandType.StoredProcedure;
+            cmb.Parameters.AddWithValue("@Flag", "MonthlyEarningSeek");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmb;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+        }
+        //--------------------Mitali Start----------------------------//
+        public void Subscription(AdminUser sub)
+        {
+            if (con.State == System.Data.ConnectionState.Closed)
+            {
+                con.Open();
+
+            }
+            SqlCommand cmd = new SqlCommand("SPAdmin", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "Subscription");
+            cmd.Parameters.AddWithValue("@SubscriptionName", sub.SubscriptionName);
+            cmd.Parameters.AddWithValue("@UserCategory", sub.UserCategory);
+            cmd.Parameters.AddWithValue("@Benefits", sub.Benefits);
+            cmd.Parameters.AddWithValue("@SubscriptionDetails", sub.SubscriptionDetails);
+            cmd.Parameters.AddWithValue("@SubscriptionDuration", sub.SubscriptionDuration);
+            cmd.Parameters.AddWithValue("@PlanPricing", sub.PlanPricing);
+            cmd.Parameters.AddWithValue("@IsOffer", sub.IsOffer);
+            cmd.Parameters.AddWithValue("@Offer", sub.Offer);
+            cmd.Parameters.AddWithValue("@OfferedPrice", sub.OfferedPrice);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+        }
+
+        public void AddBenefits(AdminUser sub)
+        {
+            if (con.State == System.Data.ConnectionState.Closed)
+            {
+                con.Open();
+
+            }
+            SqlCommand cmd = new SqlCommand("SPAdmin", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "AddBenefits");
+            cmd.Parameters.AddWithValue("@Benefits", sub.Benefits);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+        }
+        public DataSet GetBenefits()                           // multiselect dropdown
+        {
+            SqlCommand cmd = new SqlCommand("SPAdmin", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "GetBenefits");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+        }
+        public DataSet PlanGrid()
+        {
+
+            SqlCommand cmd = new SqlCommand("SPAdmin", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "PlanGrid");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+        }
+
+        public SqlDataReader PlanDetails(AdminUser obj)
+        {
+            if (con.State == System.Data.ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand cmd = new SqlCommand("SPAdmin", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "PlanDetails");
+            cmd.Parameters.AddWithValue("@SubscriptionId", obj.SubscriptionId);
+            SqlDataReader dr;
+            dr = cmd.ExecuteReader();
+            return dr;
+            con.Close();
+        }
+        public void UpdatePlan(AdminUser obj)
+        {
+
+            if (con.State == System.Data.ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand cmd = new SqlCommand("SPAdmin", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "Updateplan");
+            cmd.Parameters.AddWithValue("@SubscriptionId", obj.SubscriptionId);
+            cmd.Parameters.AddWithValue("@SubscriptionName", obj.SubscriptionName);
+            cmd.Parameters.AddWithValue("@Benefits", obj.Benefits);
+            cmd.Parameters.AddWithValue("@SubscriptionDetails", obj.SubscriptionDetails);
+            cmd.Parameters.AddWithValue("@SubscriptionDuration", obj.SubscriptionDuration);
+            cmd.Parameters.AddWithValue("@PlanPricing", obj.PlanPricing);
+            cmd.Parameters.AddWithValue("@Offer", obj.Offer);
+            cmd.Parameters.AddWithValue("@OfferedPrice", obj.OfferedPrice);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        public DataSet getbenifits(int benifitsid)
+        {
+
+            SqlCommand cmd = new SqlCommand("SPAdmin", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "getbenifits");
+            cmd.Parameters.AddWithValue("@BenefitId", benifitsid);
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+
+        }
+
+        public void DeletePlan(AdminUser ad)
+        {
+
+            if (con.State == System.Data.ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand cmd = new SqlCommand("SPAdmin", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "DeletePlan");
+            cmd.Parameters.AddWithValue("@SubscriptionId", ad.SubscriptionId);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+        }
+        public DataSet Jobseekargrid()
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("SPAdmin", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "Jobseekargrid");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+
+        }
     }
 }

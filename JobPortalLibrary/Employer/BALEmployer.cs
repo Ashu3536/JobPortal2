@@ -22,10 +22,10 @@ namespace JobPortalLibrary.Employer
             {
                 con.Open();
             }
-            else
-            {
-                con.Close();
-            }
+            //else
+            //{
+            //    con.Close();
+            //}
         }
 
         //---------------------------------Mahesh Start-----------------------------//
@@ -187,6 +187,18 @@ namespace JobPortalLibrary.Employer
             dr = cmd.ExecuteReader();
             return dr;
             
+        }
+        public SqlDataReader JobDetail(EmployerUser obj)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "JobDetail");
+            cmd.Parameters.AddWithValue("@PostJobCode", obj.PostJobCode);
+            SqlDataReader dr;
+            dr = cmd.ExecuteReader();
+            return dr;
+
         }
         public DataSet getphonedetails(EmployerUser obj)
         {
@@ -409,7 +421,20 @@ namespace JobPortalLibrary.Employer
             cmd.ExecuteNonQuery();
             
         }
-        
+        public DataSet getcount(string Empolyecode)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "Getcategoryvspostjobcount");
+            cmd.Parameters.AddWithValue("@EmployeerCode", Empolyecode);
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+        }
+
         //---------------------------------Mahesh end-----------------------------//
         //----------------------------------Mitali Start-----------------------------------------//
 
@@ -538,7 +563,7 @@ namespace JobPortalLibrary.Employer
             cmd.Parameters.AddWithValue("@CityId", ObjEmployerUser.CityId);
             cmd.Parameters.AddWithValue("@PinCode", ObjEmployerUser.Pincode);
             cmd.Parameters.AddWithValue("@CompanyLogo", ObjEmployerUser.CompanyLogo);
-            cmd.Parameters.AddWithValue("@PortFolio", ObjEmployerUser.Porfolio);
+            cmd.Parameters.AddWithValue("@PortFolio", ObjEmployerUser.Portfolio);
             cmd.Parameters.AddWithValue("@Slogan", ObjEmployerUser.Slogan);
             cmd.Parameters.AddWithValue("@Facebook", ObjEmployerUser.Facebook);
             cmd.Parameters.AddWithValue("@Twitter", ObjEmployerUser.Twitter);
@@ -552,7 +577,7 @@ namespace JobPortalLibrary.Employer
             cmd.Parameters.AddWithValue("@Source", ObjEmployerUser.Source);
             cmd.Parameters.AddWithValue("@RegistrationDate", ObjEmployerUser.RegistrationDate);
             cmd.ExecuteNonQuery();
-            
+
         }
 
 
@@ -568,7 +593,7 @@ namespace JobPortalLibrary.Employer
             DataSet ds = new DataSet();
             adpt.Fill(ds);
             return ds;
-            
+
         }
 
         public DataSet Locationbind()
@@ -582,7 +607,7 @@ namespace JobPortalLibrary.Employer
             DataSet ds = new DataSet();
             adpt.Fill(ds);
             return ds;
-            
+
 
         }
         public DataSet KTCompanyDeatilsGV(EmployerUser objuser)
@@ -601,6 +626,63 @@ namespace JobPortalLibrary.Employer
 
         }
 
+        public SqlDataReader GetCompanyDetail(EmployerUser objuser)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "GetCompanyDetail");
+            cmd.Parameters.AddWithValue("@CompanyId", objuser.CompanyId);
+            SqlDataReader dr;
+            dr = cmd.ExecuteReader();
+            return dr;
+
+        }
+
+
+        public void KTUpdateCompanyDetails(EmployerUser objuser)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "KTUpdateCompanyDetails");
+            cmd.Parameters.AddWithValue("@CompanyId", objuser.CompanyId);
+            cmd.Parameters.AddWithValue("@CompanyName", objuser.CompanyName);
+            cmd.Parameters.AddWithValue("@NoOfEmployees", objuser.NoOfEmployees);
+            cmd.Parameters.AddWithValue("@ContactNo", objuser.ContactNo);
+            cmd.Parameters.AddWithValue("@CompanyWebsite", objuser.CompanyWebsite);
+            cmd.Parameters.AddWithValue("@CompanyEmail", objuser.CompanyEmail);
+            cmd.Parameters.AddWithValue("@AboutCompany", objuser.AboutCompany);
+            cmd.Parameters.AddWithValue("@IndustryId", objuser.IndustryId);
+            cmd.Parameters.AddWithValue("@CityId", objuser.CityId);
+            cmd.Parameters.AddWithValue("@Pincode", objuser.Pincode);
+            cmd.Parameters.AddWithValue("@CompanyLogo", objuser.CompanyLogo);
+            cmd.Parameters.AddWithValue("@Portfolio", objuser.Portfolio);
+            cmd.Parameters.AddWithValue("@Slogan", objuser.Slogan);
+            cmd.Parameters.AddWithValue("@Facebook", objuser.Facebook);
+            cmd.Parameters.AddWithValue("@Twitter", objuser.Twitter);
+            cmd.Parameters.AddWithValue("@LinkedIn", objuser.LinkedIn);
+            cmd.Parameters.AddWithValue("@Instagram", objuser.Instagram);
+            cmd.Parameters.AddWithValue("@Google", objuser.Google);
+            cmd.Parameters.AddWithValue("@OwnerName", objuser.OwnerName);
+            cmd.Parameters.AddWithValue("@HRName", objuser.HRName);
+            cmd.Parameters.AddWithValue("@HRNumber", objuser.HRNumber);
+            cmd.Parameters.AddWithValue("@HREmail", objuser.HREmail);
+            cmd.Parameters.AddWithValue("@Source", objuser.Source);
+            //   cmd.Parameters.AddWithValue("@RegistrationDate",objuser.RegistrationDate);
+            cmd.ExecuteNonQuery();
+
+        }
+
+        public void KTDeleteCompany(EmployerUser objuser)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "KTDeleteCompany");
+            cmd.Parameters.AddWithValue("@CompanyId", objuser.CompanyId);
+            cmd.ExecuteNonQuery();
+        }
         //---------------------------------Kartik End----------------------------//
         //---------------------------------sachin start----------------------------//
         public DataSet GetJobCategory()
@@ -1053,24 +1135,26 @@ namespace JobPortalLibrary.Employer
 
         }
         //--------------------Dashboard-------------------------------------------------
-        public DataSet ACJobCount()
+        public DataSet ACJobCount(string EmployerCode)
         {
             ManageConnection();
             SqlCommand cmd = new SqlCommand("Employeer", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Flag", "ACJobCount");
+            cmd.Parameters.AddWithValue("@EmployeerCode", EmployerCode);
             SqlDataAdapter adpt = new SqlDataAdapter();
             adpt.SelectCommand = cmd;
             DataSet ds = new DataSet();
             adpt.Fill(ds);
             return ds;
         }
-        public DataSet ACApplyJobCount()
+        public DataSet ACApplyJobCount(string EmployerCode)
         {
             ManageConnection();
             SqlCommand cmd = new SqlCommand("Employeer", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Flag", "ACApplyJobCount");
+            cmd.Parameters.AddWithValue("@EmployeerCode", EmployerCode);
             SqlDataAdapter adpt = new SqlDataAdapter();
             adpt.SelectCommand = cmd;
             DataSet ds = new DataSet();
@@ -1083,6 +1167,7 @@ namespace JobPortalLibrary.Employer
             SqlCommand cmd = new SqlCommand("Employeer", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Flag", "ACInterviewConducted");
+           // cmd.Parameters.AddWithValue("@EmployeerCode", EmployerCode);
             SqlDataAdapter adpt = new SqlDataAdapter();
             adpt.SelectCommand = cmd;
             DataSet ds = new DataSet();
@@ -1090,12 +1175,13 @@ namespace JobPortalLibrary.Employer
             return ds;
 
         }
-        public DataSet ACTotalHire()
+        public DataSet ACTotalHire(string EmployerCode)
         {
             ManageConnection();
             SqlCommand cmd = new SqlCommand("Employeer", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Flag", "ACTotalHire");
+            cmd.Parameters.AddWithValue("@EmployeerCode", EmployerCode);
             SqlDataAdapter adpt = new SqlDataAdapter();
             adpt.SelectCommand = cmd;
             DataSet ds = new DataSet();
@@ -1116,6 +1202,65 @@ namespace JobPortalLibrary.Employer
             DataSet ds = new DataSet();
             adpt.Fill(ds);
             return ds;
+
+        }
+        public DataSet RPGetPlanDetails(int SubscriptionId)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "RPGetPlanDetails");
+            cmd.Parameters.AddWithValue("@SubscriptionId", SubscriptionId);
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+
+        }
+        public DataSet getpaymentdetail(EmployerUser obj)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "RPGetPayment");
+            cmd.Parameters.AddWithValue("@EmployeerCode", obj.Employercode);
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+
+        }
+        public DataSet RPTranjectionIdIncriment()
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag","RPTranjectionIdIncriment");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+
+        }
+        public void RPPaymentSave(EmployerUser obj, string TransactionId)
+        {
+            con.Close();
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("Employeer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "RPPaymentSave");
+            cmd.Parameters.AddWithValue("@Seekercode",obj.Seekercode);
+            cmd.Parameters.AddWithValue("@EmployeerCode", obj.Employercode);
+            cmd.Parameters.AddWithValue("@PaymentMode", obj.PaymentMode);
+            cmd.Parameters.AddWithValue("@SubcriptionDate", DateTime.Now);
+            cmd.Parameters.AddWithValue("@PaymentDate", DateTime.Now);
+            cmd.Parameters.AddWithValue("@transactionId", TransactionId);
+            cmd.Parameters.AddWithValue("@StatusId", obj.StatusId);
+            cmd.Parameters.AddWithValue("@GSTNo", obj.GSTNo);
+            cmd.ExecuteNonQuery();
 
         }
         //////////----------------Rita End-----------//

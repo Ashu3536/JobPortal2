@@ -129,7 +129,7 @@ namespace JobPortalLibrary.JobSeeker
 
         public string EmployerCode { get; set; }
 
-        public string Rating { get; set; }
+        public int Rating { get; set; }
 
         public string Review { get; set; }
 
@@ -278,6 +278,8 @@ namespace JobPortalLibrary.JobSeeker
 
         public List<SeekerUser> user { get; set; }
 
+       // public int DoYouCurrentlyWorkHere { get; set; }
+     //   public string Employercode { get; set; }
 
     }
 }

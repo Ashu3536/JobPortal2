@@ -12,6 +12,7 @@ using JobPortalLibrary.Employer;
 using Microsoft.Ajax.Utilities;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
+using JobPortalLibrary.Controller;
 
 namespace JobPortal.Controllers
 {
@@ -1609,7 +1610,7 @@ namespace JobPortal.Controllers
                 obju.CompanyName = ds.Tables[0].Rows[i]["CompanyName"].ToString();
                 obju.Slogan = ds.Tables[0].Rows[i]["Slogan"].ToString();
                 obju.CompanyLogo = ds.Tables[0].Rows[i]["CompanyLogo"].ToString();
-                obju.Rating = ds.Tables[0].Rows[i]["Rating"].ToString();
+                obju.Rating =Convert.ToInt32( ds.Tables[0].Rows[i]["Rating"].ToString());
                 obju.Follow = Convert.ToInt32(ds.Tables[0].Rows[i]["Follow"]);
                 //obju.Review = ds.Tables[0].Rows[i]["Review"].ToString();
 
@@ -1636,7 +1637,7 @@ namespace JobPortal.Controllers
                 obj.CompanyName = dr["CompanyName"].ToString();
                 obj.CompanyLogo = dr["CompanyLogo"].ToString();
                 obj.Slogan = dr["Slogan"].ToString();
-                obj.Rating = dr["Rating"].ToString();
+                obj.Rating =Convert.ToInt32( dr["Rating"].ToString());
                 obj.Follow = Convert.ToInt32(dr["Follow"]);
                 obj.AboutCompany = dr["AboutCompany"].ToString();
                 obj.AboutCompany = dr["AboutCompany"].ToString();
@@ -1672,7 +1673,7 @@ namespace JobPortal.Controllers
             }
         }
         [HttpGet]
-        public async Task<ActionResult> ReviewCompany(int CompanyId, bool DoyouCurrentlyworkhere, string Review)
+        public async Task<ActionResult> ReviewCompany(int CompanyId, bool DoyouCurrentlyworkhere, string Review, FormCollection objform,int ratings)
         {
             if (Session["SeekerCode"] != null)
             {
@@ -1682,6 +1683,7 @@ namespace JobPortal.Controllers
                 obj.CompanyId = CompanyId;
                 obj.DoyouCurrentlyworkhere = DoyouCurrentlyworkhere;
                 obj.Review = Review;
+                obj.Rating = ratings;
 
                 obj.Seekercode = seekercode;
 
@@ -1697,19 +1699,19 @@ namespace JobPortal.Controllers
                     }
                     dr.Close();
                     obj1.ReviewCompanyFeedback(obj);
-                    return await Task.Run(() => RedirectToAction("CompanysDetails"));
+                    return await Task.Run(() => RedirectToAction("AllCompany", "JobSeeker"));
                 }
                 else
                 {
                     dr.Close();
-                    dr = obj1.CompanysDetails(obj);
+                                  dr = obj1.CompanysDetails(obj);
                     while (dr.Read())
                     {
                         obj.EmployerCode = dr["Employercode"].ToString();
                     }
                     dr.Close();
                     obj1.SaveCompanyFeedback(obj);
-                    return await Task.Run(() => RedirectToAction("CompanysDetails"));
+                    return await Task.Run(() => RedirectToAction("AllCompany", "JobSeeker"));
                 }
                 dr.Close();
             }
@@ -1766,6 +1768,7 @@ namespace JobPortal.Controllers
                         obj.EmployerCode = dr["Employercode"].ToString();
                     }
                     dr.Close();
+                    obj.Rating = 1;
                     obj1.SaveCompanyFeedback(obj);
                     return await Task.Run(() => Json(new { status = "true" }));
                 }
@@ -2126,42 +2129,72 @@ namespace JobPortal.Controllers
 
         //-------------ApplyJobsDr--------------------------//
 
-        [HttpGet]
-        public async Task<ActionResult> ApplyJobs(SeekerUser obj, string postJobCode)
-        {
-              if (Session["SeekerCode"] != null)
-              {
-                seekercode = Session["SeekerCode"].ToString();
+        //[HttpGet]
+        //public async Task<ActionResult> ApplyJobs(string postjobcode)
+        //{
+        //    if (Session["SeekerCode"] != null)
+        //    {
+        //        seekercode = Session["SeekerCode"].ToString();
 
-                obj.PostJobCode = postJobCode;
-                //BALSeeker obj1 = new BALSeeker();
-                //SqlDataReader dr;
-                //dr = obj1.ApplyJobView(obj);
-                //while (dr.Read())
-                //{
-                //    obj.PostJobCode = dr["PostJobCode"].ToString();
-                //    //obj.JobTitle = dr["JobTitle"].ToString();
-                //    //obj.CompanyName = dr["CompanyName"].ToString();
-                //    //obj.JobLocation = dr["Location1"].ToString();
-                //    //obj.JobType = dr["JobType"].ToString();
-                //    //obj.Salary = dr["Salary"].ToString();
-                //    //obj.JobDescription = dr["JobDescription"].ToString();
-                //}
-                //dr.Close();
-              //  obj.PostJobCode = postJobCode;
-             //   Session["url"] = HttpContext.Request.Url.AbsoluteUri;
-                return await Task.Run(() => PartialView(obj));
-              }
-                else
-                {
-                    return await Task.Run(() => View("Login", "Account"));
-                }
+        //        SeekerUser obj = new SeekerUser();
+        //        obj.PostJobCode = postjobcode;
+        //        //BALSeeker obj1 = new BALSeeker();
+        //        //SqlDataReader dr;
+        //        //dr = obj1.ApplyJobView(obj);
+        //        //while (dr.Read())
+        //        //{
+        //        //    obj.PostJobCode = dr["PostJobCode"].ToString();
+        //        //    //obj.JobTitle = dr["JobTitle"].ToString();
+        //        //    //obj.CompanyName = dr["CompanyName"].ToString();
+        //        //    //obj.JobLocation = dr["Location1"].ToString();
+        //        //    //obj.JobType = dr["JobType"].ToString();
+        //        //    //obj.Salary = dr["Salary"].ToString();
+        //        //    //obj.JobDescription = dr["JobDescription"].ToString();
+        //        //}
+        //        //dr.Close();
+        //        //  obj.PostJobCode = postJobCode;
+        //        //   Session["url"] = HttpContext.Request.Url.AbsoluteUri;
+        //        return await Task.Run(() => PartialView(obj));
+        //    }
+        //    else
+        //    {
+        //        return await Task.Run(() => View("Login", "Account"));
+        //    }
 
-        }
+        //}
 
         //---------------SubmitPDF---------------------------------------//
-        [HttpPost]
-        public async Task<ActionResult> SubmitPDF(HttpPostedFileBase myFile ,string postjobcode)
+        [HttpGet]
+        public async Task<ActionResult> CheckApply(string postjobcode)
+        {
+            seekercode = Session["SeekerCode"].ToString();
+
+            SeekerUser obj = new SeekerUser();
+                obj.PostJobCode = postjobcode;
+                obj.Seekercode = seekercode;
+
+                BALSeeker objB = new BALSeeker();
+                SqlDataReader drA;
+                drA = objB.CheckAppliedSeeker(obj);
+                if (drA.HasRows)
+                {
+                    // ViewBag.Message = "You have already applied for this job..!";
+                    var messege = new { data = "Apply" };
+                    return await Task.Run(() => Json(messege, JsonRequestBehavior.AllowGet));
+                }
+            else
+            {
+                var messege = new { data = "NotApply" };
+                return await Task.Run(() => Json(messege, JsonRequestBehavior.AllowGet));
+            }
+
+
+            return await Task.Run(() => View());
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> ApplyJobs(string postjobcode)
         {
             if (Session["SeekerCode"] != null)
             {
@@ -2169,25 +2202,58 @@ namespace JobPortal.Controllers
 
                 SeekerUser obj = new SeekerUser();
                 obj.PostJobCode = postjobcode;
-            obj.StatusId = 9;
-            obj.Seekercode = seekercode;
-            obj.AppliedDate = DateTime.Now;
-            BALSeeker obj1 = new BALSeeker();
+                obj.Seekercode = seekercode;
 
+                //BALSeeker objB = new BALSeeker();
+                //SqlDataReader drA;
+                //drA = objB.CheckAppliedSeeker(obj);
+                //if (drA.HasRows)
+                //{
+                //    // ViewBag.Message = "You have already applied for this job..!";
+                //    var messege = new { data = "Apply" };
+                //    return await Task.Run(() => Json(messege,JsonRequestBehavior.AllowGet));
+                //}
+                //else
+                //{
+                    return await Task.Run(() => PartialView(obj));
 
-            if (myFile != null && myFile.ContentLength > 0)
-            {
+               // }
 
-                string fileName = Path.GetFileName(myFile.FileName);
-                string path = Server.MapPath("~/Content/PDF Files");
-                string ResumePath = Path.Combine(path, fileName);
-                myFile.SaveAs(ResumePath);
-                obj.ResumePDF = fileName;
-                obj1.SubmitPDF(obj);
-
-                TempData["notice"] = "OK! The file is uploaded";
 
             }
+            else
+            {
+                return await Task.Run(() => View("Login", "Account"));
+            }
+
+        }
+        public async Task<ActionResult> SubmitPDF(HttpPostedFileBase myFile, string postjobcode)
+        {
+            if (Session["SeekerCode"] != null)
+            {
+                seekercode = Session["SeekerCode"].ToString();
+
+                SeekerUser obj = new SeekerUser();
+                obj.PostJobCode = postjobcode;
+                obj.StatusId = 9;
+                obj.Seekercode = seekercode;
+                obj.AppliedDate = DateTime.Now;
+                BALSeeker obj1 = new BALSeeker();
+
+
+                if (myFile != null && myFile.ContentLength > 0)
+                {
+
+                    string fileName = Path.GetFileName(myFile.FileName);
+                    string path = Server.MapPath("~/Content/PDF Files");
+                    string ResumePath = Path.Combine(path, fileName);
+                    myFile.SaveAs(ResumePath);
+                    obj.ResumePDF = fileName;
+                    obj1.SubmitPDF(obj);
+
+                    TempData["notice"] = "OK! The file is uploaded";
+
+                }
             }
             else
             {
@@ -2195,7 +2261,7 @@ namespace JobPortal.Controllers
             }
 
 
-            return await Task.Run(() => RedirectToAction("jobdetails"));
+            return await Task.Run(() => RedirectToAction("Search"));
 
         }
 
@@ -2397,5 +2463,6 @@ namespace JobPortal.Controllers
             return RedirectToAction("Login", "Account");
         }
         // ----------------------------------------Muskan End--------------------------------//
+
     }
 }

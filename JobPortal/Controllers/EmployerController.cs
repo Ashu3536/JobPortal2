@@ -31,6 +31,8 @@ namespace JobPortal.Controllers
         string emailList;
         string postjobcode;
         string resume;
+        string Transaction;
+        string TransactionId;
         // GET: Employer
         public ActionResult Index()
         {
@@ -39,32 +41,58 @@ namespace JobPortal.Controllers
         }
         public ActionResult EmployeerIndex()
         {
-            BALEmployer obj1 = new BALEmployer();
-            DataSet ds = new DataSet();
-            ds = obj1.ACJobCount();
-            EmployerUser objuser1 = new EmployerUser();
-            @ViewBag.count = ds.Tables[1].Rows[0]["JobPost"].ToString();
-
-            BALEmployer obj2 = new BALEmployer();
-            DataSet dc = new DataSet();
-            dc = obj2.ACApplyJobCount();
-
-            @ViewBag.applyjob = dc.Tables[1].Rows[0]["JobApplication"].ToString();
-
-
-
-            BALEmployer obj3 = new BALEmployer();
-            DataSet dk = new DataSet();
-            dk = obj3.ACInterviewConducted();
-            @ViewBag.intv = dk.Tables[1].Rows[0]["Interview"].ToString();
-
-            BALEmployer obj4 = new BALEmployer();
-            DataSet dl = new DataSet();
-            dl = obj4.ACTotalHire();
-            @ViewBag.jbsk = dl.Tables[1].Rows[0]["Hire"].ToString();
+            if (Session["Employercode"] != null)
+            {
+                List<EmployerUser> Aprovelst = new List<EmployerUser>();
+                BALEmployer objbal = new BALEmployer();
+                string Empolyecode = Session["Employercode"].ToString();
+                DataSet ds1 = new DataSet();
+                ds1 = objbal.getcount(Empolyecode);
+                for (int i = 0; i < ds1.Tables[0].Rows.Count; i++)
+                {
+                    EmployerUser obj = new EmployerUser();
+                    obj.Month = Convert.ToInt32(ds1.Tables[0].Rows[i]["PostJob"].ToString());
+                    obj.Activemember = ds1.Tables[0].Rows[i]["JobCategory"].ToString();
+                    Aprovelst.Add(obj);
+                }
+                EmployerUser obj5 = new EmployerUser();
+                obj5.LstUser = Aprovelst;
+                ViewBag.listt = Newtonsoft.Json.JsonConvert.SerializeObject(Aprovelst.Select(prop => new
+                {
+                    lable = prop.Activemember,
+                    y = prop.Month
+                }).ToList());
 
 
 
+                BALEmployer obj1 = new BALEmployer();
+                DataSet ds = new DataSet();
+                ds = obj1.ACJobCount(Empolyecode);
+                EmployerUser objuser1 = new EmployerUser();
+                @ViewBag.count = ds.Tables[1].Rows[0]["JobPost"].ToString();
+
+                BALEmployer obj2 = new BALEmployer();
+                DataSet dc = new DataSet();
+                dc = obj2.ACApplyJobCount(Empolyecode);
+
+                @ViewBag.applyjob = dc.Tables[1].Rows[0]["totalapplication"].ToString();
+
+
+
+                BALEmployer obj3 = new BALEmployer();
+                DataSet dk = new DataSet();
+                dk = obj3.ACInterviewConducted();
+                @ViewBag.intv = dk.Tables[1].Rows[0]["Interview"].ToString();
+
+                BALEmployer obj4 = new BALEmployer();
+                DataSet dl = new DataSet();
+                dl = obj4.ACTotalHire(Empolyecode);
+                @ViewBag.jbsk = dl.Tables[1].Rows[0]["Hire"].ToString();
+
+
+
+                
+            }
             return View();
 
         }
@@ -92,6 +120,7 @@ namespace JobPortal.Controllers
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     EmployerUser objuser = new EmployerUser();
+                    objuser.CompanyName = ds.Tables[0].Rows[i]["CompanyName"].ToString();
                     objuser.JobTitle = ds.Tables[0].Rows[i]["JobTitle"].ToString();
                     objuser.Address = ds.Tables[0].Rows[i]["Address"].ToString();
                     objuser.Status = ds.Tables[0].Rows[i]["Status"].ToString();
@@ -467,26 +496,37 @@ namespace JobPortal.Controllers
                 obj.PostJobCode = PostJobCode;
                 BALEmployer obj1 = new BALEmployer();
                 SqlDataReader dr;
-                dr = obj1.JobDetails(obj);
+                dr = obj1.JobDetail(obj);
                 while (dr.Read())
                 {
                     //obj.PostJobCode = dr["PostJobCode"].ToString();
-                    //obj.CompanyId = Convert.ToInt32(dr["CompanyId"].ToString());
+                    obj.RequireQualification = dr["RequireQualification"].ToString();
+                    obj.Location = dr["CityName"].ToString();
+                    obj.CompanyId = Convert.ToInt32(dr["CompanyId"].ToString());
                     obj.CompanyName = dr["CompanyName"].ToString();
                     obj.ContactPerson = dr["ContactPerson"].ToString();
                     obj.JobTitle = dr["JobTitle"].ToString();
                     obj.JobDescription = dr["JobDescription"].ToString();
+                    obj.JobCategoryId = Convert.ToInt32(dr["JobCategoryId"].ToString());
                     obj.JobCategory = dr["JobCategory"].ToString();
                     obj.OpportunityType = dr["OpportunityType"].ToString();
                     obj.WorkingShifts = dr["WorkingShifts"].ToString();
                     obj.NoOfOpenings = dr["NoOfOpenings"].ToString();
                     obj.Address = dr["Address"].ToString();
                     obj.Salary = dr["Salary"].ToString();
+                    obj.JobType = dr["JobType"].ToString();
                     obj.TotalExperience = dr["TotalExperience"].ToString();
                     obj.ExpectedJoiningDate = Convert.ToDateTime(dr["ExpectedJoiningDate"].ToString());
                     obj.ApplicationEndDate = Convert.ToDateTime(dr["ApplicationEndDate"].ToString());
-                    obj.RequiredQualificationId = dr["RequiredQualificationId"].ToString();
+
                 }
+                ViewBag.JobType = obj.JobType;
+                ViewBag.companyname = obj.CompanyName;
+                ViewBag.CompanyId = obj.CompanyId;
+                ViewBag.JobCategoryId = obj.JobCategoryId;
+                ViewBag.jobcategory = obj.JobCategory;
+                ViewBag.reqqualification = obj.RequireQualification;
+                // ViewBag.location = obj.Location;
                 dr.Close();
 
 
@@ -581,6 +621,7 @@ namespace JobPortal.Controllers
                 ObjEmployerUser.City = string.Join(",", ObjEmployerUser.Locationlist);
                 ObjEmployerUser.RequireQualification = string.Join(",", ObjEmployerUser.QualificationList);
                 ObjEmployerUser.JobBenifit = string.Join(",", ObjEmployerUser.JobBenifitList);
+                ObjEmployerUser.TotalExperience = ObjEmployerUser.From + " - " + ObjEmployerUser.To;
                 BALEmployer objB = new BALEmployer();
                 if (ObjEmployerUser.SalaryType == "Fixed")
                 {
@@ -784,6 +825,7 @@ namespace JobPortal.Controllers
                     CompanyLogo.SaveAs(imgpath);
                 }
                 objEmployerUser.RegistrationDate = DateTime.Now;
+                objEmployerUser.isDelete = 0;
 
                 BALEmployer obj1 = new BALEmployer();
                 obj1.KTCompanyRegisteration(objEmployerUser);
@@ -851,7 +893,7 @@ namespace JobPortal.Controllers
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     EmployerUser obj = new EmployerUser();
-                    //  obj.Employercode = ds.Tables[0].Rows[i]["EmployerCode"].ToString();
+                    obj.CompanyId = Convert.ToInt32(ds.Tables[0].Rows[i]["CompanyId"].ToString());
                     obj.CompanyName = ds.Tables[0].Rows[i]["CompanyName"].ToString();
                     obj.ContactNo = Convert.ToInt64(ds.Tables[0].Rows[i]["ContactNo"].ToString());
                     obj.CompanyWebsite = ds.Tables[0].Rows[i]["CompanyWebsite"].ToString();
@@ -870,10 +912,84 @@ namespace JobPortal.Controllers
                 return await Task.Run(() => View("Login", "Account"));
             }
         }
-            //-----------------------------------------Kartik End----------------------------------//
-            //-----------------------------------------sachin start----------------------------------//
 
-            [HttpGet]
+
+
+        public async Task<ActionResult> GetCompanyDetails(EmployerUser obj1, int CompanyId)
+        {
+
+            CompanyCategory();
+            KTJobLocation();
+            EmployerUser obj = new EmployerUser();
+            obj.CompanyId = CompanyId;
+            BALEmployer obj2 = new BALEmployer();
+            SqlDataReader dr;
+            dr = obj2.GetCompanyDetail(obj);
+            while (dr.Read())
+            {
+                obj.CompanyName = dr["CompanyName"].ToString();
+                obj.NoOfEmployees = dr["NoOfEmployees"].ToString();
+                obj.ContactNo = Convert.ToInt64(dr["ContactNo"].ToString());
+                obj.CompanyWebsite = dr["CompanyWebsite"].ToString();
+                obj.CompanyEmail = dr["CompanyEmail"].ToString();
+                obj.AboutCompany = dr["AboutCompany"].ToString();
+                obj.IndustryId = Convert.ToInt32(dr["IndustryId"].ToString());
+                obj.CityId = dr["CityId"].ToString();
+                obj.Pincode = Convert.ToInt32(dr["Pincode"].ToString());
+                obj.CompanyLogo = dr["CompanyLogo"].ToString();
+                obj.Portfolio = dr["Portfolio"].ToString();
+                obj.Slogan = dr["Slogan"].ToString();
+                obj.Facebook = dr["Facebook"].ToString();
+                obj.Twitter = dr["Twitter"].ToString();
+                obj.LinkedIn = dr["LinkedIn"].ToString();
+                obj.Instagram = dr["Instagram"].ToString();
+                obj.Google = dr["Google+"].ToString();
+                obj.OwnerName = dr["OwnerName"].ToString();
+                obj.HRName = dr["HRName"].ToString();
+                obj.HRNumber = dr["HRNumber"].ToString();
+                obj.HREmail = dr["HREmail"].ToString();
+                obj.Source = dr["Source"].ToString();
+                obj.RegistrationDate = Convert.ToDateTime(dr["RegistrationDate"].ToString());
+
+
+
+            }
+            dr.Close();
+            return await Task.Run(() => PartialView(obj));
+
+        }
+
+        [HttpPost]
+        public ActionResult GetCompanyDetails(EmployerUser obj, HttpPostedFileBase CompanyLogo)
+        {
+            if (CompanyLogo != null && CompanyLogo.ContentLength > 0)
+            {
+                string image = Path.GetFileName(CompanyLogo.FileName);
+                string imgpath = Path.Combine(Server.MapPath("~/Content/Photos"), image);
+                CompanyLogo.SaveAs(imgpath);
+            }
+            CompanyCategory();
+            KTJobLocation();
+            BALEmployer obj1 = new BALEmployer();
+            obj1.KTUpdateCompanyDetails(obj);
+            return RedirectToAction("KTCompanyDeatilsGV");
+
+        }
+
+
+
+        public ActionResult KTDeleteCompany(EmployerUser obj, HttpPostedFileBase CompanyLogo)
+        {
+
+            BALEmployer obj1 = new BALEmployer();
+            obj1.KTDeleteCompany(obj);
+            return RedirectToAction("KTCompanyDeatilsGV");
+
+        }
+        //-----------------------------------------Kartik End----------------------------------//
+        //-----------------------------------------sachin start----------------------------------//
+
+        [HttpGet]
         public JsonResult GetJobCategory()
         {
 
@@ -2174,6 +2290,7 @@ namespace JobPortal.Controllers
                 return await Task.Run(() => View("Login", "Account"));
             }
         }
+        [HttpGet]
         public async Task<ActionResult> PlanDetails()
         {
 
@@ -2215,13 +2332,16 @@ namespace JobPortal.Controllers
                     ds2 = fun.getbenifits(BenifitsId);
                     benifit1 = ds2.Tables[1].Rows[0]["Benefits"].ToString();
 
+
                     if (k == ben.Length - 1)
                     {
                         benifit2 = string.Concat(benifit2, benifit1);
                     }
                     else
+
                     {
-                        benifit2 = string.Concat(benifit2, benifit1, ",*");
+                        
+                        benifit2 = string.Concat(benifit2 , benifit1 ," ", "✔");
                     }
                     objA.Benefits = benifit2;
 
@@ -2231,9 +2351,82 @@ namespace JobPortal.Controllers
             objB.LstUser = list;
             return await Task.Run(() => View(objB));
         }
-        //-----------------------------------------Ashish End----------------------------------//
-        //-----------------------------------------Muskan start----------------------------------//
         [HttpGet]
+        public ActionResult GetPlanDetails(EmployerUser obj1,int SubscriptionId)
+        {
+            obj1.SubscriptionId = SubscriptionId;
+            BALEmployer obj = new BALEmployer();
+            DataSet ds = new DataSet();
+            ds = obj.RPGetPlanDetails(obj1.SubscriptionId);
+            EmployerUser objuser = new EmployerUser();
+            List<EmployerUser> users1 = new List<EmployerUser>();
+            EmployerUser obju = new EmployerUser();
+            for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
+            {
+                obju.SubscriptionId = Convert.ToInt32(ds.Tables[1].Rows[i]["SubscriptionId"].ToString());
+                obju.SubscriptionName = ds.Tables[1].Rows[i]["SubscriptionName"].ToString();
+                obju.SubscriptionDuration = ds.Tables[1].Rows[i]["SubscriptionDuration"].ToString();
+                obju.OfferedPrice = Convert.ToInt64(ds.Tables[1].Rows[i]["OfferedPrice"].ToString());
+                obju.PlanPricing = Convert.ToInt64(ds.Tables[1].Rows[i]["PlanPricing"].ToString());
+
+                //      users1.Add(obju);
+            }
+        //    objuser.Users = users1;
+            return  PartialView(obju);
+        }
+        [HttpGet]
+        public ActionResult AddPaymentDetails(int subscriptionid,Int64 PlanPricing,Int64 OfferedPrice)
+        {
+
+            RPTranjectionIdIncriment();
+            
+            EmployerUser obj = new EmployerUser();
+            obj.SubscriptionId = subscriptionid;
+            obj.PlanPricing = PlanPricing;
+            obj.OfferedPrice = OfferedPrice;
+            ViewBag.PlanPricing = obj.PlanPricing;
+            ViewBag.OfferedPrice = obj.OfferedPrice;
+            obj.Employercode = Session["Employercode"].ToString();
+            BALEmployer objbal = new BALEmployer();
+            DataSet ds = new DataSet();
+            ds = objbal.getpaymentdetail(obj);
+            obj.EmployerName = ds.Tables[1].Rows[0]["EmployerName"].ToString();
+            obj.EmailId = ds.Tables[1].Rows[0]["EmailId"].ToString();
+            obj.ContactNo = Convert.ToInt64(ds.Tables[1].Rows[0]["ContactNo"].ToString());
+            obj.GSTNo = "";
+            return View(obj);
+
+        }
+        [HttpPost]
+        public ActionResult AddPaymentDetails(EmployerUser obj1)
+        {
+            if (TempData.ContainsKey("TID"))
+                TransactionId = TempData["TID"].ToString(); // returns "TransactionId" 
+            obj1.TransactionId = TransactionId;
+       //     obj1.SubscriptionDate = DateTime.Now;
+            BALEmployer obj = new BALEmployer();
+            obj.RPPaymentSave(obj1,obj1.TransactionId);
+            return RedirectToAction("PlanDetails");
+
+        }
+        public void RPTranjectionIdIncriment()
+        {
+
+            BALEmployer obj1 = new BALEmployer();
+            DataSet ds = new DataSet();
+            ds = obj1.RPTranjectionIdIncriment();
+
+            int PaymentId = Convert.ToInt32(ds.Tables[1].Rows[0]["Payment"].ToString());
+            PaymentId = PaymentId + 1;
+            string ID = "TS00";
+            string TID = ID + PaymentId;
+            ViewBag.Transaction = TID;
+            TempData["TID"] = TID;
+        }
+
+            //-----------------------------------------Ashish End----------------------------------//
+            //-----------------------------------------Muskan start----------------------------------//
+            [HttpGet]
         public ActionResult AccountEmployer()
         {
             string Employercode = Session["EmployerCode"].ToString();
@@ -2287,11 +2480,11 @@ namespace JobPortal.Controllers
         public async Task<ActionResult> RPBilling(EmployerUser obj1)
         {
 
-            //if (Session["Employercode"] != null)
-            //{
-                obj1.Employercode = "EMP0001";
-               // string employerCode = Session["Employercode"].ToString();
-                //obj1.Employercode = employerCode;
+            if (Session["Employercode"] != null)
+            {
+               // obj1.Employercode = "EMP0001";
+                string employerCode = Session["Employercode"].ToString();
+                obj1.Employercode = employerCode;
                 BALEmployer obj = new BALEmployer();
                 DataSet ds = new DataSet();
                 ds = obj.RPBilling(obj1);
@@ -2309,18 +2502,18 @@ namespace JobPortal.Controllers
                     obju.HRName = ds.Tables[1].Rows[i]["HRName"].ToString();
                     obju.CompanyEmail = ds.Tables[1].Rows[i]["CompanyEmail"].ToString();
                     obju.SubscriptionDate = Convert.ToDateTime(ds.Tables[1].Rows[i]["SubscriptionDate"].ToString());
-                    obju.Plans = ds.Tables[1].Rows[i]["Plans"].ToString();
-                    obju.PlanPrice = ds.Tables[1].Rows[i]["PlanPrice"].ToString();
+                    obju.SubscriptionName = ds.Tables[1].Rows[i]["SubscriptionName"].ToString();
+                    obju.PlanPricing = Convert.ToInt64(ds.Tables[1].Rows[i]["PlanPricing"].ToString());
                     users1.Add(obju);
                 }
                 objuser.Users = users1;
                 return await Task.Run(() => View(objuser));
 
-            //}
-            //else
-            //{
-            //    return await Task.Run(() => View("Login", "Account"));
-            //}
+            }
+            else
+            {
+                return await Task.Run(() => View("Login", "Account"));
+            }
 
 
         }

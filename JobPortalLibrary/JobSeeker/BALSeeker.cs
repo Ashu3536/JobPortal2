@@ -830,6 +830,40 @@ namespace JobPortalLibrary.JobSeeker
 
         }
         //--------------------------------------Muskan End-----------------------------------------------------------------------//
+        public void ReviewCompanyFeedback(int CompanyId, string EmployerCode, string SeekerCode, int Rating, string Review, int Follow, int StatusId, int DoyouCurrentlyWorkhere, int isDelete)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("SPSeeker", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Flag", "ReviewCompanyFeedback");
+            cmd.Parameters.AddWithValue("@CompanyId", CompanyId);
+            cmd.Parameters.AddWithValue("@EmployerCode", EmployerCode);
+            cmd.Parameters.AddWithValue("@Seekercode", SeekerCode);
+            cmd.Parameters.AddWithValue("@Rating", Rating);
+            cmd.Parameters.AddWithValue("@Review", Review);
+            cmd.Parameters.AddWithValue("@DoyouCurrentlyworkhere", DoyouCurrentlyWorkhere);
+            cmd.Parameters.AddWithValue("@Follow", Follow);
+            cmd.Parameters.AddWithValue("@StatusID", StatusId);
+            cmd.Parameters.AddWithValue("@isDelete", isDelete);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
 
+        public SqlDataReader CheckAppliedSeeker(SeekerUser CAS)
+        {
+            ManageConnection();
+            SqlCommand cmd = new SqlCommand("SPSeeker", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@flag", "CheckAppliedSeeker");
+            cmd.Parameters.AddWithValue("@Seekercode", CAS.Seekercode);
+            cmd.Parameters.AddWithValue("@PostJobCode", CAS.PostJobCode);
+            SqlDataReader dr;
+            dr = cmd.ExecuteReader();
+            return dr;
+
+        }
     }
 }
+
+    
+

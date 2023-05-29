@@ -56,8 +56,8 @@
         }
 
     .dataTables_filter {
-        margin-left: 70%;
-        margin-top: -30px;
+        margin-right:100px;
+        margin-top: -50px;
     }
 </style>
 <!DOCTYPE html>
@@ -100,13 +100,16 @@
 </body>
 </html>
 
-<table class="table table-hover" id="Vitthal" style="width:90%;margin-left:10px;margin-top:10px;">
+<table class="table table-hover" id="Vitthal" style="width:100%;margin-left:0px;margin-top:10px;">
     <thead>
         <tr style="background-color: #435ebe; color: white;">
 
 
             <th style="width:9px">
                 @Html.DisplayNameFor(model => model.PostJobCode)
+            </th>
+            <th style="width:140px">
+                @Html.DisplayNameFor(model => model.CompanyName)
             </th>
             <th style="width:140px">
                 @Html.DisplayNameFor(model => model.JobTitle)
@@ -120,7 +123,7 @@
             <th style="width:130px">
                 @Html.DisplayNameFor(model => model.Status)
             </th>
-            <th>
+            <th  style="width:130px">
                 @Html.DisplayNameFor(model => model.Actions)
             </th>
 
@@ -135,6 +138,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.PostJobCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.JobTitle)
@@ -156,26 +162,26 @@
                 </td>
                 <td>
                     @*@Html.ActionLink("Sponcer This Job", "Actions", new { postjobcode = item.PostJobCode }, htmlAttributes: new { @class = "btn btn-info" }) |
-        @Html.ActionLink("View Job Details", "JobDetails", new { postjobcode = item.PostJobCode }, htmlAttributes: new { @class = "btn btn-info popup" }) |*@
+            @Html.ActionLink("View Job Details", "JobDetails", new { postjobcode = item.PostJobCode }, htmlAttributes: new { @class = "btn btn-info popup" }) |*@
                     @*<button type="button">
-            <a class="sponcerjob" href="" data-id="@item.PostJobCode">Sponcer This Job</a>
-        </button>*@
+                <a class="sponcerjob" href="" data-id="@item.PostJobCode">Sponcer This Job</a>
+            </button>*@
                     <a class=" bi bi-eye-fill" title="View" style="font-size:20px;color:blue;" href="@Url.Action("JobDetails", "Employer", new {PostJobCode=item.PostJobCode})"></a>
 
 
                     @*<a class="Viewdetails bi bi-eye-fill" title="View" style="font-size:20px;color:blue;padding:10px 10px 10px 10px;" href="javascripts:;" data-id="@item.PostJobCode"></a>*@
 
                     @*<br /> <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button type="button">
-            <a class="sharejob" href="" data-id="@item.PostJobCode">Share Job</a>
-        </button>8
-        &nbsp;&nbsp;*@
+            <button type="button">
+                <a class="sharejob" href="" data-id="@item.PostJobCode">Share Job</a>
+            </button>8
+            &nbsp;&nbsp;*@
                     @*<button type="button">
-            <a  href="@Url.Action("RepostJob","Employer")"data-id="@item.PostJobCode"></a>
-        </button>*@
+                <a  href="@Url.Action("RepostJob","Employer")"data-id="@item.PostJobCode"></a>
+            </button>*@
                     @*<button type="button">
-            @Html.ActionLink("RepostJob", "RepostJob", new { PostJobCode = item.PostJobCode })
-        </button>*@
+                @Html.ActionLink("RepostJob", "RepostJob", new { PostJobCode = item.PostJobCode })
+            </button>*@
                     &nbsp;&nbsp; &nbsp;&nbsp;
 
                     <a class="bi bi-pencil-fill" title="Edit" style="font-size:20px;color:blue;padding:10px 10px 10px 10px;" href="@Url.Action("RepostJob", "Employer", new {PostJobCode = item.PostJobCode})"> </a>
