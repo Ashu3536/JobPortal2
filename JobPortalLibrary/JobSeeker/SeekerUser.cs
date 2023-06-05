@@ -16,6 +16,9 @@ namespace JobPortalLibrary.JobSeeker
 {
     public class SeekerUser
     {
+        public string RePassword { get; set; }
+        [Required(ErrorMessage = "Select Category")]
+        public string Category { get; set; }
         public int SeekerId { get; set; }
 
         public string Seekercode { get; set; }

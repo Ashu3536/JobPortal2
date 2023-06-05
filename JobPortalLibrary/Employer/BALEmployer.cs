@@ -815,11 +815,7 @@ namespace JobPortalLibrary.Employer
         }
         public DataSet ResumeAlert(EmployerUser objseeker)
         {
-            if (con.State == System.Data.ConnectionState.Closed)
-            {
-                con.Open();
-
-            }
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("Employeer", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "ResumeAlert");
@@ -829,7 +825,7 @@ namespace JobPortalLibrary.Employer
             DataSet ds = new DataSet();
             adpt.Fill(ds);
             return ds;
-            con.Close();
+           
         }
         //---------------------------------sachin End----------------------------//
         //---------------------------------Ashish start----------------------------//
@@ -1087,7 +1083,7 @@ namespace JobPortalLibrary.Employer
         //--------------------EmployerUpdate-------------------------------------------------
         public void Updateemployer(string Employercode, string EmailId, Int64 ContactNo, string Password)
         {
-            con.Open();
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("Employeer", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "UpdateEmployer");
@@ -1096,30 +1092,30 @@ namespace JobPortalLibrary.Employer
             cmd.Parameters.AddWithValue("@ContactNo", ContactNo);
             cmd.Parameters.AddWithValue("@Password", Password);
             cmd.ExecuteNonQuery();
-            con.Close();
+           
         }
         //--------------------Isdeleteemployer-------------------------------------------------
         public void IsDeleteEmployer(string Employercode)
         {
-            con.Open();
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("Employeer", con);
             cmd.Parameters.AddWithValue("@flag", "DeleteEmp");
             //cmd.Parameters.AddWithValue("@isDelete", isDelete);
             cmd.Parameters.AddWithValue("@EmployeerCode", Employercode);
             cmd.ExecuteNonQuery();
-            con.Close();
+         
         }
 
         //-------------------company view---------------------------//
         public void viewEmployerSave(EmployerUser obj)
         {
-            con.Open();
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("Employeer", con);
             cmd.Parameters.AddWithValue("@flag", "viewEmployerSave");
             cmd.Parameters.AddWithValue("@Seekercode", obj.Seekercode);
             cmd.Parameters.AddWithValue("@EmployeerCode", obj.Employercode);
             cmd.ExecuteNonQuery();
-            con.Close();
+          
         }
         public SqlDataReader viewEmployer(EmployerUser obj)
         {

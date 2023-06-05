@@ -128,7 +128,7 @@ namespace JobPortalLibrary.Admin
         public string IsOffer { get; set; }
         //-------------Mitali End--------------//
         public string subDate { get; set; }
-        public string SeekerCode { get; set; }
+      //  public string SeekerCode { get; set; }
         public string SeekerName { get; set; }
         public string Designation { get; set; }
     }

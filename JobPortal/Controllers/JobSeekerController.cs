@@ -1505,11 +1505,13 @@ namespace JobPortal.Controllers
         [HttpGet]
         public async Task<ActionResult> jobdetails(string id)
         {
-            SeekerUser obj = new SeekerUser();
-            obj.PostJobCode = id;
-            BALSeeker obj1 = new BALSeeker();
-            SqlDataReader dr;
-            dr = obj1.jobdetails(obj);
+            if (Session["SeekerCode"] != null)
+            {
+                SeekerUser obj = new SeekerUser();
+                obj.PostJobCode = id;
+                BALSeeker obj1 = new BALSeeker();
+                SqlDataReader dr;
+                dr = obj1.jobdetails(obj);
             while (dr.Read())
             {
                 obj.JobTitle = dr["JobTitle"].ToString();
@@ -1592,8 +1594,13 @@ namespace JobPortal.Controllers
                 else { obj.Location = null; }
 
             }
-            dr.Close();
-            return await Task.Run(() => View(obj));
+                dr.Close();
+                return await Task.Run(() => View(obj));
+            }
+            else
+            {
+                return await Task.Run(() => View("Login", "Account"));
+            }
         }
         public async Task<ActionResult> AllCompany()
         {
@@ -1625,12 +1632,14 @@ namespace JobPortal.Controllers
         [HttpGet]
         public async Task<ActionResult> CompanysDetails(int id)
         {
-            SeekerUser obj = new SeekerUser();
-            obj.CompanyId = id;
-            BALSeeker obj1 = new BALSeeker();
-            SqlDataReader dr;
-            dr = obj1.CompanysDetails(obj);
-            while (dr.Read())
+            if (Session["SeekerCode"] != null)
+            {
+                SeekerUser obj = new SeekerUser();
+                obj.CompanyId = id;
+                BALSeeker obj1 = new BALSeeker();
+                SqlDataReader dr;
+                dr = obj1.CompanysDetails(obj);
+                while (dr.Read())
             {
                 obj.CompanyId = Convert.ToInt32(dr["CompanyId"].ToString());
                 obj.EmployerCode = dr["Employercode"].ToString();
@@ -1645,8 +1654,13 @@ namespace JobPortal.Controllers
                 obj.CompanyWebsite = dr["CompanyWebsite"].ToString();
 
             }
-            dr.Close();
-            return await Task.Run(() => View(obj));
+                dr.Close();
+                return await Task.Run(() => View(obj));
+            }
+            else
+            {
+                return await Task.Run(() => View("Login", "Account"));
+            }
         }
         [HttpPost]
         public async Task<ActionResult> ReviewCompanyFeedback(int CompanyId)
@@ -2335,7 +2349,7 @@ namespace JobPortal.Controllers
 
                 }
                 dr.Close();
-                return await Task.Run(() => PartialView("ApplyJobs"));
+                return await Task.Run(() => PartialView("AllJobs"));
              }
             else
             {

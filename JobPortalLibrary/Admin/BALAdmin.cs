@@ -315,11 +315,7 @@ namespace JobPortalLibrary.Admin
         //--------------------Mitali Start----------------------------//
         public void Subscription(AdminUser sub)
         {
-            if (con.State == System.Data.ConnectionState.Closed)
-            {
-                con.Open();
-
-            }
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("SPAdmin", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "Subscription");
@@ -333,27 +329,24 @@ namespace JobPortalLibrary.Admin
             cmd.Parameters.AddWithValue("@Offer", sub.Offer);
             cmd.Parameters.AddWithValue("@OfferedPrice", sub.OfferedPrice);
             cmd.ExecuteNonQuery();
-            con.Close();
+         
 
         }
 
         public void AddBenefits(AdminUser sub)
         {
-            if (con.State == System.Data.ConnectionState.Closed)
-            {
-                con.Open();
-
-            }
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("SPAdmin", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "AddBenefits");
             cmd.Parameters.AddWithValue("@Benefits", sub.Benefits);
             cmd.ExecuteNonQuery();
-            con.Close();
+            
 
         }
         public DataSet GetBenefits()                           // multiselect dropdown
         {
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("SPAdmin", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "GetBenefits");
@@ -365,7 +358,7 @@ namespace JobPortalLibrary.Admin
         }
         public DataSet PlanGrid()
         {
-
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("SPAdmin", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "PlanGrid");
@@ -378,10 +371,7 @@ namespace JobPortalLibrary.Admin
 
         public SqlDataReader PlanDetails(AdminUser obj)
         {
-            if (con.State == System.Data.ConnectionState.Closed)
-            {
-                con.Open();
-            }
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("SPAdmin", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "PlanDetails");
@@ -389,15 +379,12 @@ namespace JobPortalLibrary.Admin
             SqlDataReader dr;
             dr = cmd.ExecuteReader();
             return dr;
-            con.Close();
+            
         }
         public void UpdatePlan(AdminUser obj)
         {
 
-            if (con.State == System.Data.ConnectionState.Closed)
-            {
-                con.Open();
-            }
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("SPAdmin", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "Updateplan");
@@ -410,11 +397,11 @@ namespace JobPortalLibrary.Admin
             cmd.Parameters.AddWithValue("@Offer", obj.Offer);
             cmd.Parameters.AddWithValue("@OfferedPrice", obj.OfferedPrice);
             cmd.ExecuteNonQuery();
-            con.Close();
+            
         }
         public DataSet getbenifits(int benifitsid)
         {
-
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("SPAdmin", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "getbenifits");
@@ -430,16 +417,13 @@ namespace JobPortalLibrary.Admin
         public void DeletePlan(AdminUser ad)
         {
 
-            if (con.State == System.Data.ConnectionState.Closed)
-            {
-                con.Open();
-            }
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("SPAdmin", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "DeletePlan");
             cmd.Parameters.AddWithValue("@SubscriptionId", ad.SubscriptionId);
             cmd.ExecuteNonQuery();
-            con.Close();
+       
 
         }
         public DataSet Jobseekargrid()

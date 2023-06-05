@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/ >
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css"/ >
 </style>
-<h2 style="margin-left:300px">AdminEmployeGrid</h2>
+<h2 style="margin-left:300px">Employeers List</h2>
 @*@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @enctype = "multipart/form-data" }))
     {
 
@@ -69,7 +69,7 @@
                         @Html.DisplayFor(modelItem => item.EmployerName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Plans)
+                        @Html.DisplayFor(modelItem => item.SubscriptionName)
                     </td>
 
                     @*<td>
@@ -82,7 +82,7 @@
                         @Html.DisplayFor(modelItem => item.Status)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PlanDuration)
+                        @Html.DisplayFor(modelItem => item.SubscriptionDuration)
                     </td>
 
                     <td style="width: 500px;display:flex">

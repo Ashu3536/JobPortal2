@@ -4,6 +4,46 @@
     ViewBag.Title = "Jobapplystud";
     Layout = "~/Views/Shared/Employer_Layout.cshtml";
 }
+<style>
+
+    #tooltip {
+        position: relative;
+        width: 100px;
+    }
+
+        #tooltip .logOutToolTip {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 65%;
+            left: 50%;
+            margin-left: -81px;
+            opacity: 1;
+            transition: opacity 1s;
+        }
+
+            #tooltip .logOutToolTip::after {
+                content: "";
+                /* position: absolute;*/
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 8px;
+                border-style: solid;
+                border-color: #555 transparent transparent transparent;
+            }
+
+        #tooltip:hover .logOutToolTip {
+            visibility: visible;
+            opacity: 1;
+        }
+</style>
 
 <h2>Applied JobSeekers List</h2>
 @*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
@@ -74,10 +114,19 @@
             margin-left: 320;
         }
     </style>*@
-<button>
+<!--<button>-->
     @*<a href="@Url.Action("AllRoundsGrid","Employer")" PostJobCode="@Model.PostJobCode">Manage Rounds</a>*@
-    @Html.ActionLink("Manage Rounds", "AllRoundsGrid", new { postjobcode = Model.PostJobCode })
-</button>
+    <!--@Html.ActionLink("Manage Rounds", "AllRoundsGrid", new { postjobcode = Model.PostJobCode })
+</button>-->
+<div class="row">
+    <button style="color: white; width:150px;height: 50px; border-radius: 12px; font-weight: 500;border-color:transparent; font-size: 15px; line-height: 10px; text-align: center; display: flex; align-items: center; justify-content: center;background-color:royalblue">
+        <a style="color: white;" href="@Url.Action("AllRoundsGrid","Employer", new { postjobcode = Model.PostJobCode})">Manage Rounds</a>
+    </button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button style="color: white; width:150px;height: 50px; border-radius: 12px; font-weight: 500;border-color:transparent; font-size: 15px; line-height: 10px; text-align: center; display: flex; align-items: center; justify-content: center;background-color:royalblue">
+        <a style="color: white;" href="@Url.Action("Addcandidate","Employer", new { postjobcode = Model.PostJobCode})">Add Candidate</a>
+    </button>
+</div>
 <br />
 <br />
 <div class="container">
@@ -88,153 +137,31 @@
             <span class="caption">ACTIVE</span>
         </div>
 
-        <div class="col-sm-4 col-md-2 justify-content-center text-center card" style="width: 110px; border: solid blue 2px; background-color: aliceblue; height: 100px; color: black; text-decoration-thickness: 60px; margin-left: 30px; box-shadow: 8px 8px 8px rgb(0,0,102); ">
+        <div class="col-sm-4 col-md-2 justify-content-center text-center card" style="width: 110px; border: solid blue 2px; background-color: aliceblue; height: 100px; color: black; text-decoration-thickness: 60px; margin-left: 20px; box-shadow: 8px 8px 8px rgb(0,0,102); ">
             @ViewBag.Awaitingreview<br />
             <span class="caption">AWAITINGREVIEW</span>
         </div>
-        <div class="col-sm-4 col-md-2 justify-content-center text-center card" style="width: 130px; border: solid blue 2px; background-color: aliceblue; height: 100px; color: black; text-decoration-thickness: 60px; margin-left: 30px; box-shadow: 8px 8px 8px rgb(0,0,102); ">
+        <div class="col-sm-4 col-md-2 justify-content-center text-center card" style="width: 130px; border: solid blue 2px; background-color: aliceblue; height: 100px; color: black; text-decoration-thickness: 60px; margin-left: 20px; box-shadow: 8px 8px 8px rgb(0,0,102); ">
             @ViewBag.Review<br />
             <span class="caption">REVIEW</span>
         </div>
-        <div class="col-sm-4 col-md-2 justify-content-center text-center card" style="width: 140px; border: solid blue 2px; background-color: aliceblue; height: 100px; color: black; text-decoration-thickness: 60px; margin-left: 30px; box-shadow: 8px 8px 8px rgb(0,0,102); ">
+        <div class="col-sm-4 col-md-2 justify-content-center text-center card" style="width: 140px; border: solid blue 2px; background-color: aliceblue; height: 100px; color: black; text-decoration-thickness: 60px; margin-left: 20px; box-shadow: 8px 8px 8px rgb(0,0,102); ">
             @ViewBag.contacting<br />
             <span class="caption">CONTACTING</span>
         </div>
-        <div class="col-sm-4 col-md-2 justify-content-center text-center card" style="width: 130px; border: solid blue 2px; background-color: aliceblue; height: 100px; color: black; text-decoration-thickness: 60px; margin-left: 30px; box-shadow: 8px 8px 8px rgb(0,0,102); ">
+        <div class="col-sm-4 col-md-2 justify-content-center text-center card" style="width: 130px; border: solid blue 2px; background-color: aliceblue; height: 100px; color: black; text-decoration-thickness: 60px; margin-left: 20px; box-shadow: 8px 8px 8px rgb(0,0,102); ">
             @ViewBag.hire<br />
             <span class="caption">HIRE</span>
         </div>
-        <div class="col-sm-4 col-md-2 justify-content-center text-center card" style="width: 130px; border: solid blue 2px; background-color: aliceblue; height: 100px; color: black; text-decoration-thickness: 60px; margin-left: 30px; box-shadow: 8px 8px 8px rgb(0,0,102); ">
+        <div class="col-sm-4 col-md-2 justify-content-center text-center card" style="width: 130px; border: solid blue 2px; background-color: aliceblue; height: 100px; color: black; text-decoration-thickness: 60px; margin-left: 20px; box-shadow: 8px 8px 8px rgb(0,0,102); ">
             @ViewBag.Rejected<br />
             <span class="caption">REJECTED</span>
         </div>
     </div>
 </div>
 
-@*<script>
-        $(document).ready(function () {
-            $(".btn11").click(function () {
-                var parent = $(this).parent().parent();
-                var AppliedJobId = $(this).attr("data-id");
-                var postjcode = $(this).attr("postjobcode");
-
-                $.get("/Employer/Approve", { AppliedJobId: AppliedJobId, postjobcode: postjcode })
-                    .then(function () {
-                        window.location.href = "/Employer/Jobapplystud?postjobcode="+postjcode;
-                    })
-                    //if (data == "Approve") {
-                    //    parent.find(".status").html(data);
-                    //    parent.find(".btn11").css({ backgroundColor: 'green' });
-                    //    parent.find(".btn12").css({ backgroundColor: 'lightgrey' });
-                    //} else if ((data == "Rejected")) {
-                    //    parent.find(".status").html(data);
-                    //    parent.find(".btn11").css({ backgroundColor: 'lightgrey' });
-                    //}
-                });
-
-            });
-            $(".btn12").click(function () {
-                var parent = $(this).parent().parent();
-                var AppliedJobId = $(this).attr("data-id");
-                var postjcode = $(this).attr("postjobcode");
-
-                $.get("/Employer/Reject", { AppliedJobId: AppliedJobId, postjobcode: postjcode }, function (data) {
-                    if (data == "Approve") {
-                        parent.find(".status").html(data);
-                        parent.find(".btn12").css({ backgroundColor: 'lightgrey' });
-                    } else if ((data == "Rejected")) {
-                        parent.find(".status").html(data);
-                        parent.find(".btn12").css({ backgroundColor: 'red' });
-                        parent.find(".btn11").css({ backgroundColor: 'lightgrey' });
-                    }
-                });
-
-            });
-            //$(".popup").click(function () {
-            //    var parent = $(this).parent().parent();
-            //    var AppliedJobId = $(this).attr("data-id");
-            //    var postjcode = $(this).attr("postjobcode");
-            //    $.get("/Employer/Jobapplystud", { AppliedJobId: AppliedJobId, postjobcode: postjcode }, function (data) {
-            //        parent.html(data);
-            //    });
-
-            //});
-        });
-
-
-    </script>*@
-<style>
-    <style >
-    #tooltip {
-        position: relative;
-        width: 100px;
-    }
-
-    #tooltip .logOutToolTip {
-        visibility: hidden;
-        width: 200px;
-        background-color: #555;
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 0;
-        position: absolute;
-        z-index: 1;
-        bottom: 65%;
-        left: 50%;
-        margin-left: -81px;
-        opacity: 1;
-        transition: opacity 1s;
-    }
-
-        #tooltip .logOutToolTip::after {
-            content: "";
-            /* position: absolute;*/
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 8px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
-        }
-
-    #tooltip:hover .logOutToolTip {
-        visibility: visible;
-        opacity: 1;
-    }
-</style>
-
-
-@*<script>
-        $(document).ready(function () {
-            $("#popup").click(function (e) {
-                e.preventDefault();
-                $("#modal").remove();
-                var url = $(this).attr("href");
-                $.get(url, function (data) {
-                    $(data).modal();
-                });
-
-            });
-        });
-
-    </script>*@
-@*<script>
-        $(function () {
-            $('#popup').change(function () {
-                var url = $(this).val();
-                if (url != null && url != '') {
-                    window.location.href = url;
-                }
-            });
-        });
-    </script>*@
-
-<br />
-
 
 <table class="table table-hover" style="margin-left:0px;width:100%" id="rita">
-
 
     <tr style="background-color:#435ebe;color:white">
         <th style="width:50px;display:none">
@@ -259,10 +186,10 @@
         <th>
             @Html.DisplayNameFor(model => model.Status)
         </th>
-        <th ">
+        <th style="width:120px; ">
             @Html.DisplayNameFor(model => model.ApplyDate)
         </th>
-        <th style="width:200px;">
+        <th style="width:150px;">
             @Html.DisplayNameFor(model => model.Eligible)
         </th>
         <th style="width:150px">
@@ -325,47 +252,47 @@
                         <a class="btn11" data-id="@item.AppliedJobId" postjobcode="@item.PostJobCode" style="color:green; font-size:20px; height:9px;">&#10004;</a>
                 "R1 Cleared" || "R2 Cleared" || "R3 Cleared" || "R4 Cleared" || "R5 Cleared" || "ShortListed For R1"
                         </button>*@
-        <td>
-            @if (item.Status == "ShortListed For R1" || item.Status == "R1 Cleared" || item.Status == "R1 Cleared" || item.Status == "R2 Cleared" || item.Status == "R3 Cleared" || item.Status == "R5 Cleared")
-            {
-                <button type="button" id="Reject" class="btn btn-success response border-success" style="background: white; border: solid green 2px;" disabled="disabled">
-                    <p style="font-size:18px;height:9px;width:20px;">
-                        <a class="btn11" id="btn1" value="Approve" title="Shortlist" data-id="@item.AppliedJobId" postjobcode="@item.PostJobCode"> &#10004; </a>
+            <td>
+                @if (item.Status == "ShortListed For R1" || item.Status == "R1 Cleared" || item.Status == "R1 Cleared" || item.Status == "R2 Cleared" || item.Status == "R3 Cleared" || item.Status == "R5 Cleared")
+                {
+                    <button type="button" id="Reject" class="btn btn-success response border-success" style="background: white; border: solid green 2px;" disabled="disabled">
+                        <p style="font-size:18px;height:9px;width:20px;">
+                            <a class="btn11" id="btn1" value="Approve" title="Shortlist" data-id="@item.AppliedJobId" postjobcode="@item.PostJobCode"> &#10004; </a>
 
-                    </p>
-                </button>
-            }
-            else
-            {
-                <button type="button" id="Reject" class="btn btn-success response border-success" style="background:white;">
-                    <p style="font-size:18px;height:9px;width:20px;">
-                        <a class="btn11" id="btn1" value="Approve" title="Shortlist" data-id="@item.AppliedJobId" postjobcode="@item.PostJobCode"> &#10004; </a>
+                        </p>
+                    </button>
+                }
+                else
+                {
+                    <button type="button" id="Reject" class="btn btn-success response border-success" style="background:white;">
+                        <p style="font-size:18px;height:9px;width:20px;">
+                            <a class="btn11" id="btn1" value="Approve" title="Shortlist" data-id="@item.AppliedJobId" postjobcode="@item.PostJobCode"> &#10004; </a>
 
-                    </p>
+                        </p>
 
-                </button>
-            }
-            @if (item.Status == "ShortListed For R1" || item.Status == "R1 Cleared" || item.Status == "R1 Cleared" || item.Status == "R2 Cleared" || item.Status == "R3 Cleared" || item.Status == "R5 Cleared")
-            {
-                <button type="button" id="Reject" class="btn btn-success response border-danger" style="background:white; " disabled="disabled">
-                    <p style="font-size:18px;height:9px;width:20px;">
-                        <a class="btn12" id="btn2" value="Reject" data-id="@item.AppliedJobId" postjobcode="@item.PostJobCode">  &#10060;</a>
+                    </button>
+                }
+                @if (item.Status == "ShortListed For R1" || item.Status == "R1 Cleared" || item.Status == "R1 Cleared" || item.Status == "R2 Cleared" || item.Status == "R3 Cleared" || item.Status == "R5 Cleared")
+                {
+                    <button type="button" id="Reject" class="btn btn-success response border-danger" style="background:white; " disabled="disabled">
+                        <p style="font-size:18px;height:9px;width:20px;">
+                            <a class="btn12" id="btn2" value="Reject" data-id="@item.AppliedJobId" postjobcode="@item.PostJobCode">  &#10060;</a>
 
-                    </p>
-                </button>
-            }
-            else
-            {
-                <button type="button" id="Reject" class="btn btn-success response border-danger" style="background: white; border: solid red 2px;">
-                    <p style="font-size:18px;height:9px;width:20px;">
-                        <a class="btn12" id="btn2" value="Reject" data-id="@item.AppliedJobId" postjobcode="@item.PostJobCode">  &#10060;</a>
+                        </p>
+                    </button>
+                }
+                else
+                {
+                    <button type="button" id="Reject" class="btn btn-success response border-danger" style="background: white; border: solid red 2px;">
+                        <p style="font-size:18px;height:9px;width:20px;">
+                            <a class="btn12" id="btn2" value="Reject" data-id="@item.AppliedJobId" postjobcode="@item.PostJobCode">  &#10060;</a>
 
-                    </p>
-                </button>
+                        </p>
+                    </button>
 
-            }
+                }
 
-        </td>
+            </td>
             @* <input type="button" class="btn11" id="btn1" value="Approve" data-id="@item.AppliedJobId" postjobcode="@item.PostJobCode">*@
 
             <!--<input type="button" class="btn12" id="btn2" value="Reject" data-id="@item.AppliedJobId" postjobcode="@item.PostJobCode" />-->
@@ -381,7 +308,7 @@
                 </p>
 
                 <p style="margin-left:92px;margin-top:-51px;">
-                    <a class="Deletecandidate bi bi-envelope" title="View" style="font-size:25px; color:blue;" href="javascript:;" data-id="@item.AppliedJobId"></a>
+                    <a class="Deletecandidate bi bi-envelope" title="View" style="font-size:25px; color:blue;" href="@Url.Action("Studemail", "Employer", new {Seekercode=item.Seekercode,AppliedJobId=item.AppliedJobId})"></a>
                 </p>
                 @*@Html.DropDownList("url", new SelectList(new[]{ new SelectListItem { Text = "View Phone Detail", Value = Url.Action("viewphonedetails", "Employer") },
                     new SelectListItem { Text = "Message", Value = Url.Action("Index", "Employer") },
@@ -395,9 +322,7 @@
 
     }
 </table>
-<button type="button">
-    @Html.ActionLink("Add Candidate", "Addcandidate", new { postjobcode = Model.PostJobCode })
-</button>
+
 
 <div id="partialModal" class="modal" tabindex="-1" role="dialog" style="position:center">
     <div class="modal-dialog" role="document">

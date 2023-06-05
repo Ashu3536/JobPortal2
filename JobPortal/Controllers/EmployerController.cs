@@ -39,6 +39,76 @@ namespace JobPortal.Controllers
 
             return View();
         }
+        
+        public ActionResult Studemail(string Seekercode,int AppliedJobId)
+        {
+            BALEmployer objbal = new BALEmployer();
+            EmployerUser objuser = new EmployerUser();
+            objuser.Seekercode = Seekercode;
+            objuser.AppliedJobId = AppliedJobId;
+            DataSet ds = new DataSet();
+            ds = objbal.GetEmailid(objuser);
+            objuser.EmailId = ds.Tables[1].Rows[0]["EmailId"].ToString();
+            objuser.SeekerName = ds.Tables[1].Rows[0]["SeekerName"].ToString();
+            DataSet ds1 = new DataSet();
+
+            ds1 = objbal.GetCompanyName(objuser.AppliedJobId);
+
+
+
+            objuser.CompanyName = ds1.Tables[1].Rows[0]["CompanyName"].ToString();
+            objuser.HRName = ds1.Tables[1].Rows[0]["HRName"].ToString();
+            objuser.HRNumber = ds1.Tables[1].Rows[0]["HRNumber"].ToString();
+
+            MailMessage mail = new MailMessage();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("<b>Dear Candidate,</b>");
+            sb.AppendFormat("<br />");
+            sb.AppendFormat("<br />");
+            sb.AppendFormat("<br />");
+            sb.AppendFormat("<b>Greetings From</b>" + " " + objuser.CompanyName + ",");
+            sb.AppendFormat("<br />");
+            sb.AppendFormat("<br />");
+            sb.AppendLine("Hello " + objuser.SeekerName + " , I hope this email finds you well. I am " + objuser.HRName + " , with the hiring department for " + objuser.CompanyName + " . On behalf of " + objuser.CompanyName + " , I would like to congratulate you are selected for the First Round.");
+            sb.AppendFormat("<br />");
+            sb.AppendFormat("<br />");
+            sb.AppendLine("I am pleased to inform you that we would like to offer you this position. We believe your past experience and strong skills will be an asset to our company.");
+            sb.AppendFormat("<br />");
+            sb.AppendFormat("<br />");
+            sb.AppendLine("Please respond to this email to let us know if you would like to accept this job.");
+            sb.AppendFormat("<br />");
+            sb.AppendFormat("<br />");
+            sb.AppendLine("I look forward to hearing from you.");
+            sb.AppendFormat("<br />");
+            sb.AppendFormat("<br />");
+            sb.AppendFormat("<br />");
+            sb.AppendFormat("<br />");
+            sb.AppendLine("Thanks and Regards, ");
+            sb.AppendFormat("<br />");
+            sb.AppendLine("<b>Hr Name :</b>" + objuser.HRName);
+            sb.AppendFormat("<br />");
+            sb.AppendLine("<b>Hr Number:</b> " + objuser.HRNumber);
+            //  mail.Body = sb.ToString();
+
+            mail.From = new MailAddress("8624077183a@gmail.com");
+            mail.Subject = "Interview Invitation";
+            //  string Address = obj.InterviewAddress;
+            // string Time = obj.StartTime.ToString();
+            mail.Body = sb.ToString();
+
+            //     string EmailId = email[i];
+            mail.To.Add(new MailAddress(objuser.EmailId));
+
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential("8624077183a@gmail.com", "mamuijmxmeiiybje"); // Enter senders User name and password  
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
+            return View();
+        }
         public ActionResult EmployeerIndex()
         {
             if (Session["Employercode"] != null)
@@ -258,7 +328,8 @@ namespace JobPortal.Controllers
         }
         public async Task<ActionResult> JobDetails(EmployerUser obj, string PostJobCode)
         {
-          
+            if (Session["Employercode"] != null)
+            {
                 obj.PostJobCode = PostJobCode;
                 BALEmployer obj1 = new BALEmployer();
                 SqlDataReader dr;
@@ -290,7 +361,12 @@ namespace JobPortal.Controllers
                 obj.PostJobCode = PostJobCode;
                 Session["url"] = HttpContext.Request.Url.AbsoluteUri;
                 return await Task.Run(() => PartialView(obj));
-            
+            }
+            else
+            {
+                return await Task.Run(() => View("Login", "Account"));
+            }
+
 
         }
         public async Task<ActionResult> viewphonedetails(EmployerUser obj,int AppliedJobId)
@@ -333,11 +409,6 @@ namespace JobPortal.Controllers
            
                 getEducation();
                 return await Task.Run(() => View());
-           
-
-
-
-
         }
         public void getEducation()
         {
@@ -380,9 +451,6 @@ namespace JobPortal.Controllers
 
             }
             return Json(Educationlist, JsonRequestBehavior.AllowGet);
-
-
-
 
         }
         public JsonResult getspecialization(int DegreeId, EmployerUser obj)
@@ -500,7 +568,7 @@ namespace JobPortal.Controllers
                 while (dr.Read())
                 {
                     //obj.PostJobCode = dr["PostJobCode"].ToString();
-                    obj.RequireQualification = dr["RequireQualification"].ToString();
+                    //obj.RequireQualification = dr["RequireQualification"].ToString();
                     obj.Location = dr["CityName"].ToString();
                     obj.CompanyId = Convert.ToInt32(dr["CompanyId"].ToString());
                     obj.CompanyName = dr["CompanyName"].ToString();
@@ -829,7 +897,7 @@ namespace JobPortal.Controllers
 
                 BALEmployer obj1 = new BALEmployer();
                 obj1.KTCompanyRegisteration(objEmployerUser);
-                return await Task.Run(() => RedirectToAction("CompanyRegistration"));
+                return await Task.Run(() => RedirectToAction("KTCompanyDeatilsGV"));
             }
 
             else
@@ -912,9 +980,6 @@ namespace JobPortal.Controllers
                 return await Task.Run(() => View("Login", "Account"));
             }
         }
-
-
-
         public async Task<ActionResult> GetCompanyDetails(EmployerUser obj1, int CompanyId)
         {
 
@@ -975,9 +1040,6 @@ namespace JobPortal.Controllers
             return RedirectToAction("KTCompanyDeatilsGV");
 
         }
-
-
-
         public ActionResult KTDeleteCompany(EmployerUser obj, HttpPostedFileBase CompanyLogo)
         {
 
@@ -2293,8 +2355,9 @@ namespace JobPortal.Controllers
         [HttpGet]
         public async Task<ActionResult> PlanDetails()
         {
-
-            EmployerUser objB = new EmployerUser();
+            if (Session["Employercode"] != null)
+            {
+                EmployerUser objB = new EmployerUser();
             BALEmployer obj2 = new BALEmployer();
             DataSet ds = new DataSet();
             ds = obj2.PlanDetails();
@@ -2350,11 +2413,18 @@ namespace JobPortal.Controllers
             }
             objB.LstUser = list;
             return await Task.Run(() => View(objB));
+            }
+            else
+            {
+                return await Task.Run(() => View("Login", "Account"));
+            }
         }
         [HttpGet]
-        public ActionResult GetPlanDetails(EmployerUser obj1,int SubscriptionId)
+        public async Task<ActionResult> GetPlanDetails(EmployerUser obj1,int SubscriptionId)
         {
-            obj1.SubscriptionId = SubscriptionId;
+                if (Session["Employercode"] != null)
+                {
+                    obj1.SubscriptionId = SubscriptionId;
             BALEmployer obj = new BALEmployer();
             DataSet ds = new DataSet();
             ds = obj.RPGetPlanDetails(obj1.SubscriptionId);
@@ -2374,11 +2444,18 @@ namespace JobPortal.Controllers
         //    objuser.Users = users1;
             return  PartialView(obju);
         }
+            else
+            {
+                return await Task.Run(() => View("Login", "Account"));
+            }
+}
         [HttpGet]
-        public ActionResult AddPaymentDetails(int subscriptionid,Int64 PlanPricing,Int64 OfferedPrice)
+        public async Task<ActionResult> AddPaymentDetails(int subscriptionid,Int64 PlanPricing,Int64 OfferedPrice)
         {
+            if (Session["Employercode"] != null)
+            {
 
-            RPTranjectionIdIncriment();
+                RPTranjectionIdIncriment();
             
             EmployerUser obj = new EmployerUser();
             obj.SubscriptionId = subscriptionid;
@@ -2393,10 +2470,15 @@ namespace JobPortal.Controllers
             obj.EmployerName = ds.Tables[1].Rows[0]["EmployerName"].ToString();
             obj.EmailId = ds.Tables[1].Rows[0]["EmailId"].ToString();
             obj.ContactNo = Convert.ToInt64(ds.Tables[1].Rows[0]["ContactNo"].ToString());
-            obj.GSTNo = "";
+            obj.GSTNo = "Enter GstNo";
             return View(obj);
-
         }
+            else
+            {
+                return await Task.Run(() => View("Login", "Account"));
+            }
+
+}
         [HttpPost]
         public ActionResult AddPaymentDetails(EmployerUser obj1)
         {
@@ -2427,9 +2509,11 @@ namespace JobPortal.Controllers
             //-----------------------------------------Ashish End----------------------------------//
             //-----------------------------------------Muskan start----------------------------------//
             [HttpGet]
-        public ActionResult AccountEmployer()
+        public async Task<ActionResult> AccountEmployer()
         {
-            string Employercode = Session["EmployerCode"].ToString();
+            if (Session["Employercode"] != null)
+            {
+                string Employercode = Session["EmployerCode"].ToString();
             EmployerUser objE = new EmployerUser();
             objE.Employercode = Employercode;
             BALEmployer obj1 = new BALEmployer();
@@ -2443,6 +2527,11 @@ namespace JobPortal.Controllers
             obju.ContactNo = Convert.ToInt64(ds.Tables[1].Rows[0]["ContactNo"].ToString());
             obju.Password = ds.Tables[1].Rows[0]["Password"].ToString();
             return View(obju);
+        }
+            else
+            {
+                return await Task.Run(() => View("Login", "Account"));
+            }
 
         }
 

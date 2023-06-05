@@ -82,33 +82,34 @@
             </style>
             <div class="form-horizontal">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.JobCategory, "Category", htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-5">
-                        @Html.DropDownListFor(model => model.JobCategoryId, new SelectList(ViewBag.Category, "Value", "Text"), "Select", new { @class = "form-inline" })
+                    <b> @Html.LabelFor(model => model.JobCategory, "Category", htmlAttributes: new { @class = "control-label col-md-4" })</b>
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(model => model.JobCategoryId, new SelectList(ViewBag.Category, "Value", "Text"), "Select", new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.JobCategory, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.JobTitle, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-5">
-                        <select id="JobTitle" class="form-inline">---Select Title</select><br />
+                    <div class="col-md-7">
+                        <select id="JobTitle" class="form-control" style="width:170px;margin-right:100px;">---Select Title</select><br />
                         @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "text-danger" })
                         <input type="hidden" id="jobtitle" name="jobtitle" />
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-5">
-                        @Html.DropDownListFor(model => model.City, new SelectList(ViewBag.City, "Value", "Text"), "Select", new { @class = "form-inline" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.City, new SelectList(ViewBag.City, "Value", "Text"), "Select", new { @class = "form-control" })
                         <input type="hidden" id="cityid" name="cityid" />
                         @Html.ValidationMessageFor(model => model.JobLocation, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <div class="form-group" style="background-color: blueviolet">
+                <div class="form-group">
                     <div class="col-md-offset-1 col-md-1">
-                        <input style="color:white; text-align:center" type="submit" value="FindResume" class="btn btn-default" />
+                        <input style="color: white; width: 120px; height: 45px; border-radius: 12px; font-weight: 500; border-color: transparent; font-size: 15px; line-height: 10px; text-align: center; display: flex; align-items: center; justify-content: center; background-color: royalblue;margin-top:10px;" type="submit" value="FindResume" class="btn btn-default" />
                     </div>
+                 
                 </div>
             </div>
         }
@@ -149,13 +150,14 @@
                                 <td>
                                     @Html.HiddenFor(modelItem => item.ResumePDF)
                                 </td>
+                               
                                 <td style="font-size:25px; font-style:oblique">
-                                    <button type="button" style="background-color:royalblue;border-radius:2px;height:40px; ">
+                                    <button type="button" style="color: white; width: 80px; height: 40px; border-radius: 12px; font-weight: 500; border-color: transparent; font-size: 15px; line-height: 10px; text-align: center; display: flex; align-items: center; justify-content: center; background-color: royalblue">
                                         <a class="SeekerDetails" href="javascript:;" data-id="@item.Seekercode" style="color:white;">Details</a>
                                     </button>
                                 </td>
                                 <td style="font-size:25px; font-style:oblique">
-                                    <a style="border:3px solid black" href="~/Content/Resume Pdf/@item.ResumePDF" target="_blank">View</a>
+                                    <a style="color: white; width: 80px; height: 40px; border-radius: 12px; font-weight: 500; border-color: transparent; font-size: 15px; line-height: 10px; text-align: center; display: flex; align-items: center; justify-content: center; background-color: royalblue" href="~/Content/Resume Pdf/@item.ResumePDF" target="_blank">View</a>
                                 </td>
                             </tr>
 

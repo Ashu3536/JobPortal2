@@ -514,7 +514,7 @@ namespace JobPortal.Controllers
             subscription.OfferedPrice = subscription.PlanPricing - (subscription.PlanPricing * subscription.Offer / 100);
             subscription.Benefits = string.Join(",", subscription.BenifitList);
             objB.Subscription(subscription);
-            return RedirectToAction("Subscription");
+            return RedirectToAction("Plangrid");
 
 
         }
@@ -707,7 +707,7 @@ namespace JobPortal.Controllers
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 AdminUser obju = new AdminUser();
-                obju.SeekerCode = ds.Tables[0].Rows[i]["SeekerCode"].ToString();
+                obju.Seekercode = ds.Tables[0].Rows[i]["SeekerCode"].ToString();
                 obju.EmailId = ds.Tables[0].Rows[i]["EmailId"].ToString();
                 obju.SeekerName = ds.Tables[0].Rows[i]["SeekerName"].ToString();
                 obju.ContactNo = Convert.ToInt64(ds.Tables[0].Rows[i]["ContactNo"].ToString());
@@ -722,6 +722,11 @@ namespace JobPortal.Controllers
             }
             objuser.Users = users1;
             return await Task.Run(() => View(objuser));
+        }
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Login", "Account");
         }
     }
 }

@@ -778,7 +778,7 @@ namespace JobPortalLibrary.JobSeeker
         //----------------------------Sanket End--------------------------------//
         public void Updateseeker(string seekercode, string EmailId, Int64 ContactNo, string Password)
         {
-            con.Open();
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("SPSeeker", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "UpdateSeeker");
@@ -787,12 +787,12 @@ namespace JobPortalLibrary.JobSeeker
             cmd.Parameters.AddWithValue("@ContactNo", ContactNo);
             cmd.Parameters.AddWithValue("@Password", Password);
             cmd.ExecuteNonQuery();
-            con.Close();
+            
         }
         //--------------------FetchSeeker-------------------------------------------------
         public SqlDataReader Fetchseeker(string seekercode)
         {
-            con.Open();
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("SPSeeker", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "fetchseeker");
@@ -800,20 +800,20 @@ namespace JobPortalLibrary.JobSeeker
             SqlDataReader dr;
             dr = cmd.ExecuteReader();
             return dr;
-            con.Close();
+           
         }
         //--------------------deleteemployer-------------------------------------------------
 
         public void IsDeleteSeeker(int seekerid)
         {
             con.Close();
-            con.Open();
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("SPSeeker", con);
             cmd.Parameters.AddWithValue("@flag", "Deleteseeker");
           //  cmd.Parameters.AddWithValue("@isDelete", isDelete);
             cmd.Parameters.AddWithValue("@SeekerId", seekerid);
             cmd.ExecuteNonQuery();
-            con.Close();
+          
         }
         public DataSet fetchseekerId(SeekerUser objsekUser /*string jobtitle,string joblocation,string salary*/)
         {
@@ -832,7 +832,7 @@ namespace JobPortalLibrary.JobSeeker
         //--------------------------------------Muskan End-----------------------------------------------------------------------//
         public void ReviewCompanyFeedback(int CompanyId, string EmployerCode, string SeekerCode, int Rating, string Review, int Follow, int StatusId, int DoyouCurrentlyWorkhere, int isDelete)
         {
-            con.Open();
+            ManageConnection();
             SqlCommand cmd = new SqlCommand("SPSeeker", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Flag", "ReviewCompanyFeedback");
@@ -846,7 +846,7 @@ namespace JobPortalLibrary.JobSeeker
             cmd.Parameters.AddWithValue("@StatusID", StatusId);
             cmd.Parameters.AddWithValue("@isDelete", isDelete);
             cmd.ExecuteNonQuery();
-            con.Close();
+            
         }
 
         public SqlDataReader CheckAppliedSeeker(SeekerUser CAS)

@@ -1,0 +1,553 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    @Scripts.Render("~/bundles/jquery")
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.min.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/vendors/iconly/bold.css">
+
+    <link rel="stylesheet" href="~/Content/vendors/perfect-scrollbar/perfect-scrollbar.css">
+
+    <link href="~/Content/vendors/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/Content/css/app.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/Content/images/favicon.svg" type="image/x-icon">
+
+    <link href="~/Content/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery.dataTables.min.css" rel="stylesheet" />
+</head>
+<body>
+
+
+    <div id="app">
+        
+            <div id="sidebar" class="active">
+                <div class="sidebar-wrapper active">
+                    <div class="sidebar-header">
+                        <div class="d-flex justify-content-between">
+                            <div class="logo">
+                                @*<a href="index.html"><img src="~/Content/images/logo/logo.png" alt="Logo" srcset=""></a>*@
+                                <b>Job Portal</b>
+                            </div>
+                            <div class="toggler">
+                                <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @if (Session["Employercode"] != null)
+                    {
+                        <h5 class="m-b-20"><strong>&nbsp;&nbsp;&nbsp; @Session["EmployerName"].ToString()</strong></h5>
+                    }
+                    else
+                    {
+                        <h1 class="m-b-20"><strong>Welcome to<br> JobPortal</strong></h1>
+                    }
+                    <div class="sidebar-menu">
+                        <ul class="menu">
+                            <li class="sidebar-title">Menu</li>
+
+                            <li class="sidebar-item active ">
+                                <a href="@Url.Action("EmployeerIndex","Employer")" class='sidebar-link'>
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+
+                            <li class="sidebar-item  ">
+                                <a href="@Url.Action("KTCompanyDeatilsGV","Employer")" class='sidebar-link'>
+                                    <i class="bi bi-stack"></i>
+                                    <span>Company Registration</span>
+                                </a>
+
+                            </li>
+
+                            <li class="sidebar-item ">
+                                <a href="@Url.Action("jobgrid","Employer")" class='sidebar-link'>
+                                    <i class="bi bi-stack"></i>
+                                    <span>Manage Posted Job</span>
+                                </a>
+
+                            </li>
+
+
+                            <li class="sidebar-item  ">
+                                <a href="@Url.Action("FindResume","Employer")" class='sidebar-link'>
+                                    <i class="bi bi-grid-1x2-fill"></i>
+                                    <span>Find Candidates</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item  ">
+                                <a href="@Url.Action("ResumeAlert","Employer")" class='sidebar-link'>
+                                    <i class="bi bi-grid-1x2-fill"></i>
+                                    <span>Candidates Alert</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item  ">
+                                <a href="@Url.Action("AccountEmployer","Employer")" class='sidebar-link'>
+                                    <i class="fa fa-cog"></i>
+                                    <span>Account Setting</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item  ">
+                                <a href="@Url.Action("PlanDetails","Employer")" class='sidebar-link'>
+                                    <i class="fa fa-cog"></i>
+                                    <span>Subcriptions</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item  ">
+                                <a href="@Url.Action("RPBilling","Employer")" class='sidebar-link'>
+                                    <i class="fa fa-cog"></i>
+                                    <span>Payment History</span>
+                                </a>
+                            </li>
+
+                            <li class="sidebar-item  ">
+                                <a href="@Url.Action("Logout","Employer")" class='sidebar-link'>
+                                    <i class="fa fa-sign-out"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                            @*<li>
+            <div style="margin-left: 8px;background-color:royalblue"; class="fa fa-users">
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"></a>
+                <div class="dropdown-menu rounded-0 m-0" style="padding-right:100px;">
+
+                    <a href="category.html" class="dropdown-item">My Profile</a>
+                    <a href="testimonial.html" class="dropdown-item">Manage Application</a>
+                    <a href="404.html" class="dropdown-item">My Reviews</a>
+
+                    <a href="@Url.Action("AccountEmployer","Employer")" , class="dropdown-item">Account Setting</a>
+
+                    <a href="@Url.Action("Logout","Employer")" class="dropdown-item">Sign Out</a>
+                </div>
+            </div>
+        </li>*@
+
+                            @*<li class="sidebar-item  has-sub">
+            <a href="#" class='sidebar-link'>
+                <i class="bi bi-grid-1x2-fill"></i>
+                <span>Find Resume</span>
+            </a>
+            <ul class="submenu ">
+                <li class="submenu-item ">
+                    <a href="@Url.Action("FindResume","Employer")">Search Resume</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="@Url.Action("ResumeAlert","Employer")">Resume Alert</a>
+                </li>
+
+            </ul>
+        </li>*@
+
+
+
+
+
+                            @*<li class="sidebar-item  ">
+
+            <a href="@Url.Action("AllRoundsGrid","Employer")" class='sidebar-link'>
+                <i class="bi bi-file-earmark-medical-fill"></i>
+                <span>Manage Applications</span>
+            </a>
+        </li>*@
+
+
+
+                            <li class="sidebar-item  ">
+                                <a href="table.html" class='sidebar-link'>
+                                    <i class="bi bi-grid-1x2-fill"></i>
+                                    <span>Messages</span>
+                                </a>
+                            </li>
+
+
+                            @*<li class="sidebar-item  ">
+            <a href="table-datatable.html" class='sidebar-link'>
+                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                <span>Datatable</span>
+            </a>
+        </li>*@
+
+                            @*<li class="sidebar-title">Extra UI</li>
+
+        <li class="sidebar-item  has-sub">
+            <a href="#" class='sidebar-link'>
+                <i class="bi bi-pentagon-fill"></i>
+                <span>Widgets</span>
+            </a>
+            <ul class="submenu ">
+                <li class="submenu-item ">
+                    <a href="ui-widgets-chatbox.html">Chatbox</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="ui-widgets-pricing.html">Pricing</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="ui-widgets-todolist.html">To-do List</a>
+                </li>
+            </ul>
+        </li>*@
+
+                            @*<li class="sidebar-item  has-sub">
+            <a href="#" class='sidebar-link'>
+                <i class="bi bi-egg-fill"></i>
+                <span>Icons</span>
+            </a>
+            <ul class="submenu ">
+                <li class="submenu-item ">
+                    <a href="ui-icons-bootstrap-icons.html">Bootstrap Icons </a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="ui-icons-fontawesome.html">Fontawesome</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="ui-icons-dripicons.html">Dripicons</a>
+                </li>
+            </ul>
+        </li>*@
+
+                            @*<li class="sidebar-item  has-sub">
+            <a href="#" class='sidebar-link'>
+                <i class="bi bi-bar-chart-fill"></i>
+                <span>Charts</span>
+            </a>
+            <ul class="submenu ">
+                <li class="submenu-item ">
+                    <a href="ui-chart-chartjs.html">ChartJS</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="ui-chart-apexcharts.html">Apexcharts</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="sidebar-item  ">
+            <a href="ui-file-uploader.html" class='sidebar-link'>
+                <i class="bi bi-cloud-arrow-up-fill"></i>
+                <span>File Uploader</span>
+            </a>
+        </li>*@
+
+                            @*<li class="sidebar-item  has-sub">
+            <a href="#" class='sidebar-link'>
+                <i class="bi bi-map-fill"></i>
+                <span>Maps</span>
+            </a>
+            <ul class="submenu ">
+                <li class="submenu-item ">
+                    <a href="ui-map-google-map.html">Google Map</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="ui-map-jsvectormap.html">JS Vector Map</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="sidebar-title">Pages</li>
+
+        <li class="sidebar-item  ">
+            <a href="application-email.html" class='sidebar-link'>
+                <i class="bi bi-envelope-fill"></i>
+                <span>Email Application</span>
+            </a>
+        </li>*@
+
+                            <li class="sidebar-item  ">
+                                <a href="application-chat.html" class='sidebar-link'>
+                                    <i class="bi bi-chat-dots-fill"></i>
+                                    <span>Chat Application</span>
+                                </a>
+                            </li>
+
+                            @*<li class="sidebar-item  ">
+            <a href="application-gallery.html" class='sidebar-link'>
+                <i class="bi bi-image-fill"></i>
+                <span>Photo Gallery</span>
+            </a>
+        </li>
+
+        <li class="sidebar-item  ">
+            <a href="application-checkout.html" class='sidebar-link'>
+                <i class="bi bi-basket-fill"></i>
+                <span>Checkout Page</span>
+            </a>
+        </li>
+
+        <li class="sidebar-item  has-sub">
+            <a href="#" class='sidebar-link'>
+                <i class="bi bi-person-badge-fill"></i>
+                <span>Authentication</span>
+            </a>
+            <ul class="submenu ">
+                <li class="submenu-item ">
+                    <a href="auth-login.html">Login</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-register.html">Register</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="auth-forgot-password.html">Forgot Password</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="sidebar-item  has-sub">
+            <a href="#" class='sidebar-link'>
+                <i class="bi bi-x-octagon-fill"></i>
+                <span>Errors</span>
+            </a>
+            <ul class="submenu ">
+                <li class="submenu-item ">
+                    <a href="error-403.html">403</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="error-404.html">404</a>
+                </li>
+                <li class="submenu-item ">
+                    <a href="error-500.html">500</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="sidebar-title">Raise Support</li>*@
+
+                            <li class="sidebar-item  ">
+                                <a href="https://github.com/zuramai/mazer#donate" class='sidebar-link'>
+                                    <i class="bi bi-cash"></i>
+                                    <span>Donate</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+                </div>
+            </div>
+            <div id="main">
+                @*<header class="mb-3">
+                    <a href="#" class="burger-btn d-block d-xl-none">
+                        <i class="bi bi-justify fs-3"></i>
+                    </a>
+                </header>*@
+
+                <!--<div class="page-heading">
+                <h3>Profile Statistics</h3>
+            </div>
+            <div class="page-content">
+                <section class="row">
+                    <div class="col-12 col-lg-9">
+                        <div class="row">
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon purple">
+                                                    <i class="iconly-boldShow"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Profile Views</h6>
+                                                <h6 class="font-extrabold mb-0">112.000</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon blue">
+                                                    <i class="iconly-boldProfile"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Followers</h6>
+                                                <h6 class="font-extrabold mb-0">183.000</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon green">
+                                                    <i class="iconly-boldAdd-User"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Following</h6>
+                                                <h6 class="font-extrabold mb-0">80.000</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon red">
+                                                    <i class="iconly-boldBookmark"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Saved Post</h6>
+                                                <h6 class="font-extrabold mb-0">112</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                @*<div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Profile Visit</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="chart-profile-visit"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+                <!--<div class="row">
+            <div class="col-12 col-xl-4">
+                <div class="card">-->
+                @*<div class="card-header">
+                    <h4>Profile Visit</h4>
+                </div>*@
+                <!--<div class="card-body">
+            <div class="row">-->
+                @*<div class="col-6">
+                    <div class="d-flex align-items-center">
+                        <svg class="bi text-primary" width="32" height="32" fill="blue"
+                             style="width:10px">
+                            <use xlink:href="~/Content/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
+                        </svg>
+                        <h5 class="mb-0 ms-3">Europe</h5>
+                    </div>
+                </div>*@
+                <!--<div class="col-6">
+                                                <h5 class="mb-0">862</h5>
+                                            </div>
+                                            <div class="col-12">
+                                                <div id="chart-europe"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="d-flex align-items-center">
+                                                    <svg class="bi text-success" width="32" height="32" fill="blue"
+                                                         style="width:10px">
+                                                        <use xlink:href="~/Content/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
+                                                    </svg>
+                                                    <h5 class="mb-0 ms-3">America</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <h5 class="mb-0">375</h5>
+                                            </div>
+                                            <div class="col-12">
+                                                <div id="chart-america"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="d-flex align-items-center">
+                                                    <svg class="bi text-danger" width="32" height="32" fill="blue"
+                                                         style="width:10px">
+                                                        <use xlink:href="~/Content/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
+                                                    </svg>
+                                                    <h5 class="mb-0 ms-3">Indonesia</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <h5 class="mb-0">1025</h5>
+                                            </div>
+                                            <div class="col-12">
+                                                <div id="chart-indonesia"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>-->
+            
+
+            @RenderBody()
+
+            @*<footer>
+                <div class="footer clearfix mb-0 text-muted">
+
+                    <div class="float-end">
+                        <p>
+                            All Rights Reserved.&copy;2023 Gaya Software & Technology.
+                        </p>
+                    </div>
+                </div>
+            </footer>*@
+        </div>
+    </div>
+    <script src="~/Content/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+
+    <script src="~/Content/vendors/apexcharts/apexcharts.js"></script>
+    <script src="~/Content/js/pages/dashboard.js"></script>
+
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+
+    <script src="~/Content/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/js/main.js"></script>
+    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#ashish,#example").dataTable(
+                {
+                    "lengthMenu": [10, 20, 40, 60, 80],
+                    "dom": '<"dt-buttons"Bfli>rtp',
+                    "paging": true, 
+                    "autoWidth": false,
+                    "fixedHeader": true,
+
+                });
+
+
+        });
+    </script>
+   
+
+
+
+
+
+</body>
+</html>
