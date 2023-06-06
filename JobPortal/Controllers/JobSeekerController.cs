@@ -549,7 +549,7 @@ namespace JobPortal.Controllers
             }
         }
         [HttpGet]
-        public async Task<ActionResult> SeekerDetailsPopup()
+        public async Task<ActionResult> SeekerDetailsPopup(string Seekeerid)
         {
             if (Session["SeekerCode"] != null)
             {
@@ -1502,106 +1502,6 @@ namespace JobPortal.Controllers
             }
 
         }
-        [HttpGet]
-        public async Task<ActionResult> jobdetails(string id)
-        {
-            if (Session["SeekerCode"] != null)
-            {
-                SeekerUser obj = new SeekerUser();
-                obj.PostJobCode = id;
-                BALSeeker obj1 = new BALSeeker();
-                SqlDataReader dr;
-                dr = obj1.jobdetails(obj);
-            while (dr.Read())
-            {
-                obj.JobTitle = dr["JobTitle"].ToString();
-                obj.Location = dr["JobLocation"].ToString();
-                obj.PostJobCode = dr["PostJobCode"].ToString();
-                obj.CompanyName = dr["CompanyName"].ToString();
-                obj.CompanyLogo = dr["CompanyLogo"].ToString();
-                obj.TotalExperience = dr["TotalExperience"].ToString();
-                obj.CurrentSalary = dr["Salary"].ToString();
-                obj.JobType = dr["JobType"].ToString();
-                obj.NoOfEmployees = dr["NoofOpenings"].ToString();
-                obj.StartDate = Convert.ToDateTime(dr["ApplicationStartDate"].ToString());
-
-                obj.JobDescription = dr["JobDescription"].ToString();
-                obj.Industry = dr["IndustryName"].ToString();
-                obj.JobCategory = dr["JobCategory"].ToString();
-                obj.CompanyWebsite = dr["OpportunityType"].ToString();
-                obj.AboutCompany = dr["AboutCompany"].ToString();
-                obj.CorrespondenceAddress = dr["Address"].ToString();
-                obj.RequiredQualificationId = dr["RequiredQualificationId"].ToString();
-
-                if (obj.RequiredQualificationId != null && obj.RequiredQualificationId != "")
-                {
-                    var languageid = obj.RequiredQualificationId;
-                    char[] seperator = { ',' };
-                    string[] language = null;
-                    language = languageid.Split(seperator);
-                    string languages1 = null;
-                    string languages2 = null;
-
-                    for (int k = 0; k < language.Length; k++)
-                    {
-                        BALSeeker objbal = new BALSeeker();
-                        DataTable dt = new DataTable();
-                        dt = objbal.requiredQualification(Convert.ToInt32(language[k]));
-                        languages1 = dt.Rows[0][1].ToString();
-
-
-                        if (k == language.Length - 1)
-                        {
-                            languages2 = string.Concat(languages2, languages1);
-                        }
-                        else
-                        {
-                            languages2 = string.Concat(languages2, languages1, ",");
-                        }
-                        obj.RequiredQualificationId = languages2;
-                    }
-                }
-                else { obj.RequiredQualificationId = null; }
-
-                if (obj.Location != null && obj.Location != "")
-                {
-                    var languageid = obj.Location;
-                    char[] seperator = { ',' };
-                    string[] language = null;
-                    language = languageid.Split(seperator);
-                    string languages1 = null;
-                    string languages2 = null;
-
-                    for (int k = 0; k < language.Length; k++)
-                    {
-                        BALSeeker objbal = new BALSeeker();
-                        DataTable dt = new DataTable();
-                        dt = objbal.PreferredLocation(Convert.ToInt32(language[k]));
-                        languages1 = dt.Rows[0][2].ToString();
-
-
-                        if (k == language.Length - 1)
-                        {
-                            languages2 = string.Concat(languages2, languages1);
-                        }
-                        else
-                        {
-                            languages2 = string.Concat(languages2, languages1, ",");
-                        }
-                        obj.Location = languages2;
-                    }
-                }
-                else { obj.Location = null; }
-
-            }
-                dr.Close();
-                return await Task.Run(() => View(obj));
-            }
-            else
-            {
-                return await Task.Run(() => View("Login", "Account"));
-            }
-        }
         public async Task<ActionResult> AllCompany()
         {
             BALSeeker ObjBal = new BALSeeker();
@@ -2054,6 +1954,106 @@ namespace JobPortal.Controllers
             }
 
         }
+        [HttpGet]
+        public async Task<ActionResult> jobdetails(string id)
+        {
+            if (Session["SeekerCode"] != null)
+            {
+                SeekerUser obj = new SeekerUser();
+                obj.PostJobCode = id;
+                BALSeeker obj1 = new BALSeeker();
+                SqlDataReader dr;
+                dr = obj1.jobdetails(obj);
+                while (dr.Read())
+                {
+                    obj.JobTitle = dr["JobTitle"].ToString();
+                    obj.Location = dr["JobLocation"].ToString();
+                    obj.PostJobCode = dr["PostJobCode"].ToString();
+                    obj.CompanyName = dr["CompanyName"].ToString();
+                    obj.CompanyLogo = dr["CompanyLogo"].ToString();
+                    obj.TotalExperience = dr["TotalExperience"].ToString();
+                    obj.CurrentSalary = dr["Salary"].ToString();
+                    obj.JobType = dr["JobType"].ToString();
+                    obj.NoOfEmployees = dr["NoofOpenings"].ToString();
+                    obj.StartDate = Convert.ToDateTime(dr["ApplicationStartDate"].ToString());
+
+                    obj.JobDescription = dr["JobDescription"].ToString();
+                    obj.Industry = dr["IndustryName"].ToString();
+                    obj.JobCategory = dr["JobCategory"].ToString();
+                    obj.CompanyWebsite = dr["OpportunityType"].ToString();
+                    obj.AboutCompany = dr["AboutCompany"].ToString();
+                    obj.CorrespondenceAddress = dr["Address"].ToString();
+                    obj.RequiredQualificationId = dr["RequiredQualificationId"].ToString();
+
+                    if (obj.RequiredQualificationId != null && obj.RequiredQualificationId != "")
+                    {
+                        var languageid = obj.RequiredQualificationId;
+                        char[] seperator = { ',' };
+                        string[] language = null;
+                        language = languageid.Split(seperator);
+                        string languages1 = null;
+                        string languages2 = null;
+
+                        for (int k = 0; k < language.Length; k++)
+                        {
+                            BALSeeker objbal = new BALSeeker();
+                            DataTable dt = new DataTable();
+                            dt = objbal.requiredQualification(Convert.ToInt32(language[k]));
+                            languages1 = dt.Rows[0][1].ToString();
+
+
+                            if (k == language.Length - 1)
+                            {
+                                languages2 = string.Concat(languages2, languages1);
+                            }
+                            else
+                            {
+                                languages2 = string.Concat(languages2, languages1, ",");
+                            }
+                            obj.RequiredQualificationId = languages2;
+                        }
+                    }
+                    else { obj.RequiredQualificationId = null; }
+
+                    if (obj.Location != null && obj.Location != "")
+                    {
+                        var languageid = obj.Location;
+                        char[] seperator = { ',' };
+                        string[] language = null;
+                        language = languageid.Split(seperator);
+                        string languages1 = null;
+                        string languages2 = null;
+
+                        for (int k = 0; k < language.Length; k++)
+                        {
+                            BALSeeker objbal = new BALSeeker();
+                            DataTable dt = new DataTable();
+                            dt = objbal.PreferredLocation(Convert.ToInt32(language[k]));
+                            languages1 = dt.Rows[0][2].ToString();
+
+
+                            if (k == language.Length - 1)
+                            {
+                                languages2 = string.Concat(languages2, languages1);
+                            }
+                            else
+                            {
+                                languages2 = string.Concat(languages2, languages1, ",");
+                            }
+                            obj.Location = languages2;
+                        }
+                    }
+                    else { obj.Location = null; }
+
+                }
+                dr.Close();
+                return await Task.Run(() => View(obj));
+            }
+            else
+            {
+                return await Task.Run(() => View("Login", "Account"));
+            }
+        }
         //------------------------------------Saurabh End---------------------------------//
         //------------------------------------Sanket Start-------------------------------//
 
@@ -2139,43 +2139,6 @@ namespace JobPortal.Controllers
 
             return View();
         }
-
-
-        //-------------ApplyJobsDr--------------------------//
-
-        //[HttpGet]
-        //public async Task<ActionResult> ApplyJobs(string postjobcode)
-        //{
-        //    if (Session["SeekerCode"] != null)
-        //    {
-        //        seekercode = Session["SeekerCode"].ToString();
-
-        //        SeekerUser obj = new SeekerUser();
-        //        obj.PostJobCode = postjobcode;
-        //        //BALSeeker obj1 = new BALSeeker();
-        //        //SqlDataReader dr;
-        //        //dr = obj1.ApplyJobView(obj);
-        //        //while (dr.Read())
-        //        //{
-        //        //    obj.PostJobCode = dr["PostJobCode"].ToString();
-        //        //    //obj.JobTitle = dr["JobTitle"].ToString();
-        //        //    //obj.CompanyName = dr["CompanyName"].ToString();
-        //        //    //obj.JobLocation = dr["Location1"].ToString();
-        //        //    //obj.JobType = dr["JobType"].ToString();
-        //        //    //obj.Salary = dr["Salary"].ToString();
-        //        //    //obj.JobDescription = dr["JobDescription"].ToString();
-        //        //}
-        //        //dr.Close();
-        //        //  obj.PostJobCode = postJobCode;
-        //        //   Session["url"] = HttpContext.Request.Url.AbsoluteUri;
-        //        return await Task.Run(() => PartialView(obj));
-        //    }
-        //    else
-        //    {
-        //        return await Task.Run(() => View("Login", "Account"));
-        //    }
-
-        //}
 
         //---------------SubmitPDF---------------------------------------//
         [HttpGet]
@@ -2266,8 +2229,8 @@ namespace JobPortal.Controllers
                     obj1.SubmitPDF(obj);
 
                     TempData["notice"] = "OK! The file is uploaded";
-
                 }
+                return await Task.Run(() => RedirectToAction("AllJobs", "JobSeeker"));
             }
             else
             {
@@ -2275,7 +2238,7 @@ namespace JobPortal.Controllers
             }
 
 
-            return await Task.Run(() => RedirectToAction("Search"));
+            return await Task.Run(() => RedirectToAction("AllJobs", "JobSeeker"));
 
         }
 
@@ -2331,32 +2294,32 @@ namespace JobPortal.Controllers
 
         //--------------------------SubmitApplication------------------------------//
 
-        [HttpPost]
-        public async Task<ActionResult> SubmitApplication(SeekerUser obj, int jobappliedid, int statusid)
-        {
-            if (Session["SeekerCode"] != null)
-            {
-                seekercode = Session["SeekerCode"].ToString();
-                SeekerUser objs = new SeekerUser();
-            obj.AppliedJobID = jobappliedid;
-            BALSeeker obj1 = new BALSeeker();
-            SqlDataReader dr;
-            dr = obj1.SubmitApplication(obj);
-                while (dr.Read())
-                {
-                    obj.StatusId = Convert.ToInt32(dr["StatusID"].ToString());
-                    obj.AppliedJobID = Convert.ToInt32(dr["AppliedJobID"].ToString());
+        //[HttpPost]
+        //public async Task<ActionResult> SubmitApplication(SeekerUser obj, int jobappliedid, int statusid)
+        //{
+        //    if (Session["SeekerCode"] != null)
+        //    {
+        //        seekercode = Session["SeekerCode"].ToString();
+        //        SeekerUser objs = new SeekerUser();
+        //    obj.AppliedJobID = jobappliedid;
+        //    BALSeeker obj1 = new BALSeeker();
+        //    SqlDataReader dr;
+        //    dr = obj1.SubmitApplication(obj);
+        //        while (dr.Read())
+        //        {
+        //            obj.StatusId = Convert.ToInt32(dr["StatusID"].ToString());
+        //            obj.AppliedJobID = Convert.ToInt32(dr["AppliedJobID"].ToString());
 
-                }
-                dr.Close();
-                return await Task.Run(() => PartialView("AllJobs"));
-             }
-            else
-            {
-                return await Task.Run(() => View("Login", "Account"));
-            }
+        //        }
+        //        dr.Close();
+        //        return await Task.Run(() => PartialView("AllJobs"));
+        //     }
+        //    else
+        //    {
+        //        return await Task.Run(() => View("Login", "Account"));
+        //    }
 
-        }
+        //}
 
 //--------------------DownloadPDF--------------------------//
 

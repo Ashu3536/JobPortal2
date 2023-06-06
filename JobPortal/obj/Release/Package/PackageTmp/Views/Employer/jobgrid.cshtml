@@ -12,10 +12,13 @@
     <link rel="stylesheet" src="https://cdn.datatables.net/buttons/2.3.2/css/buttons.bootstrap5.min.css" />*@
 <!--<link href="~/Content/datatable/buttons.dataTables.min.css" rel="stylesheet" />
 <link href="~/Content/datatable/jquery.dataTables.min.css" rel="stylesheet" />-->
-<button class="btn-bg-cl-digg-tw">
+
     @*<a href="@Url.Action("JobRegistration","Employer")" PostJobCode="@Model.PostJobCode">Post a Job</a>*@
-    @Html.ActionLink("Post a Job", "JobRegister")
-</button>
+
+    <button style="color: white; width:120px;height: 45px; border-radius: 12px; font-weight: 500;border-color:transparent; font-size: 15px; line-height: 10px; text-align: center; display: flex; align-items: center; justify-content: center;background-color:royalblue">
+        <a style="color: white;" href="@Url.Action("JobRegister","Employer")"> Post a Job</a>
+    </button>
+   <br />
 <style>
     #tooltip {
         position: absolute;

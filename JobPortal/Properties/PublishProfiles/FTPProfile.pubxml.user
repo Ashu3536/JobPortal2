@@ -7,7 +7,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbBLAmXvnX0iBwmjwt4O/dwAAAAACAAAAAAAQZgAAAAEAACAAAADp6bG7nh/dtjEeZgyAFSc7Nr92bOiJH8TNOqOoKJEsOgAAAAAOgAAAAAIAACAAAACWWPlXgqXie2DsquL4CO1MpJVPa0TaRWkgah7848EVzjAAAABLPFcA6RA3vViloijg6kJc4bG6+DvUAXyhVgdNFFfeQAeKGSeaHj/WRPK1Ain9DepAAAAApksk7T3K8en8R0W3M2CbtGfoJhka4xXiBFtLeOrGYaSwPpmtomGb32Pr2LwUAaORcSaOUrNVEfDeb1y4Z0GZ0w==</EncryptedPassword>
     <_PublishTargetUrl>ftp://getyourjob.gayasofttech.com/</_PublishTargetUrl>
-    <History>True|2023-05-30T22:37:36.0317982Z;</History>
+    <History>True|2023-06-06T05:45:36.6626079Z;True|2023-05-31T04:07:36.0317982+05:30;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -18,28 +18,28 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/10/2013 21:59:20</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>05/31/2023 01:03:43</publishTime>
+      <publishTime>06/06/2023 08:25:01</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>05/31/2023 01:03:43</publishTime>
+      <publishTime>06/06/2023 08:25:01</publishTime>
     </File>
     <File Include="bin/GoogleAuthentication.dll">
       <publishTime>01/30/2022 20:50:18</publishTime>
     </File>
     <File Include="bin/JobPortal.dll">
-      <publishTime>05/31/2023 01:03:04</publishTime>
+      <publishTime>06/06/2023 08:24:24</publishTime>
     </File>
     <File Include="bin/JobPortal.pdb">
-      <publishTime>05/31/2023 01:03:04</publishTime>
+      <publishTime>06/06/2023 08:24:24</publishTime>
     </File>
     <File Include="bin/JobPortalLibrary.dll">
-      <publishTime>05/31/2023 01:03:02</publishTime>
+      <publishTime>06/06/2023 08:24:19</publishTime>
     </File>
     <File Include="bin/JobPortalLibrary.dll.config">
       <publishTime>05/30/2023 20:13:35</publishTime>
     </File>
     <File Include="bin/JobPortalLibrary.pdb">
-      <publishTime>05/31/2023 01:03:02</publishTime>
+      <publishTime>06/06/2023 08:24:19</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNetCore.Authentication.Abstractions.dll">
       <publishTime>11/12/2018 22:59:06</publishTime>
@@ -5900,6 +5900,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/font-awesome.min.css">
       <publishTime>05/30/2023 20:13:26</publishTime>
     </File>
+    <File Include="Content/images/Add icon.png">
+      <publishTime>06/01/2023 17:50:57</publishTime>
+    </File>
     <File Include="Content/images/avatar7.png">
       <publishTime>05/30/2023 20:13:26</publishTime>
     </File>
@@ -10422,7 +10425,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/30/2023 20:13:32</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>05/31/2023 01:03:24</publishTime>
+      <publishTime>06/06/2023 08:24:43</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>05/30/2023 20:13:31</publishTime>
@@ -10514,11 +10517,20 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Scripts/Sweet.js">
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
+    <File Include="Views/Account/AllCompany.cshtml">
+      <publishTime>06/05/2023 11:16:43</publishTime>
+    </File>
+    <File Include="Views/Account/AllJobs.cshtml">
+      <publishTime>06/05/2023 11:15:44</publishTime>
+    </File>
     <File Include="Views/Account/ForgotPassword.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
+    <File Include="Views/Account/Index.cshtml">
+      <publishTime>06/03/2023 10:33:07</publishTime>
+    </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/05/2023 19:14:20</publishTime>
     </File>
     <File Include="Views/Account/Register.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
@@ -10530,7 +10542,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/Admin/ApplicationApprovel.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/05/2023 18:02:05</publishTime>
     </File>
     <File Include="Views/Admin/Details.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
@@ -10539,7 +10551,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/Admin/Jobseekargrid.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/01/2023 18:29:24</publishTime>
     </File>
     <File Include="Views/Admin/PlanDetails.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
@@ -10551,7 +10563,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/Admin/RPAdminEmployeGrid.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/05/2023 18:16:59</publishTime>
     </File>
     <File Include="Views/Admin/RPAdminJobsGrid.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
@@ -10569,19 +10581,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/Admin/Subscription.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/01/2023 18:19:15</publishTime>
     </File>
     <File Include="Views/Admin/view.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/Employer/AccountEmployer.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/05/2023 13:16:48</publishTime>
     </File>
     <File Include="Views/Employer/Addcandidate.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/Employer/AddPaymentDetails.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/05/2023 17:36:52</publishTime>
     </File>
     <File Include="Views/Employer/AllRoundsGrid.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
@@ -10593,7 +10605,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/Employer/CompanyRegistration.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/05/2023 12:24:57</publishTime>
     </File>
     <File Include="Views/Employer/CreateRoundwithDetails.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
@@ -10605,10 +10617,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/Employer/EmployeerIndex.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/05/2023 12:08:24</publishTime>
     </File>
     <File Include="Views/Employer/FindResume.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/05/2023 13:05:14</publishTime>
     </File>
     <File Include="Views/Employer/GetCompanyDetails.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
@@ -10617,13 +10629,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/Employer/Jobapplystud.cshtml">
-      <publishTime>05/30/2023 21:15:59</publishTime>
+      <publishTime>06/05/2023 19:31:02</publishTime>
     </File>
     <File Include="Views/Employer/JobDetails.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/Employer/jobgrid.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/05/2023 12:28:35</publishTime>
     </File>
     <File Include="Views/Employer/JobRegister.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
@@ -10632,16 +10644,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/Employer/KTCompanyDeatilsGV.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/05/2023 12:18:31</publishTime>
     </File>
     <File Include="Views/Employer/PlanDetails.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/05/2023 13:18:04</publishTime>
     </File>
     <File Include="Views/Employer/RepostJob.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/05/2023 19:27:37</publishTime>
     </File>
     <File Include="Views/Employer/ResumeAlert.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/05/2023 13:06:31</publishTime>
     </File>
     <File Include="Views/Employer/RoundsGrid.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
@@ -10692,7 +10704,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/JobSeeker/ApplicationGrid.cshtml">
-      <publishTime>05/30/2023 20:35:32</publishTime>
+      <publishTime>06/05/2023 11:41:45</publishTime>
     </File>
     <File Include="Views/JobSeeker/ApplyJobs.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
@@ -10716,7 +10728,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/JobSeeker/EducationDetails.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/06/2023 08:23:02</publishTime>
     </File>
     <File Include="Views/JobSeeker/EmploymentDetails.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
@@ -10752,7 +10764,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/JobSeeker/SeekerDetailsPopup.cshtml">
-      <publishTime>05/30/2023 20:13:31</publishTime>
+      <publishTime>06/05/2023 17:16:48</publishTime>
     </File>
     <File Include="Views/JobSeeker/SeekerIndex.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
@@ -10770,19 +10782,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/Shared/Account_Layout.cshtml">
-      <publishTime>05/30/2023 21:11:03</publishTime>
+      <publishTime>06/05/2023 11:08:42</publishTime>
     </File>
     <File Include="Views/Shared/Admin_Layout.cshtml">
-      <publishTime>05/31/2023 01:00:45</publishTime>
+      <publishTime>06/05/2023 17:54:53</publishTime>
     </File>
     <File Include="Views/Shared/Employer_Layout.cshtml">
-      <publishTime>05/30/2023 21:08:48</publishTime>
+      <publishTime>06/01/2023 20:20:04</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Views/Shared/JobSeeker_Layout.cshtml">
-      <publishTime>05/30/2023 21:38:53</publishTime>
+      <publishTime>06/01/2023 12:50:58</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>05/30/2023 20:13:31</publishTime>
@@ -10794,7 +10806,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/30/2023 20:13:31</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/31/2023 01:03:16</publishTime>
+      <publishTime>06/06/2023 08:24:36</publishTime>
     </File>
   </ItemGroup>
 </Project>

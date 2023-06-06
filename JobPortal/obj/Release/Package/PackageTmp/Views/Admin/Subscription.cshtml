@@ -34,6 +34,11 @@
             });
         });</script>
 }
+<style>
+    .AddBenefits {
+        height: 10px;
+    }
+</style>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
@@ -89,11 +94,12 @@
     <div style="margin-left:400px">
         <div class="form-horizontal">
             <div style="margin-left:-80px">
-                <div style="margin-left:400px">
-                    <span class="fa fa-plus-circle AddBenefits" style="font-size:50px; ">
-                    </span>
-                </div>
-
+                @*<div style="margin-left:400px">
+            <span class="fa fa-plus-circle AddBenefits" style="font-size:50px; ">
+            </span>
+        </div>*@
+               
+               
                 <div class="form-group">
                     @Html.LabelFor(model => model.SubscriptionName, "Plan Name", htmlAttributes: new { @class = "control-label col-md-6" })
                     <div class="col-md-4">
@@ -102,21 +108,22 @@
                     </div>
                 </div>
                 @*<div class="form-group">
-                        @Html.LabelFor(model => model.UserCategory, "User Category", htmlAttributes: new { @class = "control-label col-md-5" })
-                        <div class="col-md-4">
-                            @Html.DropDownListFor(model => model.UserCategory, new SelectList(ViewBag.Category), "--Select--", htmlAttributes: new { @class = "form-control category" })
-                            @Html.ValidationMessageFor(model => model.UserCategory, "", new { @class = "text-danger" })
-                            <br />
-                        </div>
-                    </div>*@
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Benefit, "Benefits", htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-10">
-                        @Html.ListBoxFor(m => m.BenifitList, new MultiSelectList(ViewBag.BenifitList, "Value", "Text"), new { id = "BenifitList", Multiple = "multiple" })
-                        @Html.ValidationMessageFor(model => model.Benefit, "", new { @class = "text-danger" })
-                        <br /><br />
-                    </div>
+            @Html.LabelFor(model => model.UserCategory, "User Category", htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-4">
+                @Html.DropDownListFor(model => model.UserCategory, new SelectList(ViewBag.Category), "--Select--", htmlAttributes: new { @class = "form-control category" })
+                @Html.ValidationMessageFor(model => model.UserCategory, "", new { @class = "text-danger" })
+                <br />
+            </div>
+        </div>*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.Benefit, "Benefits", htmlAttributes: new { @class = "control-label col-md-4" })
+                 <a style="display:flex;align-items: center; justify-content: center;" href="javascript:void(0);" class="AddBenefits" data-id=""> <img src="~/Content/images/Add icon.png" style="height:20px; margin-left:-80%;margin-top:-39px;" /></a>
+                <div class="col-md-10">
+                    @Html.ListBoxFor(m => m.BenifitList, new MultiSelectList(ViewBag.BenifitList, "Value", "Text"), new { id = "BenifitList", Multiple = "multiple" })
+                    @Html.ValidationMessageFor(model => model.Benefit, "", new { @class = "text-danger" })
+                    <br /><br />
                 </div>
+            </div>
             </div>
             <div class="form-group" style="margin-left:-80px">
                 @Html.LabelFor(model => model.SubscriptionDetails, "Subscription Details", htmlAttributes: new { @class = "control-label col-md-6" })

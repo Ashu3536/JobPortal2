@@ -127,29 +127,29 @@
 </script>
 
 
-<table class="table table-bordered table-striped mt-4 dt-responsive nowrap table-responsive" id="example" style="margin-left:300px;width:1000px; border:solid ">
+<table class="table table-bordered table-striped mt-4 dt-responsive nowrap table-responsive" id="example" style="margin-left:300px;">
     <thead>
         <tr style="background-color:royalblue">
             <b>
-            <th style="width: 100px; text-align: center; font-size: 15px; color: white;">
+            <th style=" text-align: center; font-size: 15px; color: white;">
                 @Html.DisplayNameFor(model => model.PostJobCode)
             </th>
-            <th style="width: 200px; text-align: center; font-size: 15px;color:white;">
+            <th style="text-align: center; font-size: 15px;color:white;">
                 @Html.DisplayNameFor(model => model.JobTitle)
             </th>
-            <th style="width: 260px; text-align: center; font-size: 15px; color:white;">
+            <th style="width:300px; text-align: center; font-size: 15px; color:white;">
                 @Html.DisplayNameFor(model => model.JobDescription)
             </th>
-            <th style="width: 150px; text-align: center; font-size: 15px; color: white;">
+            <th style=" text-align: center; font-size: 15px; color: white;">
                 @Html.DisplayNameFor(model => model.ApplicationStartDate)
             </th>
-            <th style="width: 80px; text-align: center; font-size:15px; color: white;">
+            <th style=" text-align: center; font-size:15px; color: white;">
                 @Html.DisplayNameFor(model => model.Status)
             </th>
-            <th style="width: 200px; text-align: center; font-size: 15px; color: white;">
+            <th style=" text-align: center; font-size: 15px; color: white;">
                 Approve/Reject
             </th>
-            <th style="width: 100px; text-align: center; font-size: 15px; color: white;"> View</th>
+            <th style="text-align: center; font-size: 15px; color: white;"> View</th>
             </b>
         </tr>
     </thead>
@@ -203,7 +203,7 @@
                     @*<button type="button" id="Details">
                             @Html.ActionLink("Details", "Details", new { PostJobCode = item.PostJobCode })
                         </button>*@
-                    <a class="fa fa-eye" title="View" style="font-size:25px;color:blue;padding:10px 10px 10px 10px" href="@Url.Action("Details","Admin",new { PostJobCode = item.PostJobCode })" style="font-size:20px"></a>
+                    <a title="View" style="font-size:25px;color:blue;padding:10px 10px 10px 10px" href="@Url.Action("Details","Admin",new { PostJobCode = item.PostJobCode })">👁</a>
 
                     @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
                 </td>
