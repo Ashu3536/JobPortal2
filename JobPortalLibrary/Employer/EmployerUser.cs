@@ -89,6 +89,15 @@ namespace JobPortalLibrary.Employer
 
         public string IndustryName { get; set; }
         public List<EmployerUser> LTUser { get; set; }
+        public string ComName{ get; set; }
+        public string AboutCom { get; set; }
+        public int pincodes { get; set; }
+        public string OwName { get; set; }
+        public string HrNam { get; set; }
+        public string Hrmail { get; set; }
+        public string ComMAIL { get; set; }
+        public string HrNum { get; set; }
+        public string NumberEmps { get; set; }
 
         //-------------------------------------------Mitali Start-----------------------------------------------------------//
         public string PostJobCode { get; set; }

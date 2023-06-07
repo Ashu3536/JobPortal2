@@ -992,12 +992,12 @@ namespace JobPortal.Controllers
             dr = obj2.GetCompanyDetail(obj);
             while (dr.Read())
             {
-                obj.CompanyName = dr["CompanyName"].ToString();
-                obj.NoOfEmployees = dr["NoOfEmployees"].ToString();
+                obj.ComName = dr["CompanyName"].ToString();
+                obj.NumberEmps = dr["NoOfEmployees"].ToString();
                 obj.ContactNo = Convert.ToInt64(dr["ContactNo"].ToString());
                 obj.CompanyWebsite = dr["CompanyWebsite"].ToString();
-                obj.CompanyEmail = dr["CompanyEmail"].ToString();
-                obj.AboutCompany = dr["AboutCompany"].ToString();
+                obj.ComMAIL = dr["CompanyEmail"].ToString();
+                obj.AboutCom = dr["AboutCompany"].ToString();
                 obj.IndustryId = Convert.ToInt32(dr["IndustryId"].ToString());
                 obj.CityId = dr["CityId"].ToString();
                 obj.Pincode = Convert.ToInt32(dr["Pincode"].ToString());
@@ -1009,10 +1009,10 @@ namespace JobPortal.Controllers
                 obj.LinkedIn = dr["LinkedIn"].ToString();
                 obj.Instagram = dr["Instagram"].ToString();
                 obj.Google = dr["Google+"].ToString();
-                obj.OwnerName = dr["OwnerName"].ToString();
-                obj.HRName = dr["HRName"].ToString();
-                obj.HRNumber = dr["HRNumber"].ToString();
-                obj.HREmail = dr["HREmail"].ToString();
+                obj.OwName = dr["OwnerName"].ToString();
+                obj.HrNam = dr["HRName"].ToString();
+                obj.HrNum = dr["HRNumber"].ToString();
+                obj.Hrmail = dr["HREmail"].ToString();
                 obj.Source = dr["Source"].ToString();
                 obj.RegistrationDate = Convert.ToDateTime(dr["RegistrationDate"].ToString());
 

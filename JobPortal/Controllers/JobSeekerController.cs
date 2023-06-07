@@ -549,7 +549,7 @@ namespace JobPortal.Controllers
             }
         }
         [HttpGet]
-        public async Task<ActionResult> SeekerDetailsPopup(string Seekeerid)
+        public async Task<ActionResult> SeekerDetailsPopup()
         {
             if (Session["SeekerCode"] != null)
             {

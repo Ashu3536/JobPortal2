@@ -447,6 +447,7 @@ namespace JobPortal.Controllers
         public async Task<ActionResult> Login()
         {
             Category();
+
             var clientId = "501741889827-ii7134kvr58e69q69cc2g6uqf867ttqc.apps.googleusercontent.com";
             var url = "http://localhost:56291/Account/Googlelogin";
             var clientsecret = "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";

@@ -59,8 +59,10 @@
                     <a href="about.html" class="nav-item nav-link">About</a>
                     <a href="@Url.Action("AllJobs","Account")" class="nav-item nav-link active">Job List</a>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    <button type="button" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block" data-toggle="modal" data-target="#Login">Login<i></i></button>
-                    <button type="button" href="@Url.Action("Register","Account")" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block" data-toggle="modal" data-target="#myModal">Register<i></i></button>
+                    @*<button type="button" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block" data-toggle="modal" data-target="#Login">Login<i></i></button>
+                    <button type="button" href="@Url.Action("Register","Account")" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block" data-toggle="modal" data-target="#myModal">Register<i></i></button>*@
+                    <a href="@Url.Action("Login","Account")" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Login</a>
+                    <a href="@Url.Action("Register","Account")" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Register</a>
                 </div>
             </div>
         </nav>
