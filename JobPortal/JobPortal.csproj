@@ -297,11 +297,12 @@
     <Content Include="Content\css\style.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\images\Add icon.png" />
-    <Content Include="Content\images\avatar7.png" />
+    <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\bg\4853433.jpg" />
     <Content Include="Content\images\Camera.png" />
     <Content Include="Content\images\companyLogo.png" />
     <Content Include="Content\images\companylogo1.jpg" />
+    <Content Include="Content\images\download.png" />
     <Content Include="Content\images\facebook.jpg" />
     <Content Include="Content\images\faces\1.jpg" />
     <Content Include="Content\images\faces\2.jpg" />
@@ -312,9 +313,9 @@
     <Content Include="Content\images\faces\7.jpg" />
     <Content Include="Content\images\faces\8.jpg" />
     <Content Include="Content\images\faces\face23.jpg" />
+    <Content Include="Content\images\icons8-google-48.png" />
     <Content Include="Content\images\Linkdin.jpg" />
     <Content Include="Content\images\logo\logo.png" />
-    <Content Include="Content\images\pexels-yugantar-sambhangphe-2661929.jpg" />
     <Content Include="Content\images\profile icon.jpg" />
     <Content Include="Content\images\profile icon2.png" />
     <Content Include="Content\images\profile icon3.jpg" />
@@ -322,17 +323,20 @@
     <Content Include="Content\images\samples\2.png" />
     <Content Include="Content\images\samples\3.png" />
     <Content Include="Content\images\samples\4.png" />
+    <Content Include="Content\images\samples\9c8d7421604a039734dc6e93cdeea4fb.jpg" />
+    <Content Include="Content\images\samples\an-inclusive-workplace-employees-protection-filled-outline-icon-illustration-color-editable-eps-10-free-vector.jpg" />
     <Content Include="Content\images\samples\architecture1.jpg" />
     <Content Include="Content\images\samples\banana.jpg" />
     <Content Include="Content\images\samples\bg-mountain.jpg" />
     <Content Include="Content\images\samples\building.jpg" />
+    <Content Include="Content\images\samples\download %281%29.png" />
+    <Content Include="Content\images\samples\download %282%29.png" />
     <Content Include="Content\images\samples\error-403.png" />
     <Content Include="Content\images\samples\error-404.png" />
     <Content Include="Content\images\samples\error-500.png" />
-    <Content Include="Content\images\samples\jump.jpg" />
-    <Content Include="Content\images\samples\motorcycle.jpg" />
-    <Content Include="Content\images\samples\origami.jpg" />
-    <Content Include="Content\images\samples\water.jpg" />
+    <Content Include="Content\images\samples\images.jpeg" />
+    <Content Include="Content\images\samples\images.png" />
+    <Content Include="Content\images\samples\istockphoto-1153024228-170667a.jpg" />
     <Content Include="Content\images\Twitter.jpg" />
     <Content Include="Content\Img2\sort_asc.png" />
     <Content Include="Content\Img2\sort_asc_disabled.png" />
@@ -1837,6 +1841,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Sweet.js" />
+    <Content Include="Views\JobSeeker\about.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1940,6 +1945,8 @@
     <Content Include="Views\Account\AllCompany.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\AllJobs.cshtml" />
+    <Content Include="Views\JobSeeker\about.cshtml" />
+    <Content Include="Views\Account\about.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,6 @@
 ﻿@model JobPortalLibrary.Admin.AdminUser
 @*@Approvel SweetAlert@*@
-<script src="~/Scripts/Sweet.js"></script>
+<!--<script src="~/Scripts/Sweet.js"></script>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
@@ -25,7 +25,7 @@
                 }
             })
         });
-    });</script>
+    });</script>-->
 
 
 <div>
@@ -67,7 +67,7 @@ margin-bottom: 20px; color: #1c4980;padding-top:30px;padding-bottom:30px; font-s
                                 <img _ngcontent-d2c-frontend-c257="" src="https://d8it4huxumps7.cloudfront.net/uploads/images/63b9549418def_location.svg" alt="Location Icon" width="15" height="16" loading="lazy">
                                 @Html.DisplayFor(modelItem => Model.Address)
                             </p>
-                            <p style="text-align:center">
+                            @*<p style="text-align:center">
 
 
                                 <button class="btn btn-outline-success" style="background-color:greenyellow;width:100px;height:40px;border:groove;border-radius:15px;">
@@ -77,7 +77,7 @@ margin-bottom: 20px; color: #1c4980;padding-top:30px;padding-bottom:30px; font-s
                                     <a class="RejectionReason" style="color:white" href="javascript:;" data-id="@Model.PostJobCode"> Reject </a>
                                 </button>
 
-                            </p>
+                            </p>*@
                         </dd>
 
                     </div>
@@ -233,7 +233,7 @@ margin-bottom: 20px; color: #1c4980;padding-top:30px;padding-bottom:30px; font-s
 
 </div>
 
-<div id="partialModal" class="modal" tabindex="-1" role="dialog" style="position:center">
+@*<div id="partialModal" class="modal" tabindex="-1" role="dialog" style="position:center">
         <div class="modal-dialog  modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -279,6 +279,6 @@ margin-bottom: 20px; color: #1c4980;padding-top:30px;padding-bottom:30px; font-s
                 });
             });
         });
-</script>
+</script>*@
 
 

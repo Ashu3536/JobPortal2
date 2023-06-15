@@ -107,7 +107,7 @@ namespace JobPortal.Controllers
             smtp.Credentials = new System.Net.NetworkCredential("8624077183a@gmail.com", "mamuijmxmeiiybje"); // Enter senders User name and password  
             smtp.EnableSsl = true;
             smtp.Send(mail);
-            return View();
+            return RedirectToAction("jobgrid");
         }
         public ActionResult EmployeerIndex()
         {
@@ -572,18 +572,18 @@ namespace JobPortal.Controllers
                     obj.Location = dr["CityName"].ToString();
                     obj.CompanyId = Convert.ToInt32(dr["CompanyId"].ToString());
                     obj.CompanyName = dr["CompanyName"].ToString();
-                    obj.ContactPerson = dr["ContactPerson"].ToString();
-                    obj.JobTitle = dr["JobTitle"].ToString();
+                    obj.ContactPerson1 = dr["ContactPerson"].ToString();
+                    obj.JobTitle1 = dr["JobTitle"].ToString();
                     obj.JobDescription = dr["JobDescription"].ToString();
                     obj.JobCategoryId = Convert.ToInt32(dr["JobCategoryId"].ToString());
                     obj.JobCategory = dr["JobCategory"].ToString();
                     obj.OpportunityType = dr["OpportunityType"].ToString();
                     obj.WorkingShifts = dr["WorkingShifts"].ToString();
-                    obj.NoOfOpenings = dr["NoOfOpenings"].ToString();
-                    obj.Address = dr["Address"].ToString();
+                    obj.NoOfOpenings1 = dr["NoOfOpenings"].ToString();
+                    obj.Address1 = dr["Address"].ToString();
                     obj.Salary = dr["Salary"].ToString();
                     obj.JobType = dr["JobType"].ToString();
-                    obj.TotalExperience = dr["TotalExperience"].ToString();
+                    obj.TotalExperience1 = dr["TotalExperience"].ToString();
                     obj.ExpectedJoiningDate = Convert.ToDateTime(dr["ExpectedJoiningDate"].ToString());
                     obj.ApplicationEndDate = Convert.ToDateTime(dr["ApplicationEndDate"].ToString());
 
@@ -612,7 +612,6 @@ namespace JobPortal.Controllers
         {
             if (Session["Employercode"] != null)
             {
-               
                 string employerCode = Session["Employercode"].ToString();
                 ObjEmployerUser.Employercode = employerCode;
                 PostJob_Code();
@@ -833,7 +832,7 @@ namespace JobPortal.Controllers
             ViewBag.JobTypelist = list;
             var list1 = new List<string>() { "Day", "Night", "US", "12hrs" };
             ViewBag.WorkingShiftlist = list1;
-            var list2 = new List<string>() { "Per Year", "Per Month", "Per Week", "Per Day" };
+            var list2 = new List<string>() { "Per Year", "Per Month" };
             ViewBag.SalaryRangeList = list2;
             //var list3 = new List<string>() { "Per Year", "Per Month", "Per Week", "Per Day" };
             //ViewBag.Fixsalarylist = list3;
@@ -855,7 +854,7 @@ namespace JobPortal.Controllers
                     Value = dr["RequireQualificationId"].ToString()
                 });
             }
-            ViewBag.Requirequalification = new SelectList(Qualificationlist, "Value", "Text");
+            ViewBag.QualificationList = new SelectList(Qualificationlist, "Value", "Text");
             return await Task.Run(() => View());
         }
         //-----------------------------------------Mitali End----------------------------------//
@@ -994,7 +993,7 @@ namespace JobPortal.Controllers
             {
                 obj.ComName = dr["CompanyName"].ToString();
                 obj.NumberEmps = dr["NoOfEmployees"].ToString();
-                obj.ContactNo = Convert.ToInt64(dr["ContactNo"].ToString());
+                obj.ContactNo1 = Convert.ToInt64(dr["ContactNo"].ToString());
                 obj.CompanyWebsite = dr["CompanyWebsite"].ToString();
                 obj.ComMAIL = dr["CompanyEmail"].ToString();
                 obj.AboutCom = dr["AboutCompany"].ToString();
@@ -1689,8 +1688,9 @@ namespace JobPortal.Controllers
             }
 
         }
-        public ActionResult RejectionEmail(EmployerUser obju, int AppliedJobId)
+        public ActionResult RejectionEmail(int AppliedJobId)
         {
+            EmployerUser obju = new EmployerUser();
             obju.AppliedJobId = AppliedJobId;
             BALEmployer obj1 = new BALEmployer();
             DataSet ds = new DataSet();           
@@ -2470,7 +2470,7 @@ namespace JobPortal.Controllers
             obj.EmployerName = ds.Tables[1].Rows[0]["EmployerName"].ToString();
             obj.EmailId = ds.Tables[1].Rows[0]["EmailId"].ToString();
             obj.ContactNo = Convert.ToInt64(ds.Tables[1].Rows[0]["ContactNo"].ToString());
-            obj.GSTNo = "Enter GstNo";
+            //obj.GSTNo = "Enter GstNo";
             return View(obj);
         }
             else
@@ -2485,9 +2485,10 @@ namespace JobPortal.Controllers
             if (TempData.ContainsKey("TID"))
                 TransactionId = TempData["TID"].ToString(); // returns "TransactionId" 
             obj1.TransactionId = TransactionId;
+            obj1.StatusId = 1;
        //     obj1.SubscriptionDate = DateTime.Now;
             BALEmployer obj = new BALEmployer();
-            obj.RPPaymentSave(obj1,obj1.TransactionId);
+            obj.RPPaymentSave(obj1);
             return RedirectToAction("PlanDetails");
 
         }
@@ -2545,12 +2546,12 @@ namespace JobPortal.Controllers
             return RedirectToAction("EmployeerIndex");
 
         }
-        public ActionResult DeleteEmployer(EmployerUser obj)
-        {
-            BALEmployer Obj = new BALEmployer();
-            Obj.IsDeleteEmployer(obj.Employercode);
-            return RedirectToAction("Login");
-        }
+        //public ActionResult DeleteEmployer(EmployerUser obj)
+        //{
+        //    BALEmployer Obj = new BALEmployer();
+        //    Obj.IsDeleteEmployer(obj.Employercode);
+        //    return RedirectToAction("Login");
+        //}
         public ActionResult Logout()
         {
             Session.Abandon();

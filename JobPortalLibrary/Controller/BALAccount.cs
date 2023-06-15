@@ -162,8 +162,8 @@ namespace JobPortalLibrary.Controller
             SqlCommand cmd = new SqlCommand("SPSeeker", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "LoginSeeker");
-            cmd.Parameters.AddWithValue("@EmailId", objaccount.EmailId);
-            cmd.Parameters.AddWithValue("@Password", objaccount.Password);
+            cmd.Parameters.AddWithValue("@EmailId", objaccount.EmailId1);
+            cmd.Parameters.AddWithValue("@Password", objaccount.Password1);
 
             SqlDataReader dr;
             dr = cmd.ExecuteReader();
@@ -179,8 +179,8 @@ namespace JobPortalLibrary.Controller
             SqlCommand cmd = new SqlCommand("Employeer", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "LoginEmployer");
-            cmd.Parameters.AddWithValue("@EmailId", objaccount.EmailId);
-            cmd.Parameters.AddWithValue("@Password", objaccount.Password);
+            cmd.Parameters.AddWithValue("@EmailId", objaccount.EmailId1);
+            cmd.Parameters.AddWithValue("@Password", objaccount.Password1);
             SqlDataReader dr;
             dr = cmd.ExecuteReader();
             return dr;
@@ -194,8 +194,8 @@ namespace JobPortalLibrary.Controller
             SqlCommand cmd = new SqlCommand("SPAdmin", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "Loginadmin");
-            cmd.Parameters.AddWithValue("@EmailId", objaccount.EmailId);
-            cmd.Parameters.AddWithValue("@Password", objaccount.Password);
+            cmd.Parameters.AddWithValue("@EmailId", objaccount.EmailId1);
+            cmd.Parameters.AddWithValue("@Password", objaccount.Password1);
             SqlDataReader dr;
             dr = cmd.ExecuteReader();
             return dr;

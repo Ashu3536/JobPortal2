@@ -87,10 +87,10 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ContactNo, "Contact Number", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ContactNo1, "Contact Number", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-3">
-                @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ContactNo1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ContactNo1, "", new { @class = "text-danger" })
                 <br />
             </div>
             @*<div class="col-md-3">
@@ -271,7 +271,7 @@
             <input type="submit" value="Update" class="btn btn-default"style="color: white; width:180px;height: 45px; border-radius: 12px; font-weight: 500;border-color:transparent; font-size: 15px; line-height: 10px; text-align: center; display: flex; align-items: center; justify-content: center;background-color:royalblue;margin-left:700px;margin-top:50px;" />
         </div>
     </div>
-    <div style="color: white; width:180px;height: 45px; border-radius: 12px; font-weight: 500;border-color:transparent; font-size: 15px; line-height: 10px; text-align: center; display: flex; align-items: center; justify-content: center;background-color:royalblue;margin-top:-55px;margin-left:10px;" >
+    <div style="color: white; width:180px;height: 45px; border-radius: 12px; font-weight: 500;border-color:transparent; font-size: 15px; line-height: 10px; text-align: center; display: flex; align-items: center; justify-content: center;background-color:royalblue;margin-top:-55px;margin-left:60px;" >
         <a style="color: white;" href="@Url.Action("KTCompanyDeatilsGV","Employer")"> Back</a>
     </div>
     @*<div>

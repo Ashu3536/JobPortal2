@@ -439,5 +439,17 @@ namespace JobPortalLibrary.Admin
             return ds;
 
         }
+        public DataSet getearningvsemp()
+        {
+            ManageConnection();
+            SqlCommand cmb = new SqlCommand("SPAdmin", con);
+            cmb.CommandType = CommandType.StoredProcedure;
+            cmb.Parameters.AddWithValue("@Flag", "Top10EarningvsEmployer");
+            SqlDataAdapter adpt = new SqlDataAdapter();
+            adpt.SelectCommand = cmb;
+            DataSet ds = new DataSet();
+            adpt.Fill(ds);
+            return ds;
+        }
     }
 }

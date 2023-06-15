@@ -97,6 +97,12 @@
 
     window.onload = function () {
         var chart = new CanvasJS.Chart("chartContainer", {
+            axisX: {
+                title: "JobCategory",
+            },
+            //axisY: {
+            //    title: "JobPosted",
+            //},
             theme: "light1", // "light1", "light2", "dark1", "dark2"
             animationEnabled: true,
 		title:{
@@ -109,6 +115,8 @@
                 type: "bar",
                 showInLegend: true,
                 color: "#435ebe",
+                indexLabel: "{lable}",
+                
 			dataPoints:@Html.Raw(ViewBag.listt),
 		}
 		]

@@ -267,12 +267,15 @@
         <li><a href="@Url.Action("view","Admin")">Home 1</a></li>-->
                     <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                     <!--</ul>
+
     </li>-->
                     <li>
+                       
+
                         <a href="@Url.Action("view","Admin")" aria-expanded="false">
                             @* <a href="@Url.Action("RPAdminEmployeGrid","Admin")">*@
                             <i class="fa fa-user"> </i>
-                            <span class="nav-text"><b>Dashboard</b></span>
+                            <span class="nav-text"><b><img style="width:25px;height:25px" src="~/Content/images/samples/images.png" />&nbsp; Dashboard</b></span>
                             @*</a>*@
                         </a>
                     </li>
@@ -280,10 +283,11 @@
 
 
                     <li>
-                        <a href="@Url.Action("SiteEarningE","Admin")" aria-expanded="false">
+                        <a href="@Url.Action("SiteEarningE","Admin")" aria-expanded="false" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Frupee&psig=AOvVaw16MSKqivY-jawbWXEiOMPT&ust=1686479782035000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCKD7sfXAuP8CFQAAAAAdAAAAABAE">
                             @* <a href="@Url.Action("RPAdminEmployeGrid","Admin")">*@
                             <i class="fa fa-user"> </i>
-                            <span class="nav-text"><b> Employer Site Earning</b></span>
+
+                            <span class="nav-text"><b> <img style="width:25px;height:25px" src="~/Content/images/samples/istockphoto-1153024228-170667a.jpg" />Employer Site Earning</b></span>
                             @*</a>*@
                         </a>
                     </li>
@@ -293,9 +297,10 @@
 
                     <li>
                         <a href="@Url.Action("RPAdminJobsGrid","Admin")" aria-expanded="false">
-                            <i class="fa fa-briefcase"></i><span class="nav-text"><b>Jobs</b></span>
+                            <i class="fa fa-briefcase"></i><span class="nav-text"><b><img style="width:25px;height:25px" src="~/Content/images/samples/download (1).png" /> &nbsp; Jobs</b></span>
                         </a>
                     </li>
+
                     <!--<li>
     <a href="@Url.Action("Jobseekargrid","Admin")" aria-expanded="false">-->
                     @* <a href="@Url.Action("RPAdminEmployeGrid","Admin")">*@
@@ -306,22 +311,24 @@
     </li>-->
 
 
+
                     <br />
                     <li>
                         <a href="@Url.Action("RPAdminEmployeGrid","Admin")" aria-expanded="false">
                             @* <a href="@Url.Action("RPAdminEmployeGrid","Admin")">*@
                             <i class="fa fa-user"> </i>
-                            <span class="nav-text"><b>Employer</b></span>
+                            <span class="nav-text"><b><img style="width:30px;height:30px" src="~/Content/images/samples/an-inclusive-workplace-employees-protection-filled-outline-icon-illustration-color-editable-eps-10-free-vector.jpg" /> Employer</b></span>
                             @*</a>*@
                         </a>
                     </li>
                     <br />
+                
 
                     <li>
                         <a href="@Url.Action("RPCompanyGridview","Admin")" aria-expanded="false">
                             @*<a href="@Url.Action("RPCompanyGridview","Admin")">*@
                             <i class="fa fa-industry"></i>
-                            <span class="nav-text"><b>Company Review</b></span>
+                            <span class="nav-text"><b><img style="width:30px;height:30px" src="~/Content/images/samples/9c8d7421604a039734dc6e93cdeea4fb.jpg" />Company Review</b></span>
                             @*</a>*@
                         </a>
                     </li>
@@ -330,15 +337,15 @@
                     <li>
                         <a href="@Url.Action("Plangrid","Admin")" aria-expanded="false">
 
-                            <i class="icon-badge menu-icon"></i><span class="nav-text"><b>Add/Manage Subscriptions</b></span>
+                            <i class="icon-badge menu-icon"></i><span class="nav-text"><b><img style="width:15px;height:15px" src="~/Content/images/samples/download (2).png" />Add/Manage Subscriptions</b></span>
                         </a>
-
+                       
                     </li>
-                    <br/>
+                    <br />
                     <li>
                         <a href="@Url.Action("Logout","Admin")" aria-expanded="false">
 
-                            <i class="icon-badge menu-icon"></i><span class="nav-text"><b>LogOut</b></span>
+                            <i class="icon-badge menu-icon"></i><span class="nav-text"><b><img style="width:25px;height:25px" src="~/Content/images/samples/images.jpeg" />&nbsp; LogOut</b></span>
                         </a>
 
                     </li>
@@ -447,5 +454,8 @@
     </script>*@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
+
 </body>
 </html>

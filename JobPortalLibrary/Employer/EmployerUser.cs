@@ -25,9 +25,10 @@ namespace JobPortalLibrary.Employer
         public string EmailId { get; set; }
 
 
-        //[RegularExpression("^[0-9]{10}$",ErrorMessage ="It must be contain 10 digits.")]
-        //[Required(ErrorMessage ="Contact Number Required")]
+        [RegularExpression("^[0-9]{10}$", ErrorMessage = "It must be contain 10 digits.")]
+        [Required(ErrorMessage = "Contact Number Required")]
         public Int64 ContactNo { get; set; }
+        public Int64 ContactNo1 { get; set; }
 
         public string Password { get; set; }
 
@@ -35,8 +36,8 @@ namespace JobPortalLibrary.Employer
 
         public int CompanyId { get; set; }
 
-        //[RegularExpression("^[a-zA-Z]*( +[a-zA-Z.]*)*$", ErrorMessage = "It must be contain only letters. ")]
-        //[Required(ErrorMessage = "Company Name is required.")]
+        [RegularExpression("^[a-zA-Z]*( +[a-zA-Z.]*)*$", ErrorMessage = "It must be contain only letters. ")]
+        [Required(ErrorMessage = "Company Name is required.")]
         public string CompanyName { get; set; }
 
         public string NoOfEmplees { get; set; }
@@ -71,16 +72,16 @@ namespace JobPortalLibrary.Employer
 
         public string Google { get; set; }
 
-        //[RegularExpression("^[a-zA-Z]*( +[a-zA-Z.]*)*$",ErrorMessage ="It must be contain only letters.")]
-        //[Required]
+        [RegularExpression("^[a-zA-Z]*( +[a-zA-Z.]*)*$", ErrorMessage = "It must be contain only letters.")]
+        [Required]
         public string OwnerName { get; set; }
 
-        //[RegularExpression("^[a-zA-Z]*( +[a-zA-Z.]*)*$")]
-        //[Required(ErrorMessage = "HR Name is required.")]
+        [RegularExpression("^[a-zA-Z]*( +[a-zA-Z.]*)*$", ErrorMessage = "It must be contain only letters.")]
+        [Required(ErrorMessage = "HR Name is required.")]
         public string HRName { get; set; }
 
-        //[Required(ErrorMessage = "Company Email Required..!")]
-        //[RegularExpression("^([a-zA-Z0-9_ .@'-]{10,500})$")]
+        [Required(ErrorMessage = "Company Email Required..!")]
+        [RegularExpression("^([a-zA-Z0-9_ .@'-]{10,500})$")]
         public string HREmail { get; set; }
 
         public string Source { get; set; }
@@ -104,27 +105,24 @@ namespace JobPortalLibrary.Employer
 
         public string OpportunityType { get; set; }
 
-        //[RegularExpression("^[a-zA-Z]*( +[a-zA-Z.]*)*$", ErrorMessage = "It must be contain only letters. ")]
-        //[Required(ErrorMessage = "Job Title is required.")]
-        //[Display(Name = "Job Title")]
+        [RegularExpression("^[a-zA-Z]*( +[a-zA-Z.]*)*$", ErrorMessage = "It must be contain only letters. ")]
+        [Required(ErrorMessage = "Job Title is required.")]
+        [Display(Name = "Job Title")]
 
         public string JobTitle { get; set; }
 
         public int JobCategoryId { get; set; }
 
-        //[RegularExpression("^([a-zA-Z0-9_ .&'-]{10,500})$", ErrorMessage = "You can write upto 500 words only.")]
-        //[Display(Name = "Job Description")]
-        //[Required]
+      
         public string JobDescription { get; set; }
-        //[Required(ErrorMessage = "Job Location is required.")]
-        //[Display(Name = "Job Location")]
+        [Required(ErrorMessage = "Job Location is required.")]
+        [Display(Name = "Job Location")]
         public string JobLocation { get; set; }
-        //[Required(ErrorMessage = "Address is required.")]
-        //[Display(Name = "Address")]
+        [Required(ErrorMessage = "Address is required.")]
+        [Display(Name = "Address")]
 
         public string Address { get; set; }
-        //[Required(ErrorMessage = "Job Type is required.")]
-        //[Display(Name = "Job Type")]
+        
         public string JobType { get; set; }
 
         public string RequiredQualificationId { get; set; }
@@ -133,6 +131,8 @@ namespace JobPortalLibrary.Employer
 
         public string SalaryType { get; set; }
 
+       
+
         public string SalaryRange { get; set; }
 
         public string Salary { get; set; }
@@ -140,13 +140,13 @@ namespace JobPortalLibrary.Employer
         public string JobBenifitId { get; set; }
 
         public int CollectResume { get; set; }
-        //[RegularExpression("^[0-9]+[.]*[0-9]*[a-zA-Z]+$")]
-        //[Required(ErrorMessage = "Total Experience is required.")]
-        //[Display(Name = " Total Experience")]
+        [RegularExpression("^[0-9]+[.]*[0-9]*[a-zA-Z]+$", ErrorMessage = "Total Experience is not valid. ")]
+        [Required(ErrorMessage = "Total Experience is required.")]
+        [Display(Name = " Total Experience")]
         public string TotalExperience { get; set; }
         [DataType(DataType.Date)]
-        //[Required(ErrorMessage = "Expected Joining Date is required.")]
-        //[Display(Name = "Expected Joining Date")]
+        [Required(ErrorMessage = "Expected Joining Date is required.")]
+        [Display(Name = "Expected Joining Date")]
         public DateTime ExpectedJoiningDate { get; set; }
 
         public DateTime ApplicationStartDate { get; set; }
@@ -158,20 +158,19 @@ namespace JobPortalLibrary.Employer
         public int StatusId { get; set; }
 
         public string RejectionReason { get; set; }
-        //[Required(ErrorMessage = "Require Qualification is required.")]
-        //[Display(Name = "Require Qualification")]
+      
         public string RequireQualification { get; set; }
         [Required(ErrorMessage = "Job Benifit is required.")]
         [Display(Name = "Job Benifit")]
         public string JobBenifit { get; set; }
 
-        //[RegularExpression("^[a-zA-Z.]*( +[a-zA-Z]+)*$", ErrorMessage = "It must be contain only letters. ")]
-        //[Required(ErrorMessage = " HR name is required.")]
-        //[Display(Name = " Contact Person")]
+        [RegularExpression("^[a-zA-Z.]*( +[a-zA-Z]+)*$", ErrorMessage = "It must be contain only letters. ")]
+        [Required(ErrorMessage = " HR name is required.")]
+        [Display(Name = " Contact Person")]
         public string ContactPerson { get; set; }
 
-        //[Required(ErrorMessage = "Please select category.")]
-        //[Display(Name = "Job Category")]
+        [Required(ErrorMessage = "Please select category.")]
+        [Display(Name = "Job Category")]
         public string JobCategory { get; set; }
 
         public List<EmployerUser> Jobs { get; set; }
@@ -188,7 +187,7 @@ namespace JobPortalLibrary.Employer
         [Required(ErrorMessage = "Please select Location.")]
         public string[] Locationlist { get; set; }
 
-        //[Required(ErrorMessage = "Please select Qualification.")]
+        [Required(ErrorMessage = "Please select Qualification.")]
         public string[] QualificationList { get; set; }
 
 
@@ -196,14 +195,28 @@ namespace JobPortalLibrary.Employer
         //[Required(ErrorMessage = "Max Salary is required.")]
         //[Display(Name = "Job Location")]
         public string Max { get; set; }
-        //[RegularExpression("^[0-9]*$", ErrorMessage = "It must be contain only digits.")]
-        //[Display(Name = "No.Of Openings")]
-        //[Required]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "It must be contain only digits.")]
+        [Display(Name = "No.Of Openings")]
+        [Required]
         public string NoOfOpenings { get; set; }
 
         public string From { get; set; }
 
         public string To { get; set; }
+
+        //------------------Edit------------------//
+
+       
+        public string ContactPerson1 { get; set; }
+
+        public string JobTitle1 { get; set; }
+
+        public string Address1 { get; set; }
+
+        public string NoOfOpenings1 { get; set; }
+
+        public string TotalExperience1 { get; set; }
+
         //----------------------------------------------------------------Mitali End---------------------------------------------------------//
         public int AppliedJobId { get; set; }
 

@@ -50,8 +50,8 @@
         }
         .modal-header {
             padding: 16px 45px;
-            font-size:30px;
-            background-color:cadetblue;
+            font-size: 30px;
+            background-color: #435ebe;
             color: black;
         }
 
@@ -61,7 +61,7 @@
 
         .modal-footer {
             padding: 2px 16px;
-            background-color: cadetblue;
+            background-color: #435ebe;
             color: white;
         }
     </style>
@@ -71,11 +71,11 @@
     <dl class="dl-horizontal">
 
         <dt>
-            @Html.DisplayNameFor(model => model.Seekercode)
+            @Html.HiddenFor(model => model.Seekercode)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Seekercode)
+            @Html.HiddenFor(model => model.Seekercode)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.SeekerName)

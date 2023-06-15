@@ -18,7 +18,7 @@
                     $.ajax({
                         type: "GET",
                         url: "/JobSeeker/SeekerDetailsPhoto",
-                        data: '{id: "' + id + '" }',
+                      /*  data: '{id: "' + id + '" }',*/
                         contentType: "application/json; charset=utf-8",
                         dataType: "html",
                         success: function (response) {
@@ -39,10 +39,11 @@
                     var $buttonClicked = $(this);
                     var id = $buttonClicked.attr('data-id')
                     /* var id = $(this).closest("tr").find("td").eq(0).html();*/
+                    /*alert(id);*/
                     $.ajax({
-                        type: "GET",
+                        type: "post",
                         url: "/JobSeeker/SeekerDetailsPopup",
-                        data: '{id: "' + id + '" }',
+                        data: '{Seekeerid: "' + id + '" }',
                         contentType: "application/json; charset=utf-8",
                         dataType: "html",
                         success: function (response) {

@@ -10,10 +10,14 @@
 
 <div style="margin-left:300px;">
     <h2>PLANS</h2>
-
-    <button>
-        @Html.ActionLink("New Plan", "Subscription")
+    <button style="color: white; width:110px;height: 50px; border-radius: 12px; font-weight: 500;border-color:transparent; font-size: 15px; line-height: 10px; text-align: center; display: flex; align-items: center; justify-content: center;background-color:royalblue">
+        <a style="color: white;" href="@Url.Action("Subscription","Admin")">New Plan</a>
     </button>
+    <br />
+  
+    @*<button>
+            @Html.ActionLink("New Plan", "Subscription")
+        </button>*@
     <table class="table table-hover" style="width:90%">
         <tr style="background-color: royalblue">
 
@@ -101,7 +105,8 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
 
-    <script type="text/javascript">$(function () {
+    <script type="text/javascript">
+        $(function () {
             $(".PlanDetails").click(function () {
                 var $buttonClicked = $(this);
                 var id = $buttonClicked.attr('data-id')

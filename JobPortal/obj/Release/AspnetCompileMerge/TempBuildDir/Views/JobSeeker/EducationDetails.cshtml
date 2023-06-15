@@ -44,7 +44,7 @@
                     $.ajax({
                         type: "GET",
                         url: "/JobSeeker/ADDEducationDetails",
-                        data: '{id: "' + id + '" }',
+                        /*data: '{id: "' + id + '" }',*/
                         contentType: "application/json; charset=utf-8",
                         dataType: "html",
                         success: function (response) {
@@ -243,7 +243,7 @@
                                 <div id="div1">
                                     <label for="html" style="color:black ">Class XII</label>
                                     <dd>
-                                        @Html.HiddenFor(Model => Model.HSC)
+                                        @Html.HiddenFor(model => model.HSC)
                                         <lable for="html" value="@ViewBag.HSCBoard">@ViewBag.HSCDegree </lable><br />
                                         @Html.DisplayFor(model => model.HSCPassingYear)
                                     <div style="display: flex; margin-top: -60px;">
@@ -262,8 +262,8 @@
                             {
                                 <div id="div1">
 
-                                    @Html.HiddenFor(Model => Model.UG)
-                                    @Html.HiddenFor(Model => Model.UGDegree)
+                                    @Html.HiddenFor(model => model.UG)
+                                    @Html.HiddenFor(model => model.UGDegree)
                                     <lable for="html" style="color:black;" value="@ViewBag.UGSpecialization">@ViewBag.UGSpecialization1 </lable>
                                     <br />
                                     <dd>
@@ -289,8 +289,8 @@
                             {
                                 <div id="div1">
 
-                                    @Html.HiddenFor(Model => Model.Graduation)
-                                    @Html.HiddenFor(Model => Model.GraduationDegree)
+                                    @Html.HiddenFor(model => model.Graduation)
+                                    @Html.HiddenFor(model => model.GraduationDegree)
                                     <lable for="html" style="color:black;" value="@ViewBag.GraduationSpecialization">@ViewBag.GSpecialization1 </lable>
                                     <br />
                                     <dd>
@@ -316,7 +316,7 @@
                             {
                                 <div id="div1">
 
-                                    @Html.HiddenFor(Model => Model.PG)
+                                    @Html.HiddenFor(model => model.PG)
                                     <lable for="html" style="color:black;" value="@ViewBag.PGSpecialization">@ViewBag.PGSpecialization1 </lable>
                                     <br />
                                     <dd>

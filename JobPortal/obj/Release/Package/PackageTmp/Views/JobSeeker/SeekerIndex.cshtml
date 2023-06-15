@@ -51,19 +51,6 @@
     @section Scripts {
 
         <link href="~/Scripts/chosen.min.css" rel="stylesheet" />
-        <script src="~/Scripts/chosen.jquery.min.js"></script>
-        @*<link href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.min.css" rel="stylesheet" />*@
-        @*<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.jquery.min.js"></script>*@
-
-        @*<script type="text/javascript">
-            /*Select Dropdown*/
-            $(function () {
-                $(".city").chosen({
-                    width: "50%"
-                });
-            });
-
-            </script>*@
         @Scripts.Render("~/bundles/jqueryval")
     }
 </head>
@@ -80,8 +67,8 @@
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
                                 <h1 class="display-3 text-white animated slideInDown mb-4">Find The Perfect Job That You Deserved</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Job</a>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Welcome to Job Portal</p>
+                                <a href="@Url.Action("AllJobs","JobSeeker")" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Job</a>
                                 <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A Talent</a>
                             </div>
                         </div>
@@ -95,8 +82,8 @@
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
                                 <h1 class="display-3 text-white animated slideInDown mb-4">Find The Best Startup Job That Fit You</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Job</a>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Welcome to Job Portal.</p>
+                                <a href="@Url.Action("AllJobs","JobSeeker")" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Job</a>
                                 <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A Talent</a>
                             </div>
                         </div>
@@ -253,6 +240,5 @@
     <!-- Template Javascript -->
     <script src="~/Content/js/main.js"></script>
 </body>
-
 </html>
 

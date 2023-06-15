@@ -41,9 +41,9 @@
                     var id = $buttonClicked.attr('data-id')
                     /* var id = $(this).closest("tr").find("td").eq(0).html();*/
                     $.ajax({
-                        type: "GET",
+                        type: "post",
                         url: "/JobSeeker/EmploymentDetailsPopup",
-                        data: '{id: "' + id + '" }',
+                        data: '{Seekeerid: "' + id + '" }',
                         contentType: "application/json; charset=utf-8",
                         dataType: "html",
                         success: function (response) {

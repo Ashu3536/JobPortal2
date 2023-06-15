@@ -9,6 +9,7 @@ using JobPortalLibrary.Admin;
 using JobPortalLibrary.JobSeeker;
 using System.Threading.Tasks;
 using JobPortalLibrary.Employer;
+using Newtonsoft.Json;
 
 namespace JobPortal.Controllers
 {
@@ -71,7 +72,30 @@ namespace JobPortal.Controllers
                 @ViewBag.Application = da["Applications"].ToString();
             }
             da.Close();
+
+
+            List<AdminUser> Aprovelst = new List<AdminUser>();
+
+            //List<AdminUser> Aprovelist = new List<AdminUser DataSet ds = new DataSet();
+            BALAdmin objadmin1 = new BALAdmin();
+            DataSet ds2 = new DataSet();
+            ds2 = objadmin1.getearningvsemp();
+            for (int i = 0; i < ds2.Tables[0].Rows.Count; i++)
+            {
+                AdminUser objb = new AdminUser();
+                objb.Pay = Convert.ToInt32(ds2.Tables[0].Rows[i]["payment"].ToString());
+                objb.Empname = ds2.Tables[0].Rows[i]["CompanyName"].ToString();
+                Aprovelst.Add(objb);
+            }
+            AdminUser objc = new AdminUser();
+            objc.LstUser = Aprovelst;
+            ViewBag.listt = JsonConvert.SerializeObject(Aprovelst.Select(prop => new
+            {
+                lable = prop.Empname,
+                y = prop.Pay
+            }).ToList());
             return View();
+           
         }
 
         //----------------------------------Admin Jov Application---------------------------------------------/
@@ -726,7 +750,7 @@ namespace JobPortal.Controllers
         public ActionResult Logout()
         {
             Session.Abandon();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "Account");
         }
     }
 }

@@ -131,5 +131,9 @@ namespace JobPortalLibrary.Admin
       //  public string SeekerCode { get; set; }
         public string SeekerName { get; set; }
         public string Designation { get; set; }
+        public string Empname { get; set; }
+        public int Pay { get; set; }
+
+        public List<AdminUser> LstUser { get; set; }
     }
 }

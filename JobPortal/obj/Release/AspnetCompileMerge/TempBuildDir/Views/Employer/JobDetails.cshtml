@@ -361,7 +361,10 @@ margin-bottom: 20px; color: #1c4980;padding-top:30px;padding-bottom:30px; font-s
                     </div>
 
                 </dl>
-               <a style="margin-left:50px;font-size:100px;"> @Html.ActionLink("Back", "jobgrid")</a>
+                @*<a style="margin-left:50px;font-size:100px;"> @Html.ActionLink("Back", "jobgrid")</a>*@
+                <div style="color: white; width:80px;height: 35px; border-radius: 12px; font-weight: 500;border-color:transparent; font-size: 15px; line-height: 10px; text-align: center; display: flex; align-items: center; justify-content: center;background-color:royalblue;margin-top:20px;margin-left:50px;">
+                    <a style="color: white;" href="@Url.Action("jobgrid","Employer")"> Back</a>
+                </div>
                 @*<button class="btn btn-primary hBack" type="button" >Back</button>*@
                 <br />
                 <br />

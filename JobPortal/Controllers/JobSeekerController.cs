@@ -24,6 +24,12 @@ namespace JobPortal.Controllers
         string year;
         // GET: JobSeeker
 
+        public async Task<ActionResult> about()
+        {
+            
+            return await Task.Run(() => View());
+        }
+
         public async Task<ActionResult> Dashboardcount()
         {
             if (Session["SeekerCode"] != null)
@@ -91,8 +97,18 @@ namespace JobPortal.Controllers
 
                 SeekerUser obj = new SeekerUser();
                 obj.Seekercode = seekercode;
-                obj.Seekercode = seekercode;
                 BALSeeker ObjBal = new BALSeeker();
+
+                SqlDataReader dr;
+                dr = ObjBal.SeekerDetails(obj);
+                while (dr.Read())
+                {
+                    obj.Seekercode = dr["Seekercode"].ToString();
+                    obj.ProfileIMG = dr["ProfileIMG"].ToString();
+                }
+                dr.Close();
+
+
                 DataSet ds = new DataSet();
                 ds = ObjBal.AllJobs();
                 SeekerUser objDetails = new SeekerUser();
@@ -448,27 +464,6 @@ namespace JobPortal.Controllers
 
             }
         }
-
-        [HttpPost]
-        public async Task<ActionResult> SeekerDetailsPopup(SeekerUser obj)
-        {
-            if (Session["SeekerCode"] != null)
-            {
-                string seekercode = Session["SeekerCode"].ToString();
-
-                obj.LanguageId = string.Join(",", obj.LanguageList);
-                obj.Seekercode = seekercode;
-                obj.ContactNo = Convert.ToInt64(obj.AlternateContactNo);
-                obj.Pincode = Convert.ToInt32(obj.Pincode1);
-                BALSeeker objsave = new BALSeeker();
-                objsave.PersonalDetails(obj);
-                return await Task.Run(() => RedirectToAction("SeekerDetails"));
-            }
-            else
-            {
-                return await Task.Run(() => View("Login", "Account"));
-            }
-        }
         public async Task<ActionResult> SeekerDetails()
         {
             if (Session["SeekerCode"] != null)
@@ -548,8 +543,28 @@ namespace JobPortal.Controllers
                 return await Task.Run(() => View("Login", "Account"));
             }
         }
-        [HttpGet]
-        public async Task<ActionResult> SeekerDetailsPopup()
+        [HttpPost]
+        public async Task<ActionResult> SeekerDetailsPopup1(SeekerUser obj)
+        {
+            if (Session["SeekerCode"] != null)
+            {
+                string seekercode = Session["SeekerCode"].ToString();
+
+                obj.LanguageId = string.Join(",", obj.LanguageList);
+                obj.Seekercode = seekercode;
+                obj.ContactNo = Convert.ToInt64(obj.AlternateContactNo);
+                obj.Pincode = Convert.ToInt32(obj.Pincode1);
+                BALSeeker objsave = new BALSeeker();
+                objsave.PersonalDetails(obj);
+                return await Task.Run(() => RedirectToAction("SeekerDetails"));
+            }
+            else
+            {
+                return await Task.Run(() => View("Login", "Account"));
+            }
+        }
+        [HttpPost]
+        public async Task<ActionResult> SeekerDetailsPopup(string Seekeerid)
         {
             if (Session["SeekerCode"] != null)
             {
@@ -596,7 +611,6 @@ namespace JobPortal.Controllers
         [HttpPost]
         public async Task<ActionResult> EditEducationDetails(string SSCID)
         {
-
             AllList();
             Qualification();
             if (Session["SeekerCode"] != null)
@@ -662,9 +676,6 @@ namespace JobPortal.Controllers
                     obj.PG1 = dr["PGQ"].ToString();
                     obj.PGDegree1 = dr["PGD"].ToString();
                     obj.PGSpecialization1 = dr["PGS"].ToString();
-
-
-
                 }
                 if (SSCID == "1")
                 {
@@ -793,9 +804,6 @@ namespace JobPortal.Controllers
                     obj.PG1 = dr["PGQ"].ToString();
                     obj.PGDegree1 = dr["PGD"].ToString();
                     obj.PGSpecialization1 = dr["PGS"].ToString();
-
-
-
                 }
 
                 ViewBag.SSC = obj.SSC;
@@ -1074,7 +1082,6 @@ namespace JobPortal.Controllers
             ViewBag.SkillName = new SelectList(skilllist, "Value", "Text");
             return await Task.Run(() => View());
         }
-
         public async Task<ActionResult> EmploymentDetails()
         {
             if (Session["SeekerCode"] != null)
@@ -1110,8 +1117,8 @@ namespace JobPortal.Controllers
                 return await Task.Run(() => View("Login", "Account"));
             }
         }
-        [HttpGet]
-        public async Task<ActionResult> EmploymentDetailsPopup()
+        [HttpPost]
+        public async Task<ActionResult> EmploymentDetailsPopup(string Seekeerid)
         {
             if (Session["SeekerCode"] != null)
             {
@@ -1202,8 +1209,8 @@ namespace JobPortal.Controllers
                 return await Task.Run(() => View("Login", "Account"));
             }
         }
-        [HttpGet]
-        public async Task<ActionResult> ProjectDetailsPop()
+        [HttpPost]
+        public async Task<ActionResult> ProjectDetailsPop(string Seekeerid)
         {
             if (Session["SeekerCode"] != null)
             {
@@ -1233,7 +1240,7 @@ namespace JobPortal.Controllers
             }
         }
         [HttpPost]
-        public async Task<ActionResult> ProjectDetailsPop(SeekerUser obj)
+        public async Task<ActionResult> ProjectDetailsPop1(SeekerUser obj)
         {
             if (Session["SeekerCode"] != null)
             {
@@ -1321,11 +1328,11 @@ namespace JobPortal.Controllers
                     obj.EmailId = dr["EmailId"].ToString();
                     obj.ContactNo1 = dr["ContactNo"].ToString();
 
-                    obj.IndustryID = Convert.ToInt32(dr["CurrentIndustry"].ToString());
+                    obj.IndustryID1 = dr["CurrentIndustry"].ToString();
                     obj.Industry = dr["IndustryName"].ToString();
                     obj.TotalExperience = dr["TotalExperience"].ToString();
                     obj.Location = dr["CurrentLocation"].ToString();
-                    obj.JobCategoryId = Convert.ToInt32(dr["Category"].ToString());
+                    obj.JobCategoryId1 = dr["Category"].ToString();
                     obj.JobCategory = dr["JobCategory"].ToString();
                     obj.EmailId = dr["AlertEmail"].ToString();
                     //  obj.ContactNo = Convert.ToInt32(dr["AlertPhone"].ToString());
@@ -1361,9 +1368,9 @@ namespace JobPortal.Controllers
                     }
                 }
                 else { obj.Location = null; }
-                ViewBag.IndustryID = obj.IndustryID;
+                ViewBag.IndustryID = obj.IndustryID1;
                 ViewBag.Industry = obj.Industry;
-                ViewBag.JobCategoryId = obj.JobCategoryId;
+                ViewBag.JobCategoryId = obj.JobCategoryId1;
                 ViewBag.JobCategory = obj.JobCategory;
 
                 return await Task.Run(() => View(obj));
@@ -1373,8 +1380,8 @@ namespace JobPortal.Controllers
                 return await Task.Run(() => View("Login", "Account"));
             }
         }
-        [HttpGet]
-        public async Task<ActionResult> CareerProfilePopup()
+        [HttpPost]
+        public async Task<ActionResult> CareerProfilePopup(string Seekeerid)
         {
             if (Session["SeekerCode"] != null)
             {
@@ -1410,7 +1417,7 @@ namespace JobPortal.Controllers
             }
         }
         [HttpPost]
-        public async Task<ActionResult> CareerProfilePopup(SeekerUser obj)
+        public async Task<ActionResult> CareerProfilePopup1(SeekerUser obj)
         {
             if (Session["SeekerCode"] != null)
             {
@@ -1511,7 +1518,7 @@ namespace JobPortal.Controllers
             List<SeekerUser> lstUserDt1 = new List<SeekerUser>();
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                SeekerUser obju = new SeekerUser();
+               SeekerUser obju = new SeekerUser(); 
 
                 obju.CompanyId = Convert.ToInt32(ds.Tables[0].Rows[i]["CompanyId"].ToString());
                 obju.CompanyName = ds.Tables[0].Rows[i]["CompanyName"].ToString();
@@ -2212,7 +2219,7 @@ namespace JobPortal.Controllers
 
                 SeekerUser obj = new SeekerUser();
                 obj.PostJobCode = postjobcode;
-                obj.StatusId = 9;
+                obj.StatusId =22;
                 obj.Seekercode = seekercode;
                 obj.AppliedDate = DateTime.Now;
                 BALSeeker obj1 = new BALSeeker();
@@ -2275,7 +2282,7 @@ namespace JobPortal.Controllers
             }
             else
             {
-                return await Task.Run(() => View("Login", "Account"));
+                return await Task.Run(() => View("Index", "Account"));
             }
 
         }
@@ -2423,7 +2430,7 @@ namespace JobPortal.Controllers
         public ActionResult Logout()
         {
             Session.Abandon();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "Account");
         }
 
         public ActionResult DeleteSeeker()
@@ -2431,12 +2438,13 @@ namespace JobPortal.Controllers
             string seekercode = Session["SeekerCode"].ToString();
             SeekerUser obju = new SeekerUser();
             obju.Seekercode = seekercode;
+            obju.isDelete = 1;
             BALSeeker Obj = new BALSeeker();
             DataSet ds = new DataSet();
             ds = Obj.fetchseekerId(obju);
             obju.SeekerId = Convert.ToInt32(ds.Tables[0].Rows[0]["SeekerId"].ToString());
-            //obju.isDelete = 1;
-            Obj.IsDeleteSeeker(obju.SeekerId);
+            obju.isDelete = 1;
+            Obj.IsDeleteSeeker(obju);
             return RedirectToAction("Login", "Account");
         }
         // ----------------------------------------Muskan End--------------------------------//

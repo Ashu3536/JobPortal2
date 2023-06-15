@@ -243,10 +243,12 @@ namespace JobPortalLibrary.JobSeeker
         public string ContactNo1 { get; set; }
         public string files { get; set; }
         public int JobCategoryId { get; set; }
+        public string JobCategoryId1 { get; set; }
 
         public string JobCategory { get; set; }
         public string Industry { get; set; }
         public int IndustryID { get; set; }
+        public string IndustryID1 { get; set; }
         public string JobTitle { get; set; }
 
         public List<SeekerUser> lstuser {  get; set; }

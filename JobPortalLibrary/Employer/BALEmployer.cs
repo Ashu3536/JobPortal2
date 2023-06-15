@@ -647,12 +647,12 @@ namespace JobPortalLibrary.Employer
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "KTUpdateCompanyDetails");
             cmd.Parameters.AddWithValue("@CompanyId", objuser.CompanyId);
-            cmd.Parameters.AddWithValue("@CompanyName", objuser.CompanyName);
-            cmd.Parameters.AddWithValue("@NoOfEmployees", objuser.NoOfEmployees);
-            cmd.Parameters.AddWithValue("@ContactNo", objuser.ContactNo);
+            cmd.Parameters.AddWithValue("@CompanyName", objuser.ComName);
+            cmd.Parameters.AddWithValue("@NoOfEmployees", objuser.NumberEmps);
+            cmd.Parameters.AddWithValue("@ContactNo", objuser.ContactNo1);
             cmd.Parameters.AddWithValue("@CompanyWebsite", objuser.CompanyWebsite);
-            cmd.Parameters.AddWithValue("@CompanyEmail", objuser.CompanyEmail);
-            cmd.Parameters.AddWithValue("@AboutCompany", objuser.AboutCompany);
+            cmd.Parameters.AddWithValue("@CompanyEmail", objuser.ComMAIL);
+            cmd.Parameters.AddWithValue("@AboutCompany", objuser.AboutCom);
             cmd.Parameters.AddWithValue("@IndustryId", objuser.IndustryId);
             cmd.Parameters.AddWithValue("@CityId", objuser.CityId);
             cmd.Parameters.AddWithValue("@Pincode", objuser.Pincode);
@@ -664,10 +664,10 @@ namespace JobPortalLibrary.Employer
             cmd.Parameters.AddWithValue("@LinkedIn", objuser.LinkedIn);
             cmd.Parameters.AddWithValue("@Instagram", objuser.Instagram);
             cmd.Parameters.AddWithValue("@Google", objuser.Google);
-            cmd.Parameters.AddWithValue("@OwnerName", objuser.OwnerName);
-            cmd.Parameters.AddWithValue("@HRName", objuser.HRName);
-            cmd.Parameters.AddWithValue("@HRNumber", objuser.HRNumber);
-            cmd.Parameters.AddWithValue("@HREmail", objuser.HREmail);
+            cmd.Parameters.AddWithValue("@OwnerName", objuser.OwName);
+            cmd.Parameters.AddWithValue("@HRName", objuser.HrNam);
+            cmd.Parameters.AddWithValue("@HRNumber", objuser.HrNum);
+            cmd.Parameters.AddWithValue("@HREmail", objuser.Hrmail);
             cmd.Parameters.AddWithValue("@Source", objuser.Source);
             //   cmd.Parameters.AddWithValue("@RegistrationDate",objuser.RegistrationDate);
             cmd.ExecuteNonQuery();
@@ -1241,7 +1241,7 @@ namespace JobPortalLibrary.Employer
             return ds;
 
         }
-        public void RPPaymentSave(EmployerUser obj, string TransactionId)
+        public void RPPaymentSave(EmployerUser obj)
         {
             con.Close();
             ManageConnection();
@@ -1250,10 +1250,12 @@ namespace JobPortalLibrary.Employer
             cmd.Parameters.AddWithValue("@flag", "RPPaymentSave");
             cmd.Parameters.AddWithValue("@Seekercode",obj.Seekercode);
             cmd.Parameters.AddWithValue("@EmployeerCode", obj.Employercode);
+            cmd.Parameters.AddWithValue("@SubscriptionId", obj.SubscriptionId);
+
             cmd.Parameters.AddWithValue("@PaymentMode", obj.PaymentMode);
             cmd.Parameters.AddWithValue("@SubcriptionDate", DateTime.Now);
             cmd.Parameters.AddWithValue("@PaymentDate", DateTime.Now);
-            cmd.Parameters.AddWithValue("@transactionId", TransactionId);
+            cmd.Parameters.AddWithValue("@transactionId", obj.TransactionId);
             cmd.Parameters.AddWithValue("@StatusId", obj.StatusId);
             cmd.Parameters.AddWithValue("@GSTNo", obj.GSTNo);
             cmd.ExecuteNonQuery();

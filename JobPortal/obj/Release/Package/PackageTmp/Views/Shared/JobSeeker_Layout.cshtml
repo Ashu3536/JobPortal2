@@ -60,33 +60,35 @@
             <!-- Spinner End -->
             <!-- Navbar Start -->
             <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-                <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
-                    <h1 class="m-0 text-primary">JobEntry</h1>
-                </a>
+                @*<a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+
+                </a>*@
+                <h1 class="m-0 text-primary">JobEntry</h1>
                 <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto p-4 p-lg-0">
-                        <a href="@Url.Action("AllCompany","JobSeeker")" class="nav-item nav-link active">Companies</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                         <a href="@Url.Action("SeekerIndex","JobSeeker")" class="nav-item nav-link active">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="about.html" class="nav-item nav-link">About</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="@Url.Action("about","JobSeeker")" class="nav-item nav-link active">About</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="@Url.Action("AllCompany","JobSeeker")" class="nav-item nav-link active">Companies</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="@Url.Action("AllJobs","JobSeeker")" class="nav-item nav-link active">Job List</a>
                         @*<div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="@Url.Action("AllJobs","JobSeeker")" class="dropdown-item">Job List</a>
-                                <a href="@Url.Action("AllJobs","JobSeeker")" class="dropdown-item">Job Detail</a>
-                            </div>
-                        </div>*@&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="category.html" class="dropdown-item">Job Category</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404</a>
-                            </div>
-                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
+            <div class="dropdown-menu rounded-0 m-0">
+                <a href="@Url.Action("AllJobs","JobSeeker")" class="dropdown-item">Job List</a>
+                <a href="@Url.Action("AllJobs","JobSeeker")" class="dropdown-item">Job Detail</a>
+            </div>
+        </div>*@&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        @*<div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+            <div class="dropdown-menu rounded-0 m-0">
+                <a href="category.html" class="dropdown-item">Job Category</a>
+                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                <a href="404.html" class="dropdown-item">404</a>
+            </div>
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*@
                         <a href="@Url.Action("PreferredJob","JobSeeker")" class="notification"><i class="fa fa-bell" style="font-size:25px;margin-top:24px;margin-right:24px"></i></a>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <div class="nav-item dropdown">
@@ -95,9 +97,7 @@
                                     @*<img class="img-m rounded-circle" src="~/Content/images/faces/face23.jpg" alt="">*@
                                     @if (Session["SeekerCode"] != null)
                                     {
-
                                         <p class="mb-0 d-none d-sm-block navbar-profile-name"><img class="img" src="~/Content/images/@Session["ProfileIMG"].ToString()" height="60" width="60"></p>
-
                                     }
                                     else
                                     {
@@ -124,8 +124,6 @@
             <!-- Navbar End -->
             @RenderBody()
             <!-- Footer Start -->
-            <br />
-            <br />
             <br />
             <br />
             <br />

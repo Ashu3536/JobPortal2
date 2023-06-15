@@ -165,23 +165,31 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.RequireQualification, "Qualification Require", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.ListBoxFor(m => m.QualificationList, new MultiSelectList(ViewBag.Requirequalification, "Value", "Text"), new { id = "QualificationList", Multiple = "multiple", @class = "control-label col-md-12" })
+                        @Html.ListBoxFor(m => m.QualificationList, new MultiSelectList(@ViewBag.QualificationList, "Value", "Text"), new { id = "QualificationList", Multiple = "multiple", @class = "control-label col-md-12" })
                         @Html.ValidationMessageFor(model => model.RequireQualification, "", new { @class = "text-danger" })
                         <br /><br />
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.TotalExperience, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.TotalExperience, "Total Experience", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="row">
                         <div class="col-md-2">
                             @Html.EditorFor(model => model.From, new { htmlAttributes = new { @class = "form-control" } })
-                       </div>
+                        </div>
                         <div class="col-md-2">
                             @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                         @Html.ValidationMessageFor(model => model.TotalExperience, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.SalaryRange, "Salary Range", htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.SalaryRange, new SelectList(ViewBag.SalaryRangeList), "--Select--", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SalaryRange, "", new { @class = "text-danger" })
+                        <br />
+                    </div>
+                </div>*@
                 <div>
                     @Html.LabelFor(model => model.SalaryType, "Salary Mode", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="form-group">
@@ -310,7 +318,9 @@
                 <input style="width: 160px;" type="submit" value="Post" class="btn btn-primary" />
             </div>
         </div>
-
+        <br>
+        <br>
+        
         <div>
             @Html.ActionLink("Back to List", "jobgrid")
         </div>

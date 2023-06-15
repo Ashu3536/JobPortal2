@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/JobSeeker_Layout.cshtml";
 }
 
-<table class="table table-bordered table-striped mt-4 dt-responsive nowrap table-responsive">
-    <tr>
+<table class="table table-hover">
+    <tr style="background-color: #00B074;">
         <th>
             @Html.HiddenFor(model => model.Seekercode)
         </th>
@@ -61,7 +61,7 @@
                 @Html.DisplayFor(modelItem => item.ResumePDF)
             </td>
             <td>
-                <a href="@item.ResumePDF">Download</a>
+                <a href="~/Content/PDF Files/@item.ResumePDF">Download</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)

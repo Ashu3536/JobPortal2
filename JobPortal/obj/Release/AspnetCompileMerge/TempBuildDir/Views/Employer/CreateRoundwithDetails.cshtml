@@ -122,7 +122,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10" style="width:150px">
+            <div class="col-md-15" style="width:150px">
                 @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" }, style = "width:200px" })
                 @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
             </div>

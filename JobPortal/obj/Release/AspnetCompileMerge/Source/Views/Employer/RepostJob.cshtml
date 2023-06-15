@@ -108,7 +108,7 @@
         <div style="margin-left: 25px;">
             <br />
             <div class="form-group">
-                <b>@Html.LabelFor(model => model.AllCompany, "Company", htmlAttributes: new { @class = "control-label col-md-2" })</b>
+                <b>@Html.LabelFor(model => model.CompanyName, "Company", htmlAttributes: new { @class = "control-label col-md-2" })</b>
                 <br />
                 @*<select id="CompanyId" name="CompanyId" style="width:200px;height:35px;">
             ----Select----
@@ -119,11 +119,11 @@
                 @Html.ValidationMessageFor(model => model.QualificationId, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.JobTitle, "Job Title", htmlAttributes: new { @class = "control-label col-md-2 label-align required" })
+                @Html.LabelFor(model => model.JobTitle1, "Job Title", htmlAttributes: new { @class = "control-label col-md-2 label-align required" })
                 <div class="col-md-5" style="width:300px;">
-                    @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.JobTitle1, new { htmlAttributes = new { @class = "form-control" } })
 
-                    @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.JobTitle1, "", new { @class = "text-danger" })
                     <br />
                     @*<input type="text" id="JobTitle" name="JobTitle" class="form-control" />*@
                 </div>
@@ -132,11 +132,11 @@
         <div style="margin-left:550px;margin-top:-230px">
             <br /><br /><br />
             <div class="form-group">
-                @Html.LabelFor(model => model.ContactPerson, "HR", htmlAttributes: new { @class = "control-label col-md-2 label-align required" })
+                @Html.LabelFor(model => model.ContactPerson1, "HR", htmlAttributes: new { @class = "control-label col-md-2 label-align required" })
 
                 <div class="col-md-10" style="width:300px;">
-                    @Html.EditorFor(model => model.ContactPerson, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ContactPerson, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.ContactPerson1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ContactPerson1, "", new { @class = "text-danger" })
                     <br />
                 </div>
                 @*<input type="text" id="ContactPerson" name="ContactPerson" required="required" class="form-control" />*@
@@ -181,16 +181,16 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.RequireQualification, "QualificationRequire", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-11" >
-                        @Html.ListBoxFor(m => m.QualificationList, new MultiSelectList(ViewBag.Requirequalification, "Value", "Text"), new { id = "QualificationList", Multiple = "multiple", @class = "control-label col-md-12" })
+                        @Html.ListBoxFor(m => m.QualificationList, new MultiSelectList(ViewBag.QualificationList, "Value", "Text"), new { id = "QualificationList", Multiple = "multiple", @class = "control-label col-md-12" })
                         @Html.ValidationMessageFor(model => model.RequireQualification, "", new { @class = "text-danger" })
                         <br /><br />
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.TotalExperience, htmlAttributes: new { @class = "control-label col-md-2 label-align required" })
+                    @Html.LabelFor(model => model.TotalExperience1, htmlAttributes: new { @class = "control-label col-md-2 label-align required" })
                     <div class="col-md-3">
-                        @Html.EditorFor(model => model.TotalExperience, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TotalExperience, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.TotalExperience1, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TotalExperience1, "", new { @class = "text-danger" })
                         <br />
                     </div>
                     @*<input type="text" id="TotalExperience" name="TotalExperience" required="required" class="form-control" />*@
@@ -251,8 +251,8 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2 label-align required" })
                     <div class="col-md-5">
-                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
                         <br />
                     </div>
                     @*<input type="text" id="Address" name="Address" required="required" class="form-control" />*@
@@ -282,10 +282,10 @@
             <!-----Right Start-->
             <div style="margin-left:750px;margin-top:-385px;">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.NoOfOpenings, "No.Of Openings", htmlAttributes: new { @class = "control-label col-md-5 label-align required" })
+                    @Html.LabelFor(model => model.NoOfOpenings1, "No.Of Openings", htmlAttributes: new { @class = "control-label col-md-5 label-align required" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.NoOfOpenings, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.NoOfOpenings, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.NoOfOpenings1, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NoOfOpenings1, "", new { @class = "text-danger" })
                         <br />
                     </div>
                     @*<input type="text" id="NoOfOpenings" name="NoOfOpenings" required="required" class="form-control" />*@

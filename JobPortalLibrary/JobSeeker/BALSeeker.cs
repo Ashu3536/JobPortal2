@@ -804,18 +804,43 @@ namespace JobPortalLibrary.JobSeeker
         }
         //--------------------deleteemployer-------------------------------------------------
 
-        public void IsDeleteSeeker(int seekerid)
+        //public void IsDeleteSeeker(int seekerid)
+        //{
+        //    con.Close();
+        //    ManageConnection();
+        //    SqlCommand cmd = new SqlCommand("SPSeeker", con);
+        //    cmd.Parameters.AddWithValue("@flag", "Deleteseeker");
+        //  //  cmd.Parameters.AddWithValue("@isDelete", isDelete);
+        //    cmd.Parameters.AddWithValue("@SeekerId", seekerid);
+        //    cmd.ExecuteNonQuery();
+          
+        //}
+        //public DataSet fetchseekerId(SeekerUser objsekUser /*string jobtitle,string joblocation,string salary*/)
+        //{
+        //    ManageConnection();
+        //    SqlCommand cmd = new SqlCommand("SPSeeker", con);
+        //    cmd.CommandType = CommandType.StoredProcedure;
+        //    cmd.Parameters.AddWithValue("@flag", "fetchseekerId");
+        //    cmd.Parameters.AddWithValue("@Seekercode", objsekUser.Seekercode);
+        //    SqlDataAdapter adpt = new SqlDataAdapter();
+        //    adpt.SelectCommand = cmd;
+        //    DataSet ds = new DataSet();
+        //    adpt.Fill(ds);
+        //    return ds;
+
+        //}
+        public void IsDeleteSeeker(SeekerUser obj)
         {
             con.Close();
             ManageConnection();
             SqlCommand cmd = new SqlCommand("SPSeeker", con);
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@flag", "Deleteseeker");
-          //  cmd.Parameters.AddWithValue("@isDelete", isDelete);
-            cmd.Parameters.AddWithValue("@SeekerId", seekerid);
+            cmd.Parameters.AddWithValue("@SeekerId", obj.SeekerId);
             cmd.ExecuteNonQuery();
-          
+
         }
-        public DataSet fetchseekerId(SeekerUser objsekUser /*string jobtitle,string joblocation,string salary*/)
+        public DataSet fetchseekerId(SeekerUser objsekUser)
         {
             ManageConnection();
             SqlCommand cmd = new SqlCommand("SPSeeker", con);

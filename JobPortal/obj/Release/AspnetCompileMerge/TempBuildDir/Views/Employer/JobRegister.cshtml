@@ -165,7 +165,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.RequireQualification, "Qualification Require", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.ListBoxFor(m => m.QualificationList, new MultiSelectList(ViewBag.Requirequalification, "Value", "Text"), new { id = "QualificationList", Multiple = "multiple", @class = "control-label col-md-12" })
+                        @Html.ListBoxFor(m => m.QualificationList, new MultiSelectList(@ViewBag.QualificationList, "Value", "Text"), new { id = "QualificationList", Multiple = "multiple", @class = "control-label col-md-12" })
                         @Html.ValidationMessageFor(model => model.RequireQualification, "", new { @class = "text-danger" })
                         <br /><br />
                     </div>

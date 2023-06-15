@@ -26,11 +26,147 @@ namespace JobPortal.Controllers
         string seekerCode;
         string IMG;
         string employeerCode;
-        
-        public ActionResult Index()
+
+        public async Task<ActionResult> about()
         {
-            return View();
+
+            return await Task.Run(() => View());
         }
+
+        [HttpGet]
+        public async Task<ActionResult> Index()
+        {
+                CityBind();
+                SeekerUser obj = new SeekerUser();
+                BALSeeker ObjBal = new BALSeeker();
+                DataSet ds = new DataSet();
+                ds = ObjBal.AllJobs();
+                SeekerUser objDetails = new SeekerUser();
+                List<SeekerUser> lstUserDt1 = new List<SeekerUser>();
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    SeekerUser obju = new SeekerUser();
+
+                    obju.JobTitle = ds.Tables[0].Rows[i]["JobTitle"].ToString();
+                    obju.Location = ds.Tables[0].Rows[i]["JobLocation"].ToString();
+                    obju.PostJobCode = ds.Tables[0].Rows[i]["PostJobCode"].ToString();
+                    obju.CompanyName = ds.Tables[0].Rows[i]["CompanyName"].ToString();
+                    obju.CompanyLogo = ds.Tables[0].Rows[i]["CompanyLogo"].ToString();
+                    obju.TotalExperience = ds.Tables[0].Rows[i]["TotalExperience"].ToString();
+                    obju.CurrentSalary = ds.Tables[0].Rows[i]["Salary"].ToString();
+                    obju.JobType = ds.Tables[0].Rows[i]["JobType"].ToString();
+                    obju.NoOfEmployees = ds.Tables[0].Rows[i]["NoofOpenings"].ToString();
+                    obju.StartDate = Convert.ToDateTime(ds.Tables[0].Rows[i]["ApplicationStartDate"].ToString());
+
+                    if (obju.Location != null && obju.Location != "")
+                    {
+                        var languageid = obju.Location;
+                        char[] seperator = { ',' };
+                        string[] language = null;
+                        language = languageid.Split(seperator);
+                        string languages1 = null;
+                        string languages2 = null;
+
+                        for (int k = 0; k < language.Length; k++)
+                        {
+                            BALSeeker objbal = new BALSeeker();
+                            DataTable dt = new DataTable();
+                            dt = objbal.PreferredLocation(Convert.ToInt32(language[k]));
+                            languages1 = dt.Rows[0][2].ToString();
+
+
+                            if (k == language.Length - 1)
+                            {
+                                languages2 = string.Concat(languages2, languages1);
+                            }
+                            else
+                            {
+                                languages2 = string.Concat(languages2, languages1, ",");
+                            }
+                            obju.Location = languages2;
+                        }
+                    }
+                    else { obju.Location = null; }
+
+
+                    lstUserDt1.Add(obju);
+                }
+                objDetails.lstuser = lstUserDt1;
+
+                return await Task.Run(() => View(objDetails));
+           
+        }
+        [HttpPost]
+        public async Task<ActionResult> Index(string searchTxt, string CityId)
+        {
+                CityBind();
+
+                SeekerUser obj = new SeekerUser();
+                obj.JobTitle = searchTxt;
+                obj.TotalExperience = searchTxt;
+                BALSeeker ObjBal = new BALSeeker();
+                DataSet ds = new DataSet();
+                ds = ObjBal.SearchJobs(obj);
+                SeekerUser objDetails = new SeekerUser();
+                List<SeekerUser> lstUserDt1 = new List<SeekerUser>();
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    SeekerUser obju = new SeekerUser();
+
+                    obju.JobTitle = ds.Tables[0].Rows[i]["JobTitle"].ToString();
+                    obju.Location = ds.Tables[0].Rows[i]["JobLocation"].ToString();
+                    obju.CityId1 = ds.Tables[0].Rows[i]["JobLocation"].ToString();
+                    obju.PostJobCode = ds.Tables[0].Rows[i]["PostJobCode"].ToString();
+                    obju.CompanyName = ds.Tables[0].Rows[i]["CompanyName"].ToString();
+                    obju.CompanyLogo = ds.Tables[0].Rows[i]["CompanyLogo"].ToString();
+                    obju.TotalExperience = ds.Tables[0].Rows[i]["TotalExperience"].ToString();
+                    obju.CurrentSalary = ds.Tables[0].Rows[i]["Salary"].ToString();
+                    obju.JobType = ds.Tables[0].Rows[i]["JobType"].ToString();
+                    obju.NoOfEmployees = ds.Tables[0].Rows[i]["NoofOpenings"].ToString();
+                    obju.StartDate = Convert.ToDateTime(ds.Tables[0].Rows[i]["ApplicationStartDate"].ToString());
+
+                    if (obju.Location != null && obju.Location != "")
+                    {
+                        var languageid = obju.Location;
+                        char[] seperator = { ',' };
+                        string[] language = null;
+                        language = languageid.Split(seperator);
+                        string languages1 = null;
+                        string languages2 = null;
+
+                        for (int k = 0; k < language.Length; k++)
+                        {
+                            BALSeeker objbal = new BALSeeker();
+                            DataTable dt = new DataTable();
+                            dt = objbal.PreferredLocation(Convert.ToInt32(language[k]));
+                            languages1 = dt.Rows[0][2].ToString();
+
+
+                            if (k == language.Length - 1)
+                            {
+                                languages2 = string.Concat(languages2, languages1);
+                            }
+                            else
+                            {
+                                languages2 = string.Concat(languages2, languages1, ",");
+                            }
+                            obju.Location = languages2;
+                        }
+                    }
+                    else { obju.Location = null; }
+
+
+                    lstUserDt1.Add(obju);
+                }
+                objDetails.lstuser = lstUserDt1;
+                if (CityId != null)
+                {
+                    objDetails.lstuser = lstUserDt1.Where(x => x.CityId1.Contains(CityId)).ToList();
+                }
+
+            return await Task.Run(() => View(objDetails));
+
+         }
         [HttpGet]
         public async Task<ActionResult> Register()
         {
@@ -494,10 +630,10 @@ namespace JobPortal.Controllers
                     while (drE.Read())
                     {
 
-                        employeerCode = drE["Employercode"].ToString();
+                        employeerCode = drE["EmployerCode"].ToString();
                         employername = drE["EmployerName"].ToString();
                         TempData["MessageLogin"] = "Login Successfully...!!";
-                        Session["Employercode"] = employeerCode;
+                        Session["EmployerCode"] = employeerCode;
                         Session["EmployerName"] = employername;
                         return RedirectToAction("EmployeerIndex","Employer");
                     }

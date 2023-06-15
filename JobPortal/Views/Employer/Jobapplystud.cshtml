@@ -79,7 +79,7 @@
         });
     });
 </script>
-<script>
+<!--<script>
     //$(document).ready(function () {
     //    $(".btn11").click(function () {
     //        $("#btn1").css({ backgroundColor: 'green' });
@@ -95,7 +95,7 @@
     //    bg.style.backgroundcolor = "green";
     //}
     //document.getElementById(".btn11").onclick = "green";
-</script>
+</script>-->
 
 @*<style type="text/css">
         .btn11{
@@ -114,8 +114,8 @@
             margin-left: 320;
         }
     </style>*@
-<!--<button>-->
-    @*<a href="@Url.Action("AllRoundsGrid","Employer")" PostJobCode="@Model.PostJobCode">Manage Rounds</a>*@
+<!--<!--<button>-->
+    <!--@*<a href="@Url.Action("AllRoundsGrid","Employer")" PostJobCode="@Model.PostJobCode">Manage Rounds</a>*@-->
     <!--@Html.ActionLink("Manage Rounds", "AllRoundsGrid", new { postjobcode = Model.PostJobCode })
 </button>-->
 <div class="row">
@@ -308,7 +308,7 @@
                 </p>
 
                 <p style="margin-left:92px;margin-top:-51px;">
-                    <a class="Deletecandidate bi bi-envelope" title="View" style="font-size:25px; color:blue;" href="@Url.Action("Studemail", "Employer", new {Seekercode=item.Seekercode,AppliedJobId=item.AppliedJobId})"></a>
+                    <a class="bi bi-envelope" title="View" style="font-size:25px; color:blue;" href="@Url.Action("Studemail", "Employer", new {Seekercode=item.Seekercode,AppliedJobId=item.AppliedJobId})"></a>
                 </p>
                 @*@Html.DropDownList("url", new SelectList(new[]{ new SelectListItem { Text = "View Phone Detail", Value = Url.Action("viewphonedetails", "Employer") },
                     new SelectListItem { Text = "Message", Value = Url.Action("Index", "Employer") },
@@ -317,7 +317,7 @@
 
 
 
-            }
+            
         </tr>
 
     }
@@ -328,7 +328,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" style="color:black; font-size:xx-large">Post Job Details</h3>
+                <h3 class="modal-title" style="color:black; font-size:xx-large">Contact Details</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
